@@ -21,7 +21,7 @@
 	}
 
 	chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-		console.log('11111111');
+		console.log('init-block');
 		if (request == "init-block") {
 			let _contentScript = new contentScript();
 			sendResponse({ status: true,blockList: _contentScript.blockList});

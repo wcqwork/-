@@ -12,7 +12,7 @@ class collectBlock {
         this.sendMessageToContentScript('init-block',(response) => {
             console.log(response);
             if(response && response.status){
-                insertBlockChoose(response.blockList);
+                this.insertBlockChoose(response.blockList || []);
             }
         });
     }
@@ -32,7 +32,7 @@ class collectBlock {
         let $select = $("<select></select>");
         console.log(this.selectBtn);
         if (blockArr && blockArr.length <= 0) {
-            this.selectBtn.html("");
+            this.selectBtn.html("没有找到区块呀！");
             this.submitBtn.remove();
             return;
         }
