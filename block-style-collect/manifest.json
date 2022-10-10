@@ -1,0 +1,66 @@
+{
+    // 插件名称
+    "name": "区块·样式收集",
+    // 插件的描述
+    "description": "领动区块样式收集",
+    // 插件的版本
+    "version": "1.0",
+    // 配置插件程序的版本号，主流版本是2，最新是3
+    "manifest_version": 2,
+    // 新增popup弹窗
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "/images/get_started16.png",
+            "32": "/images/get_started32.png",
+            "48": "/images/get_started48.png",
+            "128": "/images/get_started128.png"
+        }
+    },
+    // 常驻页面background
+    "background": {
+        "scripts": ["js/jquery-1.8.3.js", "js/background.js"]
+    },
+    // 需要直接注入页面的JS
+    "content_scripts": [
+        {
+            //"matches": ["http://*/*", "https://*/*"],
+            // "<all_urls>" 表示匹配所有地址
+            "matches": [
+                "<all_urls>"
+            ],
+            // 多个JS按顺序注入
+            "js": [
+                "js/jquery-1.8.3.js",
+                "js/content-script.js"
+            ],
+            // JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式
+            "css": [
+                // "css/custom.css",
+                // "css/style.css"
+            ],
+            // 代码注入的时间，可选值： "document_start", "document_end", or "document_idle"，最后一个表示页面空闲时，默认document_idle
+            "run_at": "document_idle"
+        }
+    ],
+    // 权限
+    "permissions": [
+        "tabs", // 标签
+        "cookies",
+        "background",
+        "notifications", // 通知
+        "webRequest", // web请求
+        "webRequestBlocking",
+        "storage" // 插件本地存储
+    ]
+    // // 新增命令 快捷键弹出popup
+    // "commands": {
+    //     "_execute_browser_action": {
+    //         "suggested_key": {
+    //             "default": "Ctrl+Shift+F",
+    //             "mac": "MacCtrl+Shift+F"
+    //         },
+    //         "description": "Opens popup.html"
+    //     }
+    // },
+}
