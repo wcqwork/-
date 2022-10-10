@@ -1,0 +1,68 @@
+#pro-crawl-btn.pro-crawl-btn {
+  position: fixed;
+  bottom: 12px;
+  left: 20px;
+  background: #005DFF;
+  border-radius: 4px;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  z-index: 2147483647!important;
+}
+#pro-crawl-btn.success-crawl,
+#start-coll .success-crawl {
+  background: #00D164;
+}
+#pro-crawl-btn.error-crawl,
+#start-coll .error-crawl {
+  background: #FF4642;
+}
+#multi-tips {
+  position: fixed;
+  z-index: 999999999999999 !important;
+  top: 150px;
+  width: 640px;
+  height: 80px;
+  line-height: 80px;
+  left: 50%;
+  margin-left: -320px;
+  background: #fff;
+  border: 1px solid #F3F4F7;
+  box-shadow: 0 7px 10px 0 rgba(0,0,0,0.15);
+  border-radius: 4px;
+  text-align: center;
+}
+
+#multi-tips .text {
+  font-size: 14px;
+  color: #30344F;
+  line-height: 80px;
+}
+
+#multi-tips .text a {
+  color: #1F7DF8;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#multi-tips .close-btn {
+  display: block;
+  position: absolute;
+  line-height: 1;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  color: #212121;
+  font-size: 16px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
