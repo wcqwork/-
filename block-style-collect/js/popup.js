@@ -47,8 +47,12 @@ class collectBlock {
 
     // 绑定收集
     bindStyleCollect() {
+        let _that = this;
         this.submitBtn.click(function () {
             console.log('收集中……');
+            _that.sendMessageToContentScript('msg-dialog',(response) => {
+                console.log(response);
+            });
         });
     }
 }
