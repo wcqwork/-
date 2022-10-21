@@ -2,7 +2,6 @@ $(function(){
     console.log('页面加载完成');
 
     window.scrollToEl = function(event,elementId){
-        debugger;
         var el = $(event.currentTarget);
         if(el.hasClass("closed")){
             el.removeClass("closed");
@@ -13,13 +12,14 @@ $(function(){
         }
        
         var overElement = window.treeNodeReference[elementId] && window.treeNodeReference[elementId].node;
+        console.log($(overElement));
         treeHelper.scrollWindow(overElement);
         event.stopPropagation();    
     }
     window.handlerTreeNodeMouseOver = function(event,elementId){
         var overElement = window.treeNodeReference[elementId] && window.treeNodeReference[elementId].node;
         treeHelper.renderHighlight(overElement, true, false);
-        // console.log(overElement);
+        console.log($(overElement));
         event.stopPropagation();    
     }
     window.handlerTreeNodeLeave = function(event,elementId){
