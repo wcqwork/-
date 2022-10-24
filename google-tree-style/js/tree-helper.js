@@ -1,6 +1,7 @@
 const treeHelper = {
     state: {
         domTree: undefined,
+        currentElementId: null,
         specialArr: ['#text', '#comment', 'SCRIPT', 'LINK', 'TEMPLATE', 'IFRAME', "STYLE"],
         rightPanel: `
                 <div class="wrapper">
@@ -666,6 +667,7 @@ const treeHelper = {
         if (toHighlight) {
             position = 'inside';
         }
+        // debugger;
         switch (position) {
             case 'inside':
                 // bus.$emit('hovering-element', $element[0], true, true)
@@ -696,13 +698,18 @@ const treeHelper = {
                 break;
         }
     },
+    /**
+     * 设置元素所在位置tip
+     * @param {*} $contextMarker 
+     * @param {*} $element 
+     */
     positionContextMarker: function ($contextMarker, $element) {
         var rect = $element.get(0).getBoundingClientRect();
         $contextMarker.css({
             height: (rect.height + 4) + 'px',
             width: (rect.width + 4) + 'px',
-            top: (rect.top + $('body').scrollTop() - 2) + 'px',
-            left: (rect.left + $($("body")).scrollLeft() - 2) + 'px'
+            top: (rect.top + document.documentElement.scrollTop - 2) + 'px',
+            left: (rect.left + document.documentElement.scrollLeft - 2) + 'px'
         });
         if (rect.top + $('body').scrollTop() < 24)
             $contextMarker.find('[data-dragcontext-marker-text]').css('top', '4px');
@@ -857,23 +864,38 @@ const treeHelper = {
 
         return
     },
+    /**
+     * 高亮右边domtree
+     * @param {*} element 
+     * @param {*} scroll 
+     * @param {*} inPanel 
+     */
     highlightElement: function (element, scroll, inPanel) {
         // debugger;
-        let found
-        if (this.state.domTree && this.state.domTree.length) {
-            this.state.domTree.forEach((node) => {
-                found = this.findByElement(node, element)
+        // let found
+        // if (this.state.domTree && this.state.domTree.length) {
+        //     this.state.domTree.forEach((node) => {
+        //         found = this.findByElement(node, element)
 
-                if (found) {
-                    // debugger;
-                    $('.dragArea li').removeClass('active')
-                    $('[data-el-id="' + found.elementId + '"]').addClass('active')
+        //         if (found) {
+        //             // debugger;
+        //             $('.dragArea li').removeClass('active')
+        //             $('[data-el-id="' + found.elementId + '"]').addClass('active')
 
-                    if (scroll) {
-                        this.scrollTree(found.elementId, inPanel)
-                    }
-                }
-            })
+        //             if (scroll) {
+        //                 this.scrollTree(found.elementId, inPanel)
+        //             }
+        //         }
+        //     })
+        // }
+        var elementId = this.state.currentElementId
+        if (elementId) {
+            $('.dragArea li').removeClass('active')
+            $('[data-el-id="' + elementId + '"]').addClass('active')
+
+            if (scroll) {
+                this.scrollTree(elementId, inPanel)
+            }
         }
     },
     /**
