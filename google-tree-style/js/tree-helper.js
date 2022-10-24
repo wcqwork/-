@@ -356,6 +356,9 @@ const treeHelper = {
         </div>    
         `
     },
+    setCurrentElementId: function(elementId){
+        this.state.currentElementId = elementId;
+    },
     getMouseBearingsPercentage: function ($element, elementRect, mousePos) {
         if (!elementRect)
             elementRect = $element.get(0).getBoundingClientRect();
@@ -757,6 +760,7 @@ const treeHelper = {
             }
 
             var _makeidKey = this.makeid();
+            this.renderNodeElementId(node, _makeidKey);
 
             var _elementObjKey = {
                 elementId: _makeidKey,
@@ -780,6 +784,7 @@ const treeHelper = {
         }
 
         var _makeid = this.makeid();
+        this.renderNodeElementId(node, _makeid);
         var _elementObj = {
             elementId: _makeid,
             elementName: newNodeName,
@@ -796,6 +801,16 @@ const treeHelper = {
 
         return _elementObj;
     },
+    /**
+     * 设置页面dom埋点
+     * @param {*} node 
+     * @param {*} makeid 
+     */
+    renderNodeElementId: function (node, makeid) {
+        if (node && node.nodeName && !this.state.specialArr.includes(node.nodeName)) {
+            node.setAttribute("data-el-id", makeid);
+        }
+    },
     getBodyChildrenOnly: function (dom) {
         return dom.children
     },
@@ -810,7 +825,7 @@ const treeHelper = {
 
                 if (treeArr[i].children) {
                     var _li = $(`
-                        <li data-el-id="${treeArr[i].elementId}" class="draggable-item closed" onmouseover="handlerTreeNodeMouseOver(event,'${treeArr[i].elementId}')" onmouseleave="handlerTreeNodeLeave(event,'${treeArr[i].elementId}')" onmousedown="scrollToEl(event,'${treeArr[i].elementId}')" >
+                        <li data-el-id="${treeArr[i].elementId}" class="draggable-item opend" onmouseover="handlerTreeNodeMouseOver(event,'${treeArr[i].elementId}')" onmouseleave="handlerTreeNodeLeave(event,'${treeArr[i].elementId}')" onmousedown="scrollToEl(event,'${treeArr[i].elementId}')" >
                             <p class="draggable-title">
                                 <i></i>
                                 ${treeArr[i].nodeName}
@@ -824,7 +839,7 @@ const treeHelper = {
                     this.renderTreeNodeHtml(treeArr[i].children, _ul);
                 } else {
                     var _li = $(`
-                        <li data-el-id="${treeArr[i].elementId}" class="draggable-item closed" onmouseover="handlerTreeNodeMouseOver(event,'${treeArr[i].elementId}')" onmouseleave="handlerTreeNodeLeave(event,'${treeArr[i].elementId}')" onmousedown="scrollToEl(event,'${treeArr[i].elementId}')" >
+                        <li data-el-id="${treeArr[i].elementId}" class="draggable-item opend" onmouseover="handlerTreeNodeMouseOver(event,'${treeArr[i].elementId}')" onmouseleave="handlerTreeNodeLeave(event,'${treeArr[i].elementId}')" onmousedown="scrollToEl(event,'${treeArr[i].elementId}')" >
                             <p class="draggable-title">
                                 ${treeArr[i].nodeName}
                             </p>
@@ -851,19 +866,6 @@ const treeHelper = {
             this.orchestrateDragDrop($currentElement, elementRectangle, mousePosition, toHighlight, hideLine)
         }
     },
-    findByElement(node, element) {
-        if (node.node == element) {
-            return node
-        }
-
-        if (node.children && node.children.length) {
-            for (var i = 0; i < node.children.length; i++) {
-                this.findByElement(node.children[i])
-            }
-        }
-
-        return
-    },
     /**
      * 高亮右边domtree
      * @param {*} element 
@@ -871,23 +873,6 @@ const treeHelper = {
      * @param {*} inPanel 
      */
     highlightElement: function (element, scroll, inPanel) {
-        // debugger;
-        // let found
-        // if (this.state.domTree && this.state.domTree.length) {
-        //     this.state.domTree.forEach((node) => {
-        //         found = this.findByElement(node, element)
-
-        //         if (found) {
-        //             // debugger;
-        //             $('.dragArea li').removeClass('active')
-        //             $('[data-el-id="' + found.elementId + '"]').addClass('active')
-
-        //             if (scroll) {
-        //                 this.scrollTree(found.elementId, inPanel)
-        //             }
-        //         }
-        //     })
-        // }
         var elementId = this.state.currentElementId
         if (elementId) {
             $('.dragArea li').removeClass('active')
@@ -897,6 +882,9 @@ const treeHelper = {
                 this.scrollTree(elementId, inPanel)
             }
         }
+    },
+    stoppedHoveringElement: function(){
+        $('.dragArea li').removeClass('active')
     },
     /**
      * 页面滚动到指定位置
@@ -959,4 +947,15 @@ const treeHelper = {
             behavior: 'smooth'
         })
     },
+    /**
+     * //Add CSS File to html
+     * @returns 
+     */
+    getInsertionCSS: function () {
+        let styles = "" +
+            ".reserved-drop-marker{width:100%;height:2px;background:#00a8ff;position:absolute}.reserved-drop-marker::after,.reserved-drop-marker::before{content:'';background:#00a8ff;height:7px;width:7px;position:absolute;border-radius:50%;top:-2px}.reserved-drop-marker::before{left:0}.reserved-drop-marker::after{right:0}";
+        styles += "[data-dragcontext-marker],[data-sh-parent-marker]{outline:#19cd9d solid 2px;outline-offset: -4px;text-align:center;position:absolute;z-index:123456781;pointer-events:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}[data-dragcontext-marker] [data-dragcontext-marker-text],[data-sh-parent-marker] [data-sh-parent-marker-text]{background:#19cd9d;color:#fff;padding:2px 10px;display:inline-block;font-size:14px;position:relative;top:-22px;min-width:121px;font-weight:700;pointer-events:none;z-index:123456782}[data-dragcontext-marker].invalid{outline:#dc044f solid 2px;outline-offset: -4px;}[data-dragcontext-marker].invalid [data-dragcontext-marker-text]{background:#dc044f}[data-dragcontext-marker=body]{outline-offset:-4px}[data-dragcontext-marker=body] [data-dragcontext-marker-text]{top:4px;}";
+        styles += '.drop-marker{pointer-events:none;}.drop-marker.horizontal{background:#00adff;position:absolute;height:2px;list-style:none;visibility:visible!important;box-shadow:0 1px 2px rgba(255,255,255,.4),0 -1px 2px rgba(255,255,255,.4);z-index:123456789;text-align:center}.drop-marker.horizontal.topside{margin-top:0}.drop-marker.horizontal.bottomside{margin-top:2px}.drop-marker.horizontal:before{content:"";width:8px;height:8px;background:#00adff;border-radius:8px;margin-top:-3px;float:left;box-shadow:0 1px 2px rgba(255,255,255,.4),0 -1px 2px rgba(255,255,255,.4)}.drop-marker.horizontal:after{content:"";width:8px;height:8px;background:#00adff;border-radius:8px;margin-top:-3px;float:right;box-shadow:0 1px 2px rgba(255,255,255,.4),0 -1px 2px rgba(255,255,255,.4)}.drop-marker.vertical{height:50px;list-style:none;border:1px solid #00ADFF;position:absolute;margin-left:3px;display:inline;box-shadow:1px 0 2px rgba(255,255,255,.4),-1px 0 2px rgba(255,255,255,.4)}.drop-marker.vertical.leftside{margin-left:0}.drop-marker.vertical.rightside{margin-left:3px}.drop-marker.vertical:before{content:"";width:8px;height:8px;background:#00adff;border-radius:8px;margin-top:-4px;top:0;position:absolute;margin-left:-4px;box-shadow:1px 0 2px rgba(255,255,255,.4),-1px 0 2px rgba(255,255,255,.4)}.drop-marker.vertical:after{content:"";width:8px;height:8px;background:#00adff;border-radius:8px;margin-left:-4px;bottom:-4px;position:absolute;box-shadow:1px 0 2px rgba(255,255,255,.4),-1px 0 2px rgba(255,255,255,.4)}';
+        return styles
+    }
 }

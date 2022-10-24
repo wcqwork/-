@@ -1,34 +1,34 @@
-$(function(){
+$(function () {
     console.log('页面加载完成');
 
-    window.scrollToEl = function(event,elementId){
-        treeHelper.state.currentElementId = elementId;
+    window.scrollToEl = function (event, elementId) {
+        treeHelper.setCurrentElementId(elementId);
         var el = $(event.currentTarget);
-        if(el.hasClass("closed")){
+        if (el.hasClass("closed")) {
             el.removeClass("closed");
             el.addClass("opend");
-        }else{
+        } else {
             el.removeClass("opend");
             el.addClass("closed");
         }
-       
+
         var overElement = window.treeNodeReference[elementId] && window.treeNodeReference[elementId].node;
         // console.log($(overElement));
         treeHelper.scrollWindow(overElement);
-        event.stopPropagation();    
+        event.stopPropagation();
     }
-    window.handlerTreeNodeMouseOver = function(event,elementId){
-        treeHelper.state.currentElementId = elementId;
+    window.handlerTreeNodeMouseOver = function (event, elementId) {
+        treeHelper.setCurrentElementId(elementId);
         var overElement = window.treeNodeReference[elementId] && window.treeNodeReference[elementId].node;
         // debugger;
         treeHelper.renderHighlight(overElement, true, false);
         // console.log($(overElement));
-        event.stopPropagation();    
+        event.stopPropagation();
     }
-    window.handlerTreeNodeLeave = function(event,elementId){
-        treeHelper.state.currentElementId = elementId;
+    window.handlerTreeNodeLeave = function (event, elementId) {
+        treeHelper.setCurrentElementId(elementId);
         treeHelper.clearContainerContext()
-        event.stopPropagation();  
+        event.stopPropagation();
     }
 
     var _body = document.body;
@@ -37,16 +37,62 @@ $(function(){
     }).then(result => {
         console.log(result);
         // debugger
-        treeHelper.state.domTree = result.slice(0,6);
+        treeHelper.state.domTree = result.slice(0, 6);
 
         var _treeUl = $('<ul class="dragArea"></ul>'); // tree
         var _treeDomContainer = $('<div class="dom-tree"></div>'); // treeContainer
         _treeDomContainer.append(_treeUl);
-        treeHelper.renderTreeNodeHtml(treeHelper.state.domTree,_treeUl);
+        treeHelper.renderTreeNodeHtml(treeHelper.state.domTree, _treeUl);
         var rightPanel = $(treeHelper.state.rightPanel);
         rightPanel.find(".side-view").append(_treeDomContainer);
         $("body").append(rightPanel)
     }).catch(error => {
         console.log(error);
     })
+
+    //Add CSS File to html
+    const style = $('<style data-reserved-styletag></style>').html(treeHelper.getInsertionCSS());
+    $("body").append(style);
+
+    // 页面联动domTree
+    const htmlBody = $("body");
+    htmlBody.find('*').addBack().on('dragenter', (event) => {
+        event.stopPropagation()
+    }).on('dragover', (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+    }).on('dragstart', (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+    }).on('dragend', (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+    }).on('mouseover', (event) => {
+        debugger;
+        event.stopPropagation()
+        const currentElement = $(event.target)
+        const elementRectangle = event.target.getBoundingClientRect()
+        const mousePosition = {
+            x: elementRectangle.x,
+            y: elementRectangle.y
+        }
+
+        treeHelper.orchestrateDragDrop(currentElement, elementRectangle, mousePosition, true, true);
+
+        var elementId =  currentElement.attr("data-el-id");
+        treeHelper.setCurrentElementId(elementId);
+        treeHelper.highlightElement(event.target);
+    }).on('mouseleave', () => {
+        treeHelper.clearContainerContext()
+        treeHelper.stoppedHoveringElement();
+    }).on('click', (event) => {
+        const currentElement = $(event.target)
+        var elementId =  currentElement.attr("data-el-id");
+        treeHelper.setCurrentElementId(elementId);
+        treeHelper.highlightElement(event.target, true);
+
+        event.preventDefault()
+        event.stopPropagation()
+    })
+
 })
