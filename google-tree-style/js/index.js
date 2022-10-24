@@ -55,7 +55,7 @@ $(function () {
     $("body").append(style);
 
     // 页面联动domTree
-    const htmlBody = $("body");
+    const htmlBody = $("#backstage-headArea,#backstage-bodyArea,#backstage-footArea");
     htmlBody.find('*').addBack().on('dragenter', (event) => {
         event.stopPropagation()
     }).on('dragover', (event) => {
@@ -68,8 +68,6 @@ $(function () {
         event.preventDefault()
         event.stopPropagation()
     }).on('mouseover', (event) => {
-        debugger;
-        event.stopPropagation()
         const currentElement = $(event.target)
         const elementRectangle = event.target.getBoundingClientRect()
         const mousePosition = {
@@ -82,15 +80,20 @@ $(function () {
         var elementId =  currentElement.attr("data-el-id");
         treeHelper.setCurrentElementId(elementId);
         treeHelper.highlightElement(event.target);
+
+        event.preventDefault()
+        event.stopPropagation()
     }).on('mouseleave', () => {
         treeHelper.clearContainerContext()
         treeHelper.stoppedHoveringElement();
     }).on('click', (event) => {
-        const currentElement = $(event.target)
+        const currentElement = $(event.target);
         var elementId =  currentElement.attr("data-el-id");
         treeHelper.setCurrentElementId(elementId);
         treeHelper.highlightElement(event.target, true);
 
+        var _selector = treeHelper.getNodeSelect(event.target);
+        console.log(_selector);
         event.preventDefault()
         event.stopPropagation()
     })

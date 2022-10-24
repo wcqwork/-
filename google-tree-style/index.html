@@ -9279,7 +9279,8 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
                     -webkit-box-flex: 1;
                     -ms-flex: 1;
                     flex: 1;
-                    padding: 15px 15px 30px;
+                    /* padding: 15px 15px 30px; */
+                    padding: 5px;
                     margin-top: 55px;
                     overflow: auto;
                 }
@@ -9291,10 +9292,14 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
                     border: 1px solid #ccc;
                     cursor: pointer;
                     background-color: #f8f6f7;
+
+                    text-align: right;
+                    padding-right: 38px;
                  }
                  .dom-tree .dragArea li .draggable-title + .dragArea {
                      padding-top: 10px;
-                     padding-left: 20px;
+                     /* padding-left: 20px; */
+                     padding-right: 20px;
                  }
                  .dom-tree .dragArea {
                      list-style: none;
@@ -9344,17 +9349,21 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
                     width: 11px;
                     border-top: 2px solid;
                     top: 17px;
-                    left: 5px;
+                    /* left: 5px; */
+
+                    right: 15px;
                 }
 
                 .dom-tree .dragArea li>.draggable-title>i:after{
                     border-top: 2px solid;
                     top: 12px;
-                    left: 10px;
+                    /* left: 10px; */
                     content: '';
                     position: absolute;
                     height: 11px;
                     border-left: 2px solid;
+
+                    right: 20px;
                 }
 
                 .dom-tree .dragArea li.opend>.draggable-title>i:after{
@@ -9365,23 +9374,35 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
             <style>
                 .wrapper .app-side-view{
                     position: fixed;
-                    right: 0;
+                    /* right: 0; */
+                    left: 0;
                     top: 0;
                     height: 100vh;
-                    width: 480px;
+                    width: 420px;
                     z-index: 99999999;
                     display: -webkit-box;
                     display: -ms-flexbox;
                     display: flex;
-                    background-color: white;
                 }
                 .wrapper .app-side-view .side-content{
                     position: absolute;
                     z-index: 5;
                     height: 100%;
-                    left: 0;
-                    right: 50px;
-                    border-left: 1px solid rgba(51, 51, 51, 0.1);
+                    /* left: 0;
+                    right: 50px; */
+                    border: 1px solid rgba(51, 51, 51, 0.1);
+
+                    width: 100%;
+
+                    left: 50px;
+
+                    background-color: white;
+                    width: 0;
+                    transition: all 0.3s;
+                    overflow: hidden;
+                }
+                .wrapper .app-side-view .side-content.active{
+                    width: 500px;
                 }
                 .wrapper .app-side-view .side-content .dom-tree-wrapper {
                     position: absolute;
@@ -9431,11 +9452,13 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
 
                 .wrapper .app-side-view .side-nav {
                     position: fixed;
-                    right: 0;
+                    /* right: 0; */
                     width: 50px;
                     background-color: #36344c;
                     height: 100%;
                     z-index: 10;
+
+                    left: 0;
                 }
                 .wrapper .app-side-view .side-nav div {
                     position: relative;
@@ -9449,8 +9472,8 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
                     -ms-flex-pack: center;
                     justify-content: center;
                     font-weight: 400;
-                    width: 50px;
-                    height: 50px;
+                    /* width: 50px;
+                    height: 50px; */
                     padding: 0 5px;
                     border: 0;
                     border-radius: 0;
@@ -9458,28 +9481,9 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
                     font-size: 1.5em;
                     color: rgba(255, 255, 255, 0.5);
                     cursor: pointer;
-                }
-                .wrapper .app-side-view .side-nav div {
-                    position: relative;
-                    display: -webkit-box;
-                    display: -ms-flexbox;
-                    display: flex;
-                    -webkit-box-align: center;
-                    -ms-flex-align: center;
-                    align-items: center;
-                    -webkit-box-pack: center;
-                    -ms-flex-pack: center;
-                    justify-content: center;
-                    font-weight: 400;
-                    width: 50px;
-                    height: 50px;
-                    padding: 0 5px;
-                    border: 0;
-                    border-radius: 0;
-                    white-space: normal;
-                    font-size: 1.5em;
-                    color: rgba(255, 255, 255, 0.5);
-                    cursor: pointer;
+
+                    width: 40px;
+                    height: 40px;
                 }
                 .wrapper .app-side-view .side-nav div:hover, .wrapper .app-side-view .side-nav div.active {
                     background-color: #504d70;

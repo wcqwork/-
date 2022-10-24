@@ -4,359 +4,29 @@ const treeHelper = {
         currentElementId: null,
         specialArr: ['#text', '#comment', 'SCRIPT', 'LINK', 'TEMPLATE', 'IFRAME', "STYLE"],
         rightPanel: `
-                <div class="wrapper">
-            <div class="app-side-view">
-                <div class="side-content">
-                    <div class="dom-tree-wrapper">
-                        <div class="header">
-                            <p>DOM tree</p>
-                        </div>
-                        <div class="dom-tree">
-                            <ul class="dragArea">
-                                <!---->
-                                <li data-el-id="2dEstnql" class="draggable-item open
-                                    active">
-                                    <p class="draggable-title">
-                                        <i class="fa fa-minus"></i>
-                                        DIV
-                                        <i class="fa fa-trash-o"></i>
-                                    </p>
-                                    <ul class="dragArea">
-                                        <!---->
-                                        <li data-el-id="ZIgg9JQF" class="draggable-item
-                                            open">
-                                            <p class="draggable-title">
-                                                <i class="fa fa-minus"></i>
-                                                DIV
-                                                <i class="fa fa-trash-o"></i>
-                                            </p>
-                                            <ul class="dragArea">
-                                                <!---->
-                                                <li data-el-id="z1NRlAuV"
-                                                    class="draggable-item no-children
-                                                    open">
-                                                    <p class="draggable-title">
-                                                        <!---->
-                                                        H1
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </p>
-                                                    <ul class="dragArea"></ul>
-                                                </li>
-                                                <!---->
-                                                <li data-el-id="vnU8TZM2"
-                                                    class="draggable-item no-children
-                                                    open">
-                                                    <p class="draggable-title">
-                                                        <!---->
-                                                        P
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </p>
-                                                    <ul class="dragArea"></ul>
-                                                </li>
-                                                <!---->
-                                                <li data-el-id="98cxGoyL"
-                                                    class="draggable-item open">
-                                                    <p class="draggable-title">
-                                                        <i class="fa fa-minus"></i>
-                                                        P
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </p>
-                                                    <ul class="dragArea">
-                                                        <!---->
-                                                        <li data-el-id="eacshohd"
-                                                            class="draggable-item
-                                                            no-children open">
-                                                            <p class="draggable-title">
-                                                                <!---->
-                                                                A
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea"></ul>
-                                                        </li>
-                                                        <!---->
-                                                    </ul>
-                                                </li>
-                                                <!---->
-                                            </ul>
-                                        </li>
-                                        <!---->
-                                    </ul>
-                                </li>
-                                <!---->
-                                <li data-el-id="qMWOhRGI" class="draggable-item open">
-                                    <p class="draggable-title">
-                                        <i class="fa fa-minus"></i>
-                                        DIV
-                                        <i class="fa fa-trash-o"></i>
-                                    </p>
-                                    <ul class="dragArea">
-                                        <!---->
-                                        <!---->
-                                        <!---->
-                                        <li data-el-id="Kh2Mtqrq" class="draggable-item
-                                            open">
-                                            <p class="draggable-title">
-                                                <i class="fa fa-minus"></i>
-                                                DIV
-                                                <i class="fa fa-trash-o"></i>
-                                            </p>
-                                            <ul class="dragArea">
-                                                <!---->
-                                                <li data-el-id="JUwftfGH"
-                                                    class="draggable-item open">
-                                                    <p class="draggable-title">
-                                                        <i class="fa fa-minus"></i>
-                                                        DIV
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </p>
-                                                    <ul class="dragArea">
-                                                        <!---->
-                                                        <li data-el-id="leIlvYzi"
-                                                            class="draggable-item
-                                                            no-children open">
-                                                            <p class="draggable-title">
-                                                                <!---->
-                                                                H2
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea"></ul>
-                                                        </li>
-                                                        <!---->
-                                                        <li data-el-id="IANJe4K1"
-                                                            class="draggable-item
-                                                            no-children open">
-                                                            <p class="draggable-title">
-                                                                <!---->
-                                                                P
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea"></ul>
-                                                        </li>
-                                                        <!---->
-                                                        <li data-el-id="d4PdEiLr"
-                                                            class="draggable-item open">
-                                                            <p class="draggable-title">
-                                                                <i class="fa fa-minus"></i>
-                                                                P
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea">
-                                                                <!---->
-                                                                <li
-                                                                    data-el-id="DMh1SzfL"
-                                                                    class="draggable-item
-                                                                    no-children open">
-                                                                    <p
-                                                                        class="draggable-title">
-                                                                        <!---->
-                                                                        A
-                                                                        <i class="fa
-                                                                            fa-trash-o"></i>
-                                                                    </p>
-                                                                    <ul
-                                                                        class="dragArea"></ul>
-                                                                </li>
-                                                                <!---->
-                                                            </ul>
-                                                        </li>
-                                                        <!---->
-                                                    </ul>
-                                                </li>
-                                                <!---->
-                                                <li data-el-id="NjyGzLir"
-                                                    class="draggable-item open">
-                                                    <p class="draggable-title">
-                                                        <i class="fa fa-minus"></i>
-                                                        DIV
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </p>
-                                                    <ul class="dragArea">
-                                                        <!---->
-                                                        <li data-el-id="aUUmtDCr"
-                                                            class="draggable-item
-                                                            no-children open">
-                                                            <p class="draggable-title">
-                                                                <!---->
-                                                                H2
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea"></ul>
-                                                        </li>
-                                                        <!---->
-                                                        <li data-el-id="ItpXILxw"
-                                                            class="draggable-item
-                                                            no-children open">
-                                                            <p class="draggable-title">
-                                                                <!---->
-                                                                P
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea"></ul>
-                                                        </li>
-                                                        <!---->
-                                                        <li data-el-id="o2txGotr"
-                                                            class="draggable-item open">
-                                                            <p class="draggable-title">
-                                                                <i class="fa fa-minus"></i>
-                                                                P
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea">
-                                                                <!---->
-                                                                <li
-                                                                    data-el-id="1OFkCgLa"
-                                                                    class="draggable-item
-                                                                    no-children open">
-                                                                    <p
-                                                                        class="draggable-title">
-                                                                        <!---->
-                                                                        A
-                                                                        <i class="fa
-                                                                            fa-trash-o"></i>
-                                                                    </p>
-                                                                    <ul
-                                                                        class="dragArea"></ul>
-                                                                </li>
-                                                                <!---->
-                                                            </ul>
-                                                        </li>
-                                                        <!---->
-                                                    </ul>
-                                                </li>
-                                                <!---->
-                                                <li data-el-id="jxvWnenH"
-                                                    class="draggable-item open">
-                                                    <p class="draggable-title">
-                                                        <i class="fa fa-minus"></i>
-                                                        DIV
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </p>
-                                                    <ul class="dragArea">
-                                                        <!---->
-                                                        <li data-el-id="BCawokYE"
-                                                            class="draggable-item
-                                                            no-children open">
-                                                            <p class="draggable-title">
-                                                                <!---->
-                                                                H2
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea"></ul>
-                                                        </li>
-                                                        <!---->
-                                                        <li data-el-id="VigX1lDW"
-                                                            class="draggable-item
-                                                            no-children open">
-                                                            <p class="draggable-title">
-                                                                <!---->
-                                                                P
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea"></ul>
-                                                        </li>
-                                                        <!---->
-                                                        <li data-el-id="6U4ANqhJ"
-                                                            class="draggable-item open">
-                                                            <p class="draggable-title">
-                                                                <i class="fa fa-minus"></i>
-                                                                P
-                                                                <i class="fa
-                                                                    fa-trash-o"></i>
-                                                            </p>
-                                                            <ul class="dragArea">
-                                                                <!---->
-                                                                <li
-                                                                    data-el-id="U40alvFy"
-                                                                    class="draggable-item
-                                                                    no-children open">
-                                                                    <p
-                                                                        class="draggable-title">
-                                                                        <!---->
-                                                                        A
-                                                                        <i class="fa
-                                                                            fa-trash-o"></i>
-                                                                    </p>
-                                                                    <ul
-                                                                        class="dragArea"></ul>
-                                                                </li>
-                                                                <!---->
-                                                            </ul>
-                                                        </li>
-                                                        <!---->
-                                                    </ul>
-                                                </li>
-                                                <!---->
-                                            </ul>
-                                        </li>
-                                        <!---->
-                                        <li data-el-id="5SlvsnuX" class="draggable-item
-                                            no-children open">
-                                            <p class="draggable-title">
-                                                <!---->
-                                                HR
-                                                <i class="fa fa-trash-o"></i>
-                                            </p>
-                                            <ul class="dragArea"></ul>
-                                        </li>
-                                        <!---->
-                                        <li data-el-id="1MqUoX0h" class="draggable-item
-                                            open">
-                                            <p class="draggable-title">
-                                                <i class="fa fa-minus"></i>
-                                                FOOTER
-                                                <i class="fa fa-trash-o"></i>
-                                            </p>
-                                            <ul class="dragArea">
-                                                <!---->
-                                                <li data-el-id="Twnbudqb"
-                                                    class="draggable-item no-children
-                                                    open">
-                                                    <p class="draggable-title">
-                                                        <!---->
-                                                        P
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </p>
-                                                    <ul class="dragArea"></ul>
-                                                </li>
-                                                <!---->
-                                            </ul>
-                                        </li>
-                                        <!---->
-                                    </ul>
-                                </li>
-                                <!---->
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="side-view">
-                        <!---->
-                        <div class="header">
-                            <p>DOM tree</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="side-nav">
-                    <div class="" style="display:none;">
-                        <i class="fa fa-square-o"></i>
-                    </div>
-                    <div class="active">
-                        <i class="fa fa-align-left"></i>
+        <div class="wrapper">
+        <div class="app-side-view">
+            <div class="side-content active">
+                <div class="side-view">
+                    <!---->
+                    <div class="header">
+                        <p>DOM tree</p>
                     </div>
                 </div>
             </div>
-        </div>    
+            <div class="side-nav">
+                <div class="" style="display:none;">
+                    <i class="fa fa-square-o"></i>
+                </div>
+                <div class="active" onclick='$(".wrapper .app-side-view .side-content").toggleClass("active")'>
+                    <i class="fa fa-align-left"></i>
+                </div>
+            </div>
+        </div>
+    </div>       
         `
     },
-    setCurrentElementId: function(elementId){
+    setCurrentElementId: function (elementId) {
         this.state.currentElementId = elementId;
     },
     getMouseBearingsPercentage: function ($element, elementRect, mousePos) {
@@ -448,6 +118,21 @@ const treeHelper = {
                 return this.placeAfter($targetElement, toHighlight, hideLine);
             }
         }
+    },
+    placeAfter: function ($element, toHighlight, hideLine) {
+        var placeholder = this.getPlaceHolder();
+        var inlinePlaceholder = ($element.css('display') == 'inline' || $element.css('display') == 'inline-block');
+        if ($element.is('br')) {
+            inlinePlaceholder = false;
+        } else if ($element.is('td,th')) {
+            placeholder.addClass('horizontal').css('width', $element.width() + 'px');
+            return this.addPlaceHolder($element, 'inside-append', placeholder, toHighlight, hideLine);
+        }
+        if (inlinePlaceholder)
+            placeholder.addClass('vertical').css('height', $element.innerHeight() + 'px');
+        else
+            placeholder.addClass('horizontal').css('width', $element.parent().width() + 'px');
+        this.addPlaceHolder($element, 'after', placeholder, toHighlight, hideLine);
     },
     checkVoidElement: function ($element) {
         var voidelements = ['i', 'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'video', 'iframe', 'source', 'track', 'wbr'];
@@ -883,7 +568,7 @@ const treeHelper = {
             }
         }
     },
-    stoppedHoveringElement: function(){
+    stoppedHoveringElement: function () {
         $('.dragArea li').removeClass('active')
     },
     /**
@@ -957,5 +642,28 @@ const treeHelper = {
         styles += "[data-dragcontext-marker],[data-sh-parent-marker]{outline:#19cd9d solid 2px;outline-offset: -4px;text-align:center;position:absolute;z-index:123456781;pointer-events:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}[data-dragcontext-marker] [data-dragcontext-marker-text],[data-sh-parent-marker] [data-sh-parent-marker-text]{background:#19cd9d;color:#fff;padding:2px 10px;display:inline-block;font-size:14px;position:relative;top:-22px;min-width:121px;font-weight:700;pointer-events:none;z-index:123456782}[data-dragcontext-marker].invalid{outline:#dc044f solid 2px;outline-offset: -4px;}[data-dragcontext-marker].invalid [data-dragcontext-marker-text]{background:#dc044f}[data-dragcontext-marker=body]{outline-offset:-4px}[data-dragcontext-marker=body] [data-dragcontext-marker-text]{top:4px;}";
         styles += '.drop-marker{pointer-events:none;}.drop-marker.horizontal{background:#00adff;position:absolute;height:2px;list-style:none;visibility:visible!important;box-shadow:0 1px 2px rgba(255,255,255,.4),0 -1px 2px rgba(255,255,255,.4);z-index:123456789;text-align:center}.drop-marker.horizontal.topside{margin-top:0}.drop-marker.horizontal.bottomside{margin-top:2px}.drop-marker.horizontal:before{content:"";width:8px;height:8px;background:#00adff;border-radius:8px;margin-top:-3px;float:left;box-shadow:0 1px 2px rgba(255,255,255,.4),0 -1px 2px rgba(255,255,255,.4)}.drop-marker.horizontal:after{content:"";width:8px;height:8px;background:#00adff;border-radius:8px;margin-top:-3px;float:right;box-shadow:0 1px 2px rgba(255,255,255,.4),0 -1px 2px rgba(255,255,255,.4)}.drop-marker.vertical{height:50px;list-style:none;border:1px solid #00ADFF;position:absolute;margin-left:3px;display:inline;box-shadow:1px 0 2px rgba(255,255,255,.4),-1px 0 2px rgba(255,255,255,.4)}.drop-marker.vertical.leftside{margin-left:0}.drop-marker.vertical.rightside{margin-left:3px}.drop-marker.vertical:before{content:"";width:8px;height:8px;background:#00adff;border-radius:8px;margin-top:-4px;top:0;position:absolute;margin-left:-4px;box-shadow:1px 0 2px rgba(255,255,255,.4),-1px 0 2px rgba(255,255,255,.4)}.drop-marker.vertical:after{content:"";width:8px;height:8px;background:#00adff;border-radius:8px;margin-left:-4px;bottom:-4px;position:absolute;box-shadow:1px 0 2px rgba(255,255,255,.4),-1px 0 2px rgba(255,255,255,.4)}';
         return styles
+    },
+    /**
+     * 获取node的select选择器
+     * @param {*} el 
+     */
+    getNodeSelect: function (el) {
+        const getCssSelectorShort = (el) => {
+            let path = [], parent;
+            while (parent = el.parentNode) {
+                let tag = el.tagName, siblings;
+                path.unshift(
+                    el.id ? `#${el.id}` : (
+                        siblings = parent.children,
+                        [].filter.call(siblings, sibling => sibling.tagName === tag).length === 1 ? tag :
+                            `${tag}:nth-child(${1 + [].indexOf.call(siblings, el)})`
+                    )
+                );
+                el = parent;
+            };
+            path.splice(0, 1);
+            return `${path.join(' > ')}`;
+        };
+        return getCssSelectorShort(el);
     }
 }
