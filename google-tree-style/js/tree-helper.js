@@ -14,6 +14,7 @@ const treeHelper = {
                 <!---->
                 <div class="header">
                     <p>DOM tree</p>
+                    <button class="exportStyleBtn">导出</button>
                 </div>
             </div>
         </div>
@@ -27,11 +28,12 @@ const treeHelper = {
         </div>
     </div>
     <div class="right-seeting-board">
-        <div class="setting-title"><span>样式设置</span><span class="setting-close"><span></div>
+        <div class="setting-title"><div>样式设置</div><div class="setting-close"></div></div>
         <div class="seeting-content">
             <div class="seeting-content-item">
                 <div class="subtitle">
-                    布局
+                    <div>布局</div>
+                    <div><label>权重   <input checked type="checkbox" id="weightCheckbox"></input></label></div>
                 </div>
                 <div class="subtitle-content">
                     <div
@@ -751,6 +753,34 @@ const treeHelper = {
             return `${path.join(' > ')}`;
         };
         return getCssSelectorShort(el);
+    },
+    exportSettingStyle: function(){
+        var exportStyleBtn = $(".exportStyleBtn");
+        exportStyleBtn.unbind('click').bind('click',function(){
+            var selectorStr = stylePanelHelper.state.stylePanelContainer;
+            var _allInjectStyle =  $("#" + selectorStr).html();
+            console.log(_allInjectStyle);
+            initExportEl(_allInjectStyle);
+        })
+
+        function initExportEl(_allInjectStyle){
+            if( $(".exportSettingStyle").length <= 0){
+                var _styleBoxContainer = $(`
+                <div class="exportSettingStyle">
+                    <div class="exportSetingClose"></div>
+                    <textarea id="exportInnerHtml"></textarea>
+                </div>
+            `);
+                $("body").append(_styleBoxContainer);
+            }
+
+            $("#exportInnerHtml").html(_allInjectStyle);
+
+            $(".exportSetingClose").unbind('click').bind('click',function(){
+                $(".exportSettingStyle").hide();
+            })
+            $(".exportSettingStyle").show();
+        }
     }
 }
 
@@ -762,7 +792,9 @@ const stylePanelHelper = {
         // 选择器
         currentSelector: null,
         stylePanel:".right-seeting-board",
-        spaceItemVal:["margin-top", "margin-right", "margin-bottom", "margin-left", "padding-top", "padding-right", "padding-bottom", "padding-left"]
+        spaceItemVal:["margin-top", "margin-right", "margin-bottom", "margin-left", "padding-top", "padding-right", "padding-bottom", "padding-left"],
+        // 导出的样式文件选择器
+        stylePanelContainer:"stylePanelContainer"
     },
     /**
      * 初始化样式面板
@@ -773,9 +805,9 @@ const stylePanelHelper = {
         this.closePanel();
         var _selector = treeHelper.getNodeSelect.call(treeHelper,el);
         this.state.currentSelector = _selector;
-        spacePanelHelper.initEventListerInputSpace.call(spacePanelHelper);
         var resultArr = this.getNodeDesignStyle(el, this.state.spaceItemVal);
         spacePanelHelper.initSpaceInputVal.call(spacePanelHelper,resultArr);
+        spacePanelHelper.initEventListerInputSpace.call(spacePanelHelper);
         console.log(resultArr);
     },
     /**
@@ -804,18 +836,25 @@ const stylePanelHelper = {
         });
     },
     injectPanelStyle: function(selector,styleName,styleVal){
-        var _styleStr = generateStyle(selector,styleName,styleVal);
+        var isFlag = $("#weightCheckbox").is(":checked");
+        var _styleStr = generateStyle(selector,styleName,styleVal,isFlag);
+        var selectContainer = this.state.stylePanelContainer;
         console.log(_styleStr);
-        var stylePanelContainer = $("<style id='stylePanelContainer'></style>");
-        if($("#stylePanelContainer").length <= 0){
-            $("body").append(stylePanelContainer);
-            $("#stylePanelContainer").append(_styleStr);
+        var styleElStr = $("<style id="+ selectContainer +"></style>");
+        if($("#"+ selectContainer).length <= 0){
+            $("body").append(styleElStr);
+            $("#"+ selectContainer).append(_styleStr);
         }else{
-            $("#stylePanelContainer").append(_styleStr);
+            $("#"+ selectContainer).append(_styleStr);
         }
 
-        function generateStyle(selector,styleName,styleVal){
-           var _styleStr =  selector + "{" + styleName + ":" + styleVal + "px" + "}";
+        function generateStyle(selector,styleName,styleVal,isFlag){
+            var _styleStr;
+            if(isFlag){
+                _styleStr =  selector + "{" + styleName + ":" + styleVal + "px" +" !important" + "}";
+            }else{
+                _styleStr =  selector + "{" + styleName + ":" + styleVal + "px" + "}";
+            }
            return _styleStr;
         }
     }
@@ -870,13 +909,18 @@ const spacePanelHelper = {
         var mapptingArr = Object.assign({},stylePanelHelper.state.spaceItemVal);
         var spaceEl = this.getSpaceInput();
         for (let i = 0; i < spaceEl.length; i++) {
-            spaceEl[i].unbind('blur').bind('blur', function () {
-                var _inputVal = $(this).val();
-                var _selector = stylePanelHelper.state.currentSelector;
-
-                // 生成样式
-                stylePanelHelper.injectPanelStyle(_selector,mapptingArr[i],_inputVal);
-            })
+            (function(){
+                var _originVal = spaceEl[i].val();
+                spaceEl[i].unbind('blur').bind('blur', function () {
+                    var _inputVal = $(this).val();
+                    if(_originVal != _inputVal){
+                        var _selector = stylePanelHelper.state.currentSelector;
+    
+                        // 生成样式
+                        stylePanelHelper.injectPanelStyle(_selector,mapptingArr[i],_inputVal);
+                    }
+                })
+            })()
         }
     }
 }

@@ -45,7 +45,8 @@ $(function () {
         treeHelper.renderTreeNodeHtml(treeHelper.state.domTree, _treeUl);
         var rightPanel = $(treeHelper.state.rightPanel);
         rightPanel.find(".side-view").append(_treeDomContainer);
-        $("body").append(rightPanel)
+        $("body").append(rightPanel);
+        treeHelper.exportSettingStyle(); // 导出所有样式
     }).catch(error => {
         console.log(error);
     })
