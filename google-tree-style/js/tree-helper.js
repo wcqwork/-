@@ -1,3 +1,6 @@
+/**
+ * domtree辅组生成类
+ */
 const treeHelper = {
     state: {
         domTree: undefined,
@@ -5,27 +8,110 @@ const treeHelper = {
         specialArr: ['#text', '#comment', 'SCRIPT', 'LINK', 'TEMPLATE', 'IFRAME', "STYLE"],
         rightPanel: `
         <div class="wrapper">
-        <div class="app-side-view">
-            <div class="side-content active">
-                <div class="side-view">
-                    <!---->
-                    <div class="header">
-                        <p>DOM tree</p>
-                    </div>
-                </div>
-            </div>
-            <div class="side-nav">
-                <div class="" style="display:none;">
-                    <i class="fa fa-square-o"></i>
-                </div>
-                <div class="active" onclick='$(".wrapper .app-side-view .side-content").toggleClass("active")'>
-                    <i class="fa fa-align-left"></i>
+    <div class="app-side-view">
+        <div class="side-content active">
+            <div class="side-view">
+                <!---->
+                <div class="header">
+                    <p>DOM tree</p>
                 </div>
             </div>
         </div>
-    </div>       
+        <div class="side-nav">
+            <div class="" style="display:none;">
+                <i class="fa fa-square-o"></i>
+            </div>
+            <div class="active" onclick='$(".wrapper .app-side-view.side-content").toggleClass(" active")'>
+                <i class="fa fa-align-left"></i>
+            </div>
+        </div>
+    </div>
+    <div class="right-seeting-board">
+        <div class="setting-title"><span>样式设置</span><span class="setting-close"><span></div>
+        <div class="seeting-content">
+            <div class="seeting-content-item">
+                <div class="subtitle">
+                    布局
+                </div>
+                <div class="subtitle-content">
+                    <div
+                        id="el-collapse-content-7635"
+                        class="el-collapse-item__wrap"
+                        role="tabpanel"
+                        aria-hidden="false"
+                        aria-labelledby="el-collapse-head-7635"
+                        data-old-padding-top=""
+                        data-old-padding-bottom=""
+                        data-old-overflow=""
+                        style=""
+                    >
+                        <div class="el-collapse-item__content">
+                            <div class="layout-page-container" data-v-42fee549="">
+                                <div class="layout-box-container">
+                                    <div class="margin-top-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="margin-right-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="margin-bottom-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <span class="help-txt">外边距</span>
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="margin-left-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="padding-top-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="padding-right-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="padding-bottom-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <span class="help-txt">内边距</span>
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="padding-left-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+       
         `
     },
+    /**
+     * 设置当前选中的唯一elementId
+     * @param {*} elementId 
+     */
     setCurrentElementId: function (elementId) {
         this.state.currentElementId = elementId;
     },
@@ -665,5 +751,132 @@ const treeHelper = {
             return `${path.join(' > ')}`;
         };
         return getCssSelectorShort(el);
+    }
+}
+
+/**
+ * 样式面板辅组工具类
+ */
+const stylePanelHelper = {
+    state: {
+        // 选择器
+        currentSelector: null,
+        stylePanel:".right-seeting-board",
+        spaceItemVal:["margin-top", "margin-right", "margin-bottom", "margin-left", "padding-top", "padding-right", "padding-bottom", "padding-left"]
+    },
+    /**
+     * 初始化样式面板
+     */
+    initPanel: function (el) {
+        $(this.state.stylePanel).show();
+
+        this.closePanel();
+        var _selector = treeHelper.getNodeSelect.call(treeHelper,el);
+        this.state.currentSelector = _selector;
+        spacePanelHelper.initEventListerInputSpace.call(spacePanelHelper);
+        var resultArr = this.getNodeDesignStyle(el, this.state.spaceItemVal);
+        spacePanelHelper.initSpaceInputVal.call(spacePanelHelper,resultArr);
+        console.log(resultArr);
+    },
+    /**
+     * 移除样式面板
+     */
+    removePanel: function(){
+        $(this.state.stylePanel).hide();
+    },
+    /**
+     * 获取dom对应的样式值
+     * @param {*} el 
+     * @param {*} arr 
+     * @returns 
+     */
+    getNodeDesignStyle: function (el, arr) {
+        var styleMap = getComputedStyle(el);
+        var resultArr = [];
+        for (var item of arr) {
+            resultArr.push(parseFloat(styleMap[item]));
+        }
+        return resultArr;
+    },
+    closePanel: function(){
+        $(".setting-close").unbind('click').bind('click',function(){
+            stylePanelHelper.removePanel();
+        });
+    },
+    injectPanelStyle: function(selector,styleName,styleVal){
+        var _styleStr = generateStyle(selector,styleName,styleVal);
+        console.log(_styleStr);
+        var stylePanelContainer = $("<style id='stylePanelContainer'></style>");
+        if($("#stylePanelContainer").length <= 0){
+            $("body").append(stylePanelContainer);
+            $("#stylePanelContainer").append(_styleStr);
+        }else{
+            $("#stylePanelContainer").append(_styleStr);
+        }
+
+        function generateStyle(selector,styleName,styleVal){
+           var _styleStr =  selector + "{" + styleName + ":" + styleVal + "px" + "}";
+           return _styleStr;
+        }
+    }
+}
+
+/**
+ * 间距设置项
+ */
+const spacePanelHelper = {
+    /**
+     * 获取间距面板对应input
+     * @returns 
+     */
+    getSpaceInput: function () {
+        var _boxContainer = $(".layout-box-container");
+        var marginTop = _boxContainer.find(".margin-top-div").find("input");
+        var marginRight = _boxContainer.find(".margin-right-div").find("input");
+        var marginBottom = _boxContainer.find(".margin-bottom-div").find("input");
+        var marginLeft = _boxContainer.find(".margin-left-div").find("input");
+        var paddingTop = _boxContainer.find(".padding-top-div").find("input");
+        var paddingRight = _boxContainer.find(".padding-right-div").find("input");
+        var paddingBottom = _boxContainer.find(".padding-bottom-div").find("input");
+        var paddingLeft = _boxContainer.find(".padding-left-div").find("input");
+
+        return [
+            marginTop,
+            marginRight,
+            marginBottom,
+            marginLeft,
+            paddingTop,
+            paddingRight,
+            paddingBottom,
+            paddingLeft
+        ]
+    },
+    /**
+     * 初始化间距设置面板
+     * @param {*} resultArr 
+     */
+    initSpaceInputVal: function (resultArr) {
+        var spaceEl = this.getSpaceInput();
+        if (resultArr.length == 8) {
+            for (var i = 0; i < resultArr.length; i++) {
+                spaceEl[i].val(resultArr[i])
+            }
+        };
+    },
+    /**
+     * 初始化间距面板失去焦点事件绑定
+     */
+    initEventListerInputSpace: function () {
+        var mapptingArr = Object.assign({},stylePanelHelper.state.spaceItemVal);
+        var spaceEl = this.getSpaceInput();
+        for (let i = 0; i < spaceEl.length; i++) {
+            spaceEl[i].unbind('blur').bind('blur', function () {
+                var _inputVal = $(this).val();
+                var _selector = stylePanelHelper.state.currentSelector;
+
+                // 生成样式
+                stylePanelHelper.injectPanelStyle(_selector,mapptingArr[i],_inputVal);
+            })
+        }
     }
 }

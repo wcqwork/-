@@ -87,13 +87,13 @@ $(function () {
         treeHelper.clearContainerContext()
         treeHelper.stoppedHoveringElement();
     }).on('click', (event) => {
+        stylePanelHelper.removePanel();
         const currentElement = $(event.target);
         var elementId =  currentElement.attr("data-el-id");
         treeHelper.setCurrentElementId(elementId);
         treeHelper.highlightElement(event.target, true);
 
-        var _selector = treeHelper.getNodeSelect(event.target);
-        console.log(_selector);
+        stylePanelHelper.initPanel(event.target);
         event.preventDefault()
         event.stopPropagation()
     })

@@ -9378,7 +9378,7 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
                     left: 0;
                     top: 0;
                     height: 100vh;
-                    width: 420px;
+                    /* width: 420px; */
                     z-index: 99999999;
                     display: -webkit-box;
                     display: -ms-flexbox;
@@ -9402,7 +9402,7 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
                     overflow: hidden;
                 }
                 .wrapper .app-side-view .side-content.active{
-                    width: 500px;
+                    width: 420px;
                 }
                 .wrapper .app-side-view .side-content .dom-tree-wrapper {
                     position: absolute;
@@ -9488,6 +9488,367 @@ timer=setTimeout(function(){if(e.currentTarget&&e.currentTarget.className.indexO
                 .wrapper .app-side-view .side-nav div:hover, .wrapper .app-side-view .side-nav div.active {
                     background-color: #504d70;
                     color: #ffffff;
+                }
+            </style>
+
+            <style>
+                .right-seeting-board{
+                    position: fixed;
+                    top: 0;
+                    right: 0px;
+                    width: 380px;
+                    height: 100vh;
+                    background-color: white;
+                    border: 1px solid rgba(51, 51, 51, 0.1);
+                    z-index: 9999999999999999999999;
+                }
+                .right-seeting-board .setting-title{
+                    padding: 15px;
+                    font-weight: bold;
+                    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .right-seeting-board .seeting-content{
+                    padding: 15px;
+                }
+            </style>
+            <style>
+                .setting-close{
+                    display: inline-block;
+                    width: 32px;
+                    height: 32px;
+                    background-image: url(./img/close.png);
+                    background-size: 32px;
+
+                    cursor: pointer;
+                }
+                .right-seeting-board{
+                    display: none;
+                }
+                .layout-page-container .layout-box-container {
+                    position: relative;
+                    width: 100%;
+                    height: 150px
+                }
+
+                .layout-page-container .layout-box-container>div {
+                    cursor: pointer
+                }
+
+                .layout-page-container .layout-box-container input {
+                    text-align: center;
+                    line-height: 20px;
+                    height: 20px;
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    padding: 0;
+                    margin: 0;
+                    font-weight: 400;
+                    vertical-align: top;
+                    background-color: transparent;
+                    color: #333;
+                    font-size: 12px;
+                    cursor: pointer
+                }
+
+                .layout-page-container .layout-box-container .margin-top-div {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 0;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-top: 20px solid #d6e4ff;
+                    transition: all .3s ease;
+                    box-sizing: border-box
+                }
+
+                .layout-page-container .layout-box-container .margin-top-div .next-input {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: -20px;
+                    height: 20px!important;
+                    background: transparent;
+                    width: 100%
+                }
+
+                .layout-page-container .layout-box-container .margin-top-div .next-input input {
+                    text-align: center;
+                    line-height: 20px;
+                    height: 20px;
+                    padding: 0
+                }
+
+                .layout-page-container .layout-box-container .margin-top-div:hover {
+                    border-top-color: #bfd4fb
+                }
+
+                .layout-page-container .layout-box-container .margin-right-div {
+                    position: absolute;
+                    top: 5px;
+                    bottom: 5px;
+                    right: 0;
+                    width: 0;
+                    border-top: 20px solid transparent;
+                    border-bottom: 20px solid transparent;
+                    border-right: 20px solid #d6e4ff;
+                    transition: all .3s ease;
+                    box-sizing: border-box
+                }
+
+                .layout-page-container .layout-box-container .margin-right-div .next-input {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: -20px;
+                    width: 20px;
+                    margin: auto;
+                    background: transparent
+                }
+
+                .layout-page-container .layout-box-container .margin-right-div .next-input input {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: -20px;
+                    margin: auto;
+                    width: 60px;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    padding: 0 8px
+                }
+
+                .layout-page-container .layout-box-container .margin-right-div:hover {
+                    border-right-color: #bfd4fb
+                }
+
+                .layout-page-container .layout-box-container .margin-bottom-div {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 0;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-bottom: 20px solid #d6e4ff;
+                    transition: all .3s ease
+                }
+
+                .layout-page-container .layout-box-container .margin-bottom-div .help-txt {
+                    float: left;
+                    margin-left: -10px;
+                    transform: scale(.75)
+                }
+
+                .layout-page-container .layout-box-container .margin-bottom-div .next-input {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: -20px;
+                    height: 20px!important;
+                    background: transparent
+                }
+
+                .layout-page-container .layout-box-container .margin-bottom-div .next-input input {
+                    text-align: center;
+                    line-height: 20px;
+                    height: 20px;
+                    padding: 0;
+                    position: absolute;
+                    left: 0;
+                    top: 0
+                }
+
+                .layout-page-container .layout-box-container .margin-bottom-div:hover {
+                    border-bottom-color: #bfd4fb
+                }
+
+                .layout-page-container .layout-box-container .margin-left-div {
+                    position: absolute;
+                    top: 5px;
+                    bottom: 5px;
+                    left: 0;
+                    width: 0;
+                    border-top: 20px solid transparent;
+                    border-bottom: 20px solid transparent;
+                    border-left: 20px solid #d6e4ff;
+                    transition: all .3s ease
+                }
+
+                .layout-page-container .layout-box-container .margin-left-div .next-input {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: -20px;
+                    width: 20px;
+                    margin: auto;
+                    background: transparent
+                }
+
+                .layout-page-container .layout-box-container .margin-left-div .next-input input {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: -20px;
+                    margin: auto;
+                    width: 60px;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    padding: 0 8px
+                }
+
+                .layout-page-container .layout-box-container .margin-left-div:hover {
+                    border-left-color: #bfd4fb
+                }
+
+                .layout-page-container .layout-box-container .padding-top-div {
+                    position: absolute;
+                    top: 25px;
+                    left: 25px;
+                    right: 25px;
+                    height: 0;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-top: 20px solid #d6e4ff;
+                    transition: all .3s ease
+                }
+
+                .layout-page-container .layout-box-container .padding-top-div .next-input {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: -20px;
+                    height: 20px!important;
+                    background: transparent;
+                    width: 100%
+                }
+
+                .layout-page-container .layout-box-container .padding-top-div:hover {
+                    border-top-color: #bfd4fb
+                }
+
+                .layout-page-container .layout-box-container .padding-right-div {
+                    position: absolute;
+                    top: 30px;
+                    bottom: 30px;
+                    right: 25px;
+                    width: 0;
+                    border-top: 20px solid transparent;
+                    border-bottom: 20px solid transparent;
+                    border-right: 20px solid #d6e4ff;
+                    transition: all .3s ease
+                }
+
+                .layout-page-container .layout-box-container .padding-right-div .next-input {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: -25px;
+                    width: 20px;
+                    margin: auto;
+                    background: transparent
+                }
+
+                .layout-page-container .layout-box-container .padding-right-div .next-input input {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 30px;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    padding: 0 5px
+                }
+
+                .layout-page-container .layout-box-container .padding-right-div:hover {
+                    border-right-color: #bfd4fb
+                }
+
+                .layout-page-container .layout-box-container .padding-bottom-div {
+                    position: absolute;
+                    bottom: 25px;
+                    left: 25px;
+                    right: 25px;
+                    height: 0;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-bottom: 20px solid #d6e4ff;
+                    transition: all .3s ease
+                }
+
+                .layout-page-container .layout-box-container .padding-bottom-div .help-txt {
+                    float: left;
+                    margin-left: -10px;
+                    transform: scale(.75)
+                }
+
+                .layout-page-container .layout-box-container .padding-bottom-div .next-input {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: -20px;
+                    height: 20px!important;
+                    background: transparent;
+                    width: 100%
+                }
+
+                .layout-page-container .layout-box-container .padding-bottom-div input {
+                    position: absolute;
+                    left: 0;
+                    top: 0
+                }
+
+                .layout-page-container .layout-box-container .padding-bottom-div:hover {
+                    border-bottom-color: #bfd4fb
+                }
+
+                .layout-page-container .layout-box-container .padding-left-div {
+                    position: absolute;
+                    top: 30px;
+                    bottom: 30px;
+                    left: 25px;
+                    width: 0;
+                    border-top: 20px solid transparent;
+                    border-bottom: 20px solid transparent;
+                    border-left: 20px solid #d6e4ff;
+                    transition: all .3s ease
+                }
+
+                .layout-page-container .layout-box-container .padding-left-div .next-input {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: -25px;
+                    width: 20px;
+                    margin: auto;
+                    background: transparent
+                }
+
+                .layout-page-container .layout-box-container .padding-left-div .next-input input {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    margin: auto;
+                    width: 30px;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    padding: 0 5px
+                }
+
+                .layout-page-container .layout-box-container .padding-left-div:hover {
+                    border-left-color: #bfd4fb
                 }
             </style>
             </body>
