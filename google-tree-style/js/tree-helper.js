@@ -755,6 +755,36 @@ const treeHelper = {
         return getCssSelectorShort(el);
     },
     exportSettingStyle: function(){
+        var lCSSCoder = {
+            format: function(s) {
+                s = s.replace(/\s*([\{\}\:\;\,])\s*/g, "$1");
+                s = s.replace(/;\s*;/g, ";");
+                s = s.replace(/\,[\s\.\#\d]*{/g, "{");
+                s = s.replace(/([^\s])\{([^\s])/g, "$1 {\n\t$2");
+                s = s.replace(/([^\s])\}([^\n]*)/g, "$1\n}\n$2");
+                s = s.replace(/([^\s]);([^\s\}])/g, "$1;\n\t$2");
+                return s
+            },
+            packAdv: function(s) {
+                s = s.replace(/\/\*(.|\n)*?\*\//g, "");
+                s = s.replace(/\s*([\{\}\:\;\,])\s*/g, "$1");
+                s = s.replace(/\,[\s\.\#\d]*\{/g, "{");
+                s = s.replace(/;\s*;/g, ";");
+                s = s.match(/^\s*(\S+(\s+\S+)*)\s*$/);
+                return (s == null) ? "" : s[1]
+            },
+            pack: function(s) {
+                s = s.replace(/\/\*(.|\n)*?\*\//g, "");
+                s = s.replace(/\s*([\{\}\:\;\,])\s*/g, "$1");
+                s = s.replace(/\,[\s\.\#\d]*\{/g, "{");
+                s = s.replace(/;\s*;/g, ";");
+                s = s.replace(/;\s*}/g, "}");
+                s = s.replace(/([^\s])\{([^\s])/g, "$1{$2");
+                s = s.replace(/([^\s])\}([^\n]s*)/g, "$1}\n$2");
+                return s
+            }
+        };
+
         var exportStyleBtn = $(".exportStyleBtn");
         exportStyleBtn.unbind('click').bind('click',function(){
             var selectorStr = stylePanelHelper.state.stylePanelContainer;
@@ -774,7 +804,7 @@ const treeHelper = {
                 $("body").append(_styleBoxContainer);
             }
 
-            $("#exportInnerHtml").html(_allInjectStyle);
+            $("#exportInnerHtml").html(lCSSCoder['format'](_allInjectStyle));
 
             $(".exportSetingClose").unbind('click').bind('click',function(){
                 $(".exportSettingStyle").hide();
