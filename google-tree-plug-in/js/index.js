@@ -31,6 +31,7 @@ var handlerTreeNodeLeave = function (event, elementId) {
 }
 
 var startTreeStyle = function () {
+    $("body").addClass("alltreecontaner");
     var _body = document.body;
     window.treeHelper.processNodeTree(_body).then(dom => {
         return window.treeHelper.getBodyChildrenOnly(dom);
