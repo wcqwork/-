@@ -804,7 +804,7 @@ const treeHelper = {
                 $("body").append(_styleBoxContainer);
             }
 
-            $("#exportInnerHtml").html(lCSSCoder['format'](_allInjectStyle));
+            $("#exportInnerHtml").html(lCSSCoder['format'](_allInjectStyle || ''));
 
             $(".exportSetingClose").unbind('click').bind('click',function(){
                 $(".exportSettingStyle").hide();
