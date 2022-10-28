@@ -639,3 +639,22 @@ body.alltreecontaner{
     position: absolute;
     right: 0;
 }
+
+
+/* 
+ */
+ .wrapper .draggable-title{
+    position: relative;
+ }
+ .wrapper .draggable-title i{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35px;
+    height: 100%;
+ }
+
+ .dom-tree .dragArea .drag-no-show{
+    display: none;
+ }

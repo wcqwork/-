@@ -4,32 +4,34 @@
 (function () {
 	class contentScript {
 		constructor() {
-
+			this.startFlag = true;
 			this.init();
 		}
 		init() {
 			window.getStateFun = () => {
-				console.log(111111111);
 			}
 		}
 	}
 
-	console.log(33333333);
-
 	var GoogleContentScript = null;
 
 	chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-		console.log(request);
 		if (!GoogleContentScript) {
 			GoogleContentScript = new contentScript();
 		}
 		let backFun = {
 			"msg-dialog": function () {
-				var script = document.createElement("script");
-				script.innerHTML = `
-				window.startTreeStyle();
-				`
-				document.head.appendChild(script)
+				if(GoogleContentScript.startFlag){
+					GoogleContentScript.startFlag = false;
+					var script = document.createElement("script");
+					script.innerHTML = `
+					window.startTreeStyle();
+					`
+					document.head.appendChild(script);
+				}else{
+					console.log("请勿重复start");
+				}
+				
 				sendResponse({ status: true });
 			}
 		}

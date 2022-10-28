@@ -598,14 +598,14 @@ var setAllHelper = function () {
                         var _li = $(`
                             <li data-el-id="${treeArr[i].elementId}" class="draggable-item opend" onmouseover="handlerTreeNodeMouseOver(event,'${treeArr[i].elementId}')" onmouseleave="handlerTreeNodeLeave(event,'${treeArr[i].elementId}')" onmousedown="scrollToEl(event,'${treeArr[i].elementId}')" >
                                 <p class="draggable-title">
-                                    <i></i>
                                     ${treeArr[i].nodeName}
+                                    <i onmousedown="handlerDropSwitch(event,'${treeArr[i].elementId}')"></i>
                                 </p>
                             </li>
                         `);
-                        // parentDom.show();
+                        parentDom.removeClass("drag-no-show");
                         parentDom.append(_li);
-                        var _ul = $('<ul class="dragArea"></ul>');
+                        var _ul = $('<ul class="dragArea drag-no-show"></ul>');
                         _li.append(_ul);
                         this.renderTreeNodeHtml(treeArr[i].children, _ul);
                     } else {
@@ -616,7 +616,7 @@ var setAllHelper = function () {
                                 </p>
                             </li>
                         `);
-                        // parentDom.show();
+                        parentDom.removeClass("drag-no-show");
                         parentDom.append(_li);
                     }
                 }
@@ -785,9 +785,7 @@ var setAllHelper = function () {
 
             var exportStyleBtn = $(".exportStyleBtn");
             exportStyleBtn.unbind('click').bind('click', function () {
-                var selectorStr = stylePanelHelper.state.stylePanelContainer;
-                var _allInjectStyle = $("#" + selectorStr).html();
-                console.log(_allInjectStyle);
+                var _allInjectStyle = stylePanelHelper.generateJsontoStyle();
                 initExportEl(_allInjectStyle);
             })
 
@@ -818,7 +816,8 @@ var setAllHelper = function () {
             stylePanel: ".right-seeting-board",
             spaceItemVal: ["margin-top", "margin-right", "margin-bottom", "margin-left", "padding-top", "padding-right", "padding-bottom", "padding-left"],
             // 导出的样式文件选择器
-            stylePanelContainer: "stylePanelContainer"
+            stylePanelContainer: "stylePanelContainer",
+            googlePanelStyle:{}
         },
         /**
          * 初始化样式面板
@@ -832,7 +831,7 @@ var setAllHelper = function () {
             var resultArr = this.getNodeDesignStyle(el, this.state.spaceItemVal);
             spacePanelHelper.initSpaceInputVal.call(spacePanelHelper, resultArr);
             spacePanelHelper.initEventListerInputSpace.call(spacePanelHelper);
-            console.log(resultArr);
+            // console.log(resultArr);
         },
         /**
          * 移除样式面板
@@ -858,6 +857,51 @@ var setAllHelper = function () {
             $(".setting-close").unbind('click').bind('click', function () {
                 stylePanelHelper.removePanel();
             });
+        },
+        generatePanelObj: function(selector,styleName, styleVal){
+            var isFlag = $("#weightCheckbox").is(":checked");
+            var _googlePanelStyle = this.state.googlePanelStyle;
+            if(_googlePanelStyle[selector]){
+                _googlePanelStyle[selector].push(generateStyleVal(styleName,styleVal,isFlag));
+            }else{
+                var _arrObj = [];
+                _googlePanelStyle[selector] = _arrObj;
+                _arrObj.push(generateStyleVal(styleName,styleVal,isFlag))
+            }
+
+            function generateStyleVal(styleName, styleVal, isFlag){
+                var _styleStr;
+                if (isFlag) {
+                    _styleStr = styleName + ":" + styleVal + "px" + " !important;";
+                } else {
+                    _styleStr = styleName + ":" + styleVal + "px;";
+                }
+                return _styleStr;
+            }
+        },
+        generateJsontoStyle: function(){
+            var _googlePanelStyle = this.state.googlePanelStyle;
+            var entriesArr = Object.entries(_googlePanelStyle);
+            var allPanelStyle = "";
+            for(let [selector,styleVal] of entriesArr){
+                var _styleStr = "";
+                for(var item of styleVal){
+                    _styleStr += item;
+                }
+                allPanelStyle += selector + "{" + _styleStr + "}";
+            }
+            console.log(allPanelStyle);
+            return allPanelStyle;
+        },
+        injectPanelStyleTwo: function(allPanelStyle){
+            var selectContainer = this.state.stylePanelContainer;
+            var styleElStr = $("<style id=" + selectContainer + "></style>");
+            if ($("#" + selectContainer).length <= 0) {
+                $("body").append(styleElStr);
+                $("#" + selectContainer).html(allPanelStyle);
+            } else {
+                $("#" + selectContainer).html(allPanelStyle);
+            }
         },
         injectPanelStyle: function (selector, styleName, styleVal) {
             var isFlag = $("#weightCheckbox").is(":checked");
@@ -937,7 +981,11 @@ var setAllHelper = function () {
                             var _selector = stylePanelHelper.state.currentSelector;
 
                             // 生成样式
-                            stylePanelHelper.injectPanelStyle(_selector, mapptingArr[i], _inputVal);
+                            stylePanelHelper.generatePanelObj(_selector, mapptingArr[i], _inputVal);
+                            var googlePanelStyle =  stylePanelHelper.generateJsontoStyle();
+                            stylePanelHelper.injectPanelStyleTwo(googlePanelStyle);
+                            // debugger;
+                            // stylePanelHelper.injectPanelStyle(_selector, mapptingArr[i], _inputVal);
                         }
                     })
                 })()

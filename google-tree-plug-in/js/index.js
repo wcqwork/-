@@ -1,19 +1,33 @@
-console.log('11111111111');
+var handlerDropSwitch = function (event, elementId) {
+    try {
+        var el = $(event.currentTarget).parent().parent();
+        if (el.hasClass("closed")) {
+            el.removeClass("closed");
+            el.addClass("opend");
+        } else {
+            el.removeClass("opend");
+            el.addClass("closed");
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 var scrollToEl = function (event, elementId) {
     window.treeHelper.setCurrentElementId(elementId);
-    var el = $(event.currentTarget);
-    if (el.hasClass("closed")) {
-        el.removeClass("closed");
-        el.addClass("opend");
-    } else {
-        el.removeClass("opend");
-        el.addClass("closed");
-    }
 
     var overElement = window.treeNodeReference[elementId] && window.treeNodeReference[elementId].node;
     // console.log($(overElement));
     window.treeHelper.scrollWindow(overElement);
+
+    window.stylePanelHelper.removePanel();
+    const currentElement = $(event.target);
+    var elementId = currentElement.attr("data-el-id");
+    window.treeHelper.setCurrentElementId(elementId);
+    window.treeHelper.highlightElement(event.target, true);
+
+    window.stylePanelHelper.initPanel(event.target);
+    event.preventDefault()
     event.stopPropagation();
 }
 var handlerTreeNodeMouseOver = function (event, elementId) {
@@ -104,6 +118,7 @@ var startTreeStyle = function () {
 
 var script = document.createElement("script");
 script.innerHTML = `
+window.handlerDropSwitch = ${handlerDropSwitch};
 window.scrollToEl = ${scrollToEl};
 window.handlerTreeNodeMouseOver = ${handlerTreeNodeMouseOver};
 window.handlerTreeNodeLeave = ${handlerTreeNodeLeave};
