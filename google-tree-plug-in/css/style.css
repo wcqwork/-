@@ -252,6 +252,8 @@ body.alltreecontaner{
     background-color: white;
     border: 1px solid rgba(51, 51, 51, 0.1);
     z-index: 9999999999999999999999;
+
+    max-height: 100vh;
 }
 
 .right-seeting-board .setting-title {
@@ -658,3 +660,12 @@ body.alltreecontaner{
  .dom-tree .dragArea .drag-no-show{
     display: none;
  }
+
+ .wrapper  .seeting-content-item{
+    border-bottom: 1px solid #ebeef5;
+    margin-bottom: 20px;
+ }
+
+ .wrapper  .subtitle-content {
+    padding-bottom: 15px;
+}

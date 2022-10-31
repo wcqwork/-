@@ -6,96 +6,127 @@ var setAllHelper = function () {
             specialArr: ['#text', '#comment', 'SCRIPT', 'LINK', 'TEMPLATE', 'IFRAME', "STYLE"],
             rightPanel: `
             <div class="wrapper">
-        <div class="app-side-view">
-            <div class="side-content active">
-                <div class="side-view">
-                    <!---->
-                    <div class="header">
-                        <p>DOM tree</p>
-                        <button class="exportStyleBtn">导出</button>
-                    </div>
-                </div>
-            </div>
-            <div class="side-nav">
-                <div class="" style="display:none;">
-                    <i class="fa fa-square-o"></i>
-                </div>
-                <div class="active" onclick='$(".wrapper .app-side-view.side-content").toggleClass(" active")'>
-                    <i class="fa fa-align-left"></i>
+    <div class="app-side-view">
+        <div class="side-content active">
+            <div class="side-view">
+                <!---->
+                <div class="header">
+                    <p>DOM tree</p>
+                    <button class="exportStyleBtn">导出</button>
                 </div>
             </div>
         </div>
-        <div class="right-seeting-board">
-            <div class="setting-title"><div>样式设置</div><div class="setting-close"></div></div>
-            <div class="seeting-content">
-                <div class="seeting-content-item">
-                    <div class="subtitle">
-                        <div>布局</div>
-                        <div><label>权重   <input checked type="checkbox" id="weightCheckbox"></input></label></div>
-                    </div>
-                    <div class="subtitle-content">
-                        <div
-                            id="el-collapse-content-7635"
-                            class="el-collapse-item__wrap"
-                            role="tabpanel"
-                            aria-hidden="false"
-                            aria-labelledby="el-collapse-head-7635"
-                            data-old-padding-top=""
-                            data-old-padding-bottom=""
-                            data-old-overflow=""
-                            style=""
-                        >
-                            <div class="el-collapse-item__content">
-                                <div class="layout-page-container" data-v-42fee549="">
-                                    <div class="layout-box-container">
-                                        <div class="margin-top-div">
-                                            <span class="next-input next-medium next-noborder">
-                                                <!---->
-                                                <input maxlength="3" placeholder="0" autocomplete="off">
-                                            </span>
-                                        </div>
-                                        <div class="margin-right-div">
-                                            <span class="next-input next-medium next-noborder">
-                                                <!---->
-                                                <input maxlength="3" placeholder="0" autocomplete="off">
-                                            </span>
-                                        </div>
-                                        <div class="margin-bottom-div">
-                                            <span class="next-input next-medium next-noborder">
-                                                <span class="help-txt">外边距</span>
-                                                <input maxlength="3" placeholder="0" autocomplete="off">
-                                            </span>
-                                        </div>
-                                        <div class="margin-left-div">
-                                            <span class="next-input next-medium next-noborder">
-                                                <!---->
-                                                <input maxlength="3" placeholder="0" autocomplete="off">
-                                            </span>
-                                        </div>
-                                        <div class="padding-top-div">
-                                            <span class="next-input next-medium next-noborder">
-                                                <!---->
-                                                <input maxlength="3" placeholder="0" autocomplete="off">
-                                            </span>
-                                        </div>
-                                        <div class="padding-right-div">
-                                            <span class="next-input next-medium next-noborder">
-                                                <!---->
-                                                <input maxlength="3" placeholder="0" autocomplete="off">
-                                            </span>
-                                        </div>
-                                        <div class="padding-bottom-div">
-                                            <span class="next-input next-medium next-noborder">
-                                                <span class="help-txt">内边距</span>
-                                                <input maxlength="3" placeholder="0" autocomplete="off">
-                                            </span>
-                                        </div>
-                                        <div class="padding-left-div">
-                                            <span class="next-input next-medium next-noborder">
-                                                <!---->
-                                                <input maxlength="3" placeholder="0" autocomplete="off">
-                                            </span>
-                                        </div>
+        <div class="side-nav">
+            <div class="" style="display:none;">
+                <i class="fa fa-square-o"></i>
+            </div>
+            <div class="active" onclick='$(".wrapper .app-side-view.side-content").toggleClass(" active")'>
+                <i class="fa fa-align-left"></i>
+            </div>
+        </div>
+    </div>
+    <div class="right-seeting-board">
+        <div class="setting-title"><div>样式设置</div><div class="setting-close"></div></div>
+        <div class="seeting-content">
+            <div class="seeting-content-item">
+                <div class="subtitle">
+                    是否隐藏
+                </div>
+                <div class="subtitle-content">
+                    <input type="checkbox" id="setting-hidden-flag">
+                </div>
+            </div>
+            <div class="seeting-content-item">
+                <div class="subtitle">
+                    字体
+                </div>
+                <div class="subtitle-content">
+                    <input type="text" id="setting-fontfamily-flag">
+                </div>
+            </div>
+            <div class="seeting-content-item">
+                <div class="subtitle">
+                    字体大小
+                </div>
+                <div class="subtitle-content">
+                    <input type="text" id="setting-fontsize-flag">
+                </div>
+            </div>
+            <div class="seeting-content-item">
+                <div class="subtitle">
+                    颜色
+                </div>
+                <div class="subtitle-content">
+                    <input type="text" id="setting-fontcolor-flag">
+                </div>
+            </div>
+            <div class="seeting-content-item">
+                <div class="subtitle">
+                    <div>布局</div>
+                    <div><label>权重   <input checked type="checkbox" id="weightCheckbox"></input></label></div>
+                </div>
+                <div class="subtitle-content">
+                    <div
+                        id="el-collapse-content-7635"
+                        class="el-collapse-item__wrap"
+                        role="tabpanel"
+                        aria-hidden="false"
+                        aria-labelledby="el-collapse-head-7635"
+                        data-old-padding-top=""
+                        data-old-padding-bottom=""
+                        data-old-overflow=""
+                        style=""
+                    >
+                        <div class="el-collapse-item__content">
+                            <div class="layout-page-container" data-v-42fee549="">
+                                <div class="layout-box-container">
+                                    <div class="margin-top-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="margin-right-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="margin-bottom-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <span class="help-txt">外边距</span>
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="margin-left-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="padding-top-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="padding-right-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="padding-bottom-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <span class="help-txt">内边距</span>
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
+                                    </div>
+                                    <div class="padding-left-div">
+                                        <span class="next-input next-medium next-noborder">
+                                            <!---->
+                                            <input maxlength="3" placeholder="0" autocomplete="off">
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +136,7 @@ var setAllHelper = function () {
             </div>
         </div>
     </div>
-           
+</div>
             `
         },
         /**
@@ -828,10 +859,31 @@ var setAllHelper = function () {
             this.closePanel();
             var _selector = treeHelper.getNodeSelect.call(treeHelper, el);
             this.state.currentSelector = _selector;
+            // 当前元素所有样式集合
+            var _styleMapHidden = this.getNormalDesinStyle(el); 
+            
+
+            // 布局间距面板
             var resultArr = this.getNodeDesignStyle(el, this.state.spaceItemVal);
             spacePanelHelper.initSpaceInputVal.call(spacePanelHelper, resultArr);
             spacePanelHelper.initEventListerInputSpace.call(spacePanelHelper);
             // console.log(resultArr);
+
+            // 是否隐藏
+            hiddenPanelHelper.initInputVal.call(hiddenPanelHelper, _styleMapHidden);
+            hiddenPanelHelper.initEventListerInputSpace.call(hiddenPanelHelper,_styleMapHidden,el);
+
+            // 字体
+            fontfamilyPanelHelper.initInputVal.call(fontfamilyPanelHelper, _styleMapHidden);
+            fontfamilyPanelHelper.initEventListerInputSpace.call(fontfamilyPanelHelper);
+
+            // 字体大小
+            fontsizePanelHelper.initInputVal.call(fontsizePanelHelper, _styleMapHidden);
+            fontsizePanelHelper.initEventListerInputSpace.call(fontsizePanelHelper);
+
+            // 颜色
+            colorPanelHelper.initInputVal.call(colorPanelHelper, _styleMapHidden);
+            colorPanelHelper.initEventListerInputSpace.call(colorPanelHelper);
         },
         /**
          * 移除样式面板
@@ -853,12 +905,22 @@ var setAllHelper = function () {
             }
             return resultArr;
         },
+        getNormalDesinStyle: function(el){
+            var styleMap = getComputedStyle(el);
+            return styleMap;
+        },
         closePanel: function () {
             $(".setting-close").unbind('click').bind('click', function () {
                 stylePanelHelper.removePanel();
             });
         },
-        generatePanelObj: function(selector,styleName, styleVal){
+        /**
+         * 生成样式转成{} 暂存到googlePanelStyle
+         * @param {*} selector 
+         * @param {*} styleName 
+         * @param {*} styleVal 
+         */
+        generatePanelObj: function(selector,styleName, styleVal,unit){
             var isFlag = $("#weightCheckbox").is(":checked");
             var _googlePanelStyle = this.state.googlePanelStyle;
             if(_googlePanelStyle[selector]){
@@ -872,13 +934,17 @@ var setAllHelper = function () {
             function generateStyleVal(styleName, styleVal, isFlag){
                 var _styleStr;
                 if (isFlag) {
-                    _styleStr = styleName + ":" + styleVal + "px" + " !important;";
+                    _styleStr = styleName + ":" + styleVal + unit + " !important;";
                 } else {
-                    _styleStr = styleName + ":" + styleVal + "px;";
+                    _styleStr = styleName + ":" + styleVal + unit + ";";
                 }
                 return _styleStr;
             }
         },
+        /**
+         * 把暂存的googlePanelStyle {} 转成对应样式
+         * @returns 
+         */
         generateJsontoStyle: function(){
             var _googlePanelStyle = this.state.googlePanelStyle;
             var entriesArr = Object.entries(_googlePanelStyle);
@@ -893,6 +959,10 @@ var setAllHelper = function () {
             console.log(allPanelStyle);
             return allPanelStyle;
         },
+        /**
+         * 把json对象的样式 插入到页面
+         * @param {*} allPanelStyle 
+         */
         injectPanelStyleTwo: function(allPanelStyle){
             var selectContainer = this.state.stylePanelContainer;
             var styleElStr = $("<style id=" + selectContainer + "></style>");
@@ -981,17 +1051,118 @@ var setAllHelper = function () {
                             var _selector = stylePanelHelper.state.currentSelector;
 
                             // 生成样式
-                            stylePanelHelper.generatePanelObj(_selector, mapptingArr[i], _inputVal);
+                            stylePanelHelper.generatePanelObj(_selector, mapptingArr[i], _inputVal,"px");
                             var googlePanelStyle =  stylePanelHelper.generateJsontoStyle();
                             stylePanelHelper.injectPanelStyleTwo(googlePanelStyle);
-                            // debugger;
-                            // stylePanelHelper.injectPanelStyle(_selector, mapptingArr[i], _inputVal);
                         }
                     })
                 })()
             }
         }
     };
+    window.hiddenPanelHelper = {
+        getHiddenInput: function(){
+            var _boxContainer = $(".right-seeting-board");
+            return _boxContainer.find("#setting-hidden-flag");
+        },
+        initInputVal: function(resultArr){
+            var hiddenInputEl = this.getHiddenInput();
+            if(resultArr["display"] == "none"){
+                hiddenInputEl.attr('checked',true);
+            }else{
+                hiddenInputEl.attr('checked',false);
+            }
+        },
+        initEventListerInputSpace: function(resultArr,el){
+            var hiddenInputEl = this.getHiddenInput();
+            var _orginVal = resultArr["display"];
+            hiddenInputEl.unbind('click').bind('click',function(){
+                var _val = 'block';
+                if(hiddenInputEl.is(":checked")){
+                    _val = 'none';
+                }else{
+                    _val = _orginVal;
+                }
+                var _selector = stylePanelHelper.state.currentSelector;
+                // 生成样式
+                stylePanelHelper.generatePanelObj(_selector, "display", _val,"");
+                var googlePanelStyle =  stylePanelHelper.generateJsontoStyle();
+                stylePanelHelper.injectPanelStyleTwo(googlePanelStyle);
+            });
+        }
+    };
+    window.fontfamilyPanelHelper = {
+        getHiddenInput: function(){
+            var _boxContainer = $(".right-seeting-board");
+            return _boxContainer.find("#setting-fontfamily-flag");
+        },
+        initInputVal: function(resultArr){
+            var fontfamilyEl = this.getHiddenInput();
+            if(resultArr["font-family"]){
+                fontfamilyEl.val(resultArr["font-family"]);
+            }
+        },
+        initEventListerInputSpace: function(){
+            var fontfamilyEl = this.getHiddenInput();
+            fontfamilyEl.unbind('blur').bind('blur',function(){
+                var _selector = stylePanelHelper.state.currentSelector;
+                var _inputVal = $(this).val();
+
+                 // 生成样式
+                 stylePanelHelper.generatePanelObj(_selector, "font-family", _inputVal,"");
+                 var googlePanelStyle =  stylePanelHelper.generateJsontoStyle();
+                 stylePanelHelper.injectPanelStyleTwo(googlePanelStyle);
+            })
+        }
+    };
+    window.fontsizePanelHelper = {
+        getHiddenInput: function(){
+            var _boxContainer = $(".right-seeting-board");
+            return _boxContainer.find("#setting-fontsize-flag");
+        },
+        initInputVal: function(resultArr){
+            var fontsizeEl = this.getHiddenInput();
+            if(resultArr["font-size"]){
+                fontsizeEl.val(resultArr["font-size"]);
+            }
+        },
+        initEventListerInputSpace: function(){
+            var fontsizeEl = this.getHiddenInput();
+            fontsizeEl.unbind('blur').bind('blur',function(){
+                var _selector = stylePanelHelper.state.currentSelector;
+                var _inputVal = $(this).val();
+
+                 // 生成样式
+                 stylePanelHelper.generatePanelObj(_selector, "font-size", _inputVal,"");
+                 var googlePanelStyle =  stylePanelHelper.generateJsontoStyle();
+                 stylePanelHelper.injectPanelStyleTwo(googlePanelStyle);
+            })
+        }
+    };
+    window.colorPanelHelper = {
+        getHiddenInput: function(){
+            var _boxContainer = $(".right-seeting-board");
+            return _boxContainer.find("#setting-fontcolor-flag");
+        },
+        initInputVal: function(resultArr){
+            var fontsizeEl = this.getHiddenInput();
+            if(resultArr["color"]){
+                fontsizeEl.val(resultArr["color"]);
+            }
+        },
+        initEventListerInputSpace: function(){
+            var fontsizeEl = this.getHiddenInput();
+            fontsizeEl.unbind('blur').bind('blur',function(){
+                var _selector = stylePanelHelper.state.currentSelector;
+                var _inputVal = $(this).val();
+
+                 // 生成样式
+                 stylePanelHelper.generatePanelObj(_selector, "color", _inputVal,"");
+                 var googlePanelStyle =  stylePanelHelper.generateJsontoStyle();
+                 stylePanelHelper.injectPanelStyleTwo(googlePanelStyle);
+            })
+        }
+    }
 };
 
 var script = document.createElement("script");
