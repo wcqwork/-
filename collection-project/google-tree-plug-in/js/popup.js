@@ -11,7 +11,7 @@ class collectBlock {
         this.bindStyleCollect();
     }
 
-    sendMessageToContentScript(message, callback) {
+    sendMessageToContentScript(message, callback) { 
         chrome.tabs.query({
           active: true,
           currentWindow: true
