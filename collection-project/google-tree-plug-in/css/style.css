@@ -3,6 +3,18 @@ body.alltreecontaner{
     margin-left: 477px; */
 }
 
+#backstage-syleEdit-iframe.backstage-mobile{
+    width: 374px;
+    height: 750px;
+    margin: 0 auto;
+    display: block;
+    padding: 47px 0 0 16px;
+    padding-bottom: 24px;
+    background: url(//a2.leadongcdn.com/cloud/liBprKkjlmSRojjqmjmoip/phone-new-shu.png) no-repeat;
+    background-size: 100% 100%;
+    padding-right: 16px;
+}
+
 .wrapper .app-side-view .side-content .side-view .dom-tree {
     -webkit-box-flex: 1;
     -ms-flex: 1;

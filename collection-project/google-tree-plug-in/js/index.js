@@ -44,34 +44,11 @@ var handlerTreeNodeLeave = function (event, elementId) {
     event.stopPropagation();
 }
 
-var startTreeStyle = function () {
-    $("body").addClass("alltreecontaner");
-    var _body = document.body;
-    window.treeHelper.processNodeTree(_body).then(dom => {
-        return window.treeHelper.getBodyChildrenOnly(dom);
-    }).then(result => {
-        console.log(result);
-        // debugger
-        window.treeHelper.state.domTree = result.slice(0, 6);
-
-        var _treeUl = $('<ul class="dragArea"></ul>'); // tree
-        var _treeDomContainer = $('<div class="dom-tree"></div>'); // treeContainer
-        _treeDomContainer.append(_treeUl);
-        window.treeHelper.renderTreeNodeHtml(window.treeHelper.state.domTree, _treeUl);
-        var rightPanel = $(window.treeHelper.state.rightPanel);
-        rightPanel.find(".side-view").append(_treeDomContainer);
-        $("body").append(rightPanel);
-        window.treeHelper.exportSettingStyle(); // 导出所有样式
-    }).catch(error => {
-        console.log(error);
-    })
-
-    //Add CSS File to html
-    const style = $('<style data-reserved-styletag></style>').html(window.treeHelper.getInsertionCSS());
-    $("body").append(style);
-
-    // 页面联动domTree
-    const htmlBody = $("#backstage-headArea,#backstage-bodyArea,#backstage-footArea");
+/**
+ * 页面联动domTree
+ * @param {*} htmlBody 
+ */
+var linkageDomTree = function (htmlBody) {
     htmlBody.find('*').addBack().on('dragenter', (event) => {
         event.stopPropagation()
     }).on('dragover', (event) => {
@@ -115,6 +92,62 @@ var startTreeStyle = function () {
     })
 }
 
+/**
+ * 初始化domtree
+ */
+var initLeftDomTree = function (pageBodyEl) {
+    // $("body").addClass("alltreecontaner");
+    // var _body = document.body;
+    window.treeHelper.processNodeTree(pageBodyEl).then(dom => {
+        return window.treeHelper.getBodyChildrenOnly(dom);
+    }).then(result => {
+        console.log(result);
+        // debugger
+        window.treeHelper.state.domTree = result;
+
+        var _treeUl = $('<ul class="dragArea"></ul>'); // tree
+        var _treeDomContainer = $('<div class="dom-tree"></div>'); // treeContainer
+        _treeDomContainer.append(_treeUl);
+        window.treeHelper.renderTreeNodeHtml(window.treeHelper.state.domTree, _treeUl);
+        var rightPanel = $(window.treeHelper.state.rightPanel);
+        rightPanel.find(".side-view").append(_treeDomContainer);
+        $("body").append(rightPanel);
+        window.treeHelper.exportSettingStyle(); // 导出所有样式
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
+/**
+ * 初始化生成iframe
+ */
+var initIframe = function () {
+    $("body").html($(''));
+    var _pageUrl = window.location.href;
+    Iframe = $(`<iframe id="backstage-syleEdit-iframe" class="backstage-mobile" src=${_pageUrl} style='width:374px;height:750px;border: 0;'></iframe>`);
+    $("body").append(Iframe);
+}
+
+var startTreeStyle = function () {
+    window.initIframe();
+
+    var pageIframe = document.getElementById("backstage-syleEdit-iframe");
+    pageIframe.addEventListener('load',function(){
+        window.treeHelper.iframeContentDocument = pageIframe.contentDocument;
+        var pageBodyEl = window.treeHelper.iframeContentDocument.body;
+        window.initLeftDomTree(pageBodyEl);
+
+        // Add CSS File to html
+        const style = $('<style data-reserved-styletag></style>').html(window.treeHelper.getInsertionCSS());
+        $(window.treeHelper.iframeContentDocument).find("body").append(style);
+        
+
+        // const htmlBody = $("#backstage-headArea,#backstage-bodyArea,#backstage-footArea");
+        const htmlBody = $(window.treeHelper.iframeContentDocument.body);
+        window.linkageDomTree(htmlBody);
+    },true)
+}
+
 
 var script = document.createElement("script");
 script.innerHTML = `
@@ -123,6 +156,10 @@ window.scrollToEl = ${scrollToEl};
 window.handlerTreeNodeMouseOver = ${handlerTreeNodeMouseOver};
 window.handlerTreeNodeLeave = ${handlerTreeNodeLeave};
 window.startTreeStyle = ${startTreeStyle}
+
+window.initIframe = ${initIframe}
+window.linkageDomTree = ${linkageDomTree}
+window.initLeftDomTree = ${initLeftDomTree}
 `
 document.head.appendChild(script)
 

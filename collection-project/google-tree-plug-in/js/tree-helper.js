@@ -2,6 +2,7 @@ var setAllHelper = function () {
     window.treeHelper = {
         state: {
             domTree: undefined,
+            iframeContentDocument:null,
             currentElementId: null,
             specialArr: ['#text', '#comment', 'SCRIPT', 'LINK', 'TEMPLATE', 'IFRAME', "STYLE"],
             rightPanel: `
@@ -193,7 +194,7 @@ var setAllHelper = function () {
                 if (toHighlight)
                     validElement = $element
                 if (validElement.is('body,html'))
-                    validElement = $('body').children(':not(.drop-marker,[data-dragcontext-marker])').first();
+                    validElement = $(window.treeHelper.iframeContentDocument).find("body").children(':not(.drop-marker,[data-dragcontext-marker])').first();
                 this.decideBeforeAfter(validElement, mousePercents, mousePos, toHighlight, hideLine);
             } else if ((mousePercents.x >= 100 - breakPointNumber.x) || (mousePercents.y >= 100 - breakPointNumber.y)) {
                 var validElement = null
@@ -204,7 +205,7 @@ var setAllHelper = function () {
                 if (toHighlight)
                     validElement = $element
                 if (validElement.is('body,html'))
-                    validElement = $('body').children(':not(.drop-marker,[data-dragcontext-marker])').last();
+                    validElement = $(window.treeHelper.iframeContentDocument).find("body").children(':not(.drop-marker,[data-dragcontext-marker])').last();
                 this.decideBeforeAfter(validElement, mousePercents, mousePos, toHighlight, hideLine);
             }
         },
@@ -338,7 +339,7 @@ var setAllHelper = function () {
                 });
                 if (previousElData !== null) {
                     var position = previousElData.position;
-                    return { 'el': $(previousElData.el), 'position': position };
+                    return { 'el': $(window.treeHelper.iframeContentDocument).find(previousElData.el), 'position': position };
                 } else {
                     return false;
                 }
@@ -467,7 +468,7 @@ var setAllHelper = function () {
             this.clearContainerContext();
             if ($element.is('html,body')) {
                 position = 'inside';
-                $element = $('body');
+                $element = $(window.treeHelper.iframeContentDocument).find("body");
             }
             if (toHighlight) {
                 position = 'inside';
@@ -482,10 +483,10 @@ var setAllHelper = function () {
                         $contextMarker.addClass('invalid');
                     var name = this.getElementName($element);
                     $contextMarker.find('[data-dragcontext-marker-text]').html(name);
-                    if ($('body [data-sh-parent-marker]').length != 0)
-                        $('body [data-sh-parent-marker]').first().before($contextMarker);
+                    if ($(window.treeHelper.iframeContentDocument).find('body [data-sh-parent-marker]').length != 0)
+                        $(window.treeHelper.iframeContentDocument).find('body [data-sh-parent-marker]').first().before($contextMarker);
                     else
-                        $('body').append($contextMarker);
+                        $(window.treeHelper.iframeContentDocument).find("body").append($contextMarker);
                     break;
                 case 'sibling':
                     // bus.$emit('hovering-element', $element.parent()[0], true, true)
@@ -496,10 +497,10 @@ var setAllHelper = function () {
                     var name = this.getElementName($element.parent());
                     $contextMarker.find('[data-dragcontext-marker-text]').html(name);
                     $contextMarker.attr('data-dragcontext-marker', name.toLowerCase());
-                    if ($('body [data-sh-parent-marker]').length != 0)
-                        $('body [data-sh-parent-marker]').first().before($contextMarker);
+                    if ($(window.treeHelper.iframeContentDocument).find('body [data-sh-parent-marker]').length != 0)
+                        $(window.treeHelper.iframeContentDocument).find('body [data-sh-parent-marker]').first().before($contextMarker);
                     else
-                        $('body').append($contextMarker);
+                        $(window.treeHelper.iframeContentDocument).find("body").append($contextMarker);
                     break;
             }
         },
@@ -513,10 +514,10 @@ var setAllHelper = function () {
             $contextMarker.css({
                 height: (rect.height + 4) + 'px',
                 width: (rect.width + 4) + 'px',
-                top: (rect.top + document.documentElement.scrollTop - 2) + 'px',
-                left: (rect.left + document.documentElement.scrollLeft - 2) + 'px'
+                top: (rect.top + $(window.treeHelper.iframeContentDocument).scrollTop() - 2) + 'px',
+                left: (rect.left + $(window.treeHelper.iframeContentDocument).scrollLeft() - 2) + 'px'
             });
-            if (rect.top + $('body').scrollTop() < 24)
+            if (rect.top + $(window.treeHelper.iframeContentDocument).find("body").scrollTop() < 24)
                 $contextMarker.find('[data-dragcontext-marker-text]').css('top', '4px');
         },
         getElementName: function ($element) {
@@ -527,10 +528,10 @@ var setAllHelper = function () {
             return $contextMarker;
         },
         clearContainerContext: function () {
-            $('[data-dragcontext-marker]').remove();
+            $(window.treeHelper.iframeContentDocument).find('[data-dragcontext-marker]').remove();
         },
         removePlaceholder: function () {
-            $('.drop-marker').remove();
+            $(window.treeHelper.iframeContentDocument).find('.drop-marker').remove();
         },
         makeid: function () {
             var text = "";
@@ -657,7 +658,7 @@ var setAllHelper = function () {
             const el = element;
             if (el) {
                 // Get element being dragged
-                const $currentElement = $(el)
+                const $currentElement = $(window.treeHelper.iframeContentDocument).find(el)
                 const elementRectangle = el.getBoundingClientRect()
                 const mousePosition = {
                     x: elementRectangle.x,
@@ -966,11 +967,11 @@ var setAllHelper = function () {
         injectPanelStyleTwo: function(allPanelStyle){
             var selectContainer = this.state.stylePanelContainer;
             var styleElStr = $("<style id=" + selectContainer + "></style>");
-            if ($("#" + selectContainer).length <= 0) {
-                $("body").append(styleElStr);
-                $("#" + selectContainer).html(allPanelStyle);
+            if ($(window.treeHelper.iframeContentDocument).find("#" + selectContainer).length <= 0) {
+                $(window.treeHelper.iframeContentDocument).find("body").append(styleElStr);
+                $(window.treeHelper.iframeContentDocument).find("#" + selectContainer).html(allPanelStyle);
             } else {
-                $("#" + selectContainer).html(allPanelStyle);
+                $(window.treeHelper.iframeContentDocument).find("#" + selectContainer).html(allPanelStyle);
             }
         },
         injectPanelStyle: function (selector, styleName, styleVal) {
@@ -979,11 +980,11 @@ var setAllHelper = function () {
             var selectContainer = this.state.stylePanelContainer;
             console.log(_styleStr);
             var styleElStr = $("<style id=" + selectContainer + "></style>");
-            if ($("#" + selectContainer).length <= 0) {
-                $("body").append(styleElStr);
-                $("#" + selectContainer).append(_styleStr);
+            if ($(window.treeHelper.iframeContentDocument).find("#" + selectContainer).length <= 0) {
+                $(window.treeHelper.iframeContentDocument).find("body").append(styleElStr);
+                $(window.treeHelper.iframeContentDocument).find("#" + selectContainer).append(_styleStr);
             } else {
-                $("#" + selectContainer).append(_styleStr);
+                $(window.treeHelper.iframeContentDocument).find("#" + selectContainer).append(_styleStr);
             }
 
             function generateStyle(selector, styleName, styleVal, isFlag) {
