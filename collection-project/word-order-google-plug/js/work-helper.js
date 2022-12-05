@@ -9,7 +9,342 @@ var setAllHelper = function () {
             prevBtn: null,
             nextBtn: null,
             continueBtn: null,
+            cfnContainerEl:null,
+            workOrderCnfList:   [
+                {
+                    "title": "样式无法编辑",
+                    "desc": "间距写死"
+                },
+                {
+                    "title": "样式无法编辑",
+                    "desc": "展示形式无法设置（横向、竖向、对齐方式等）"
+                },
+                {
+                    "title": "样式无法编辑",
+                    "desc": "特殊样式（下划线、色块等）无法取消、修改"
+                },
+                {
+                    "title": "样式无法编辑",
+                    "desc": "文字样式写死，无设置入口（字体、颜色、换行等）"
+                },
+                {
+                    "title": "样式无法编辑",
+                    "desc": "部分样式写死，也无设置入口（按钮、下拉菜单等）"
+                },
+                {
+                    "title": "移动端样式问题",
+                    "desc": "移动端文字样式无法单独设置"
+                },
+                {
+                    "title": "移动端样式问题",
+                    "desc": "移动端间距无法调整"
+                },
+                {
+                    "title": "移动端样式问题",
+                    "desc": "移动端样式不美观"
+                },
+                {
+                    "title": "多端响应问题",
+                    "desc": "文字展示不全、文字展示太多"
+                },
+                {
+                    "title": "多端响应问题",
+                    "desc": "展示错乱"
+                },
+                {
+                    "title": "多端响应问题",
+                    "desc": "响应不美观"
+                },
+                {
+                    "title": "图片问题",
+                    "desc": "图片压缩，非原图"
+                },
+                {
+                    "title": "图片问题",
+                    "desc": "图片拉伸变形"
+                },
+                {
+                    "title": "图片问题",
+                    "desc": "图片展示不全"
+                },
+                {
+                    "title": "区块样式bug",
+                    "desc": "后台编辑问题"
+                },
+                {
+                    "title": "区块样式bug",
+                    "desc": "前台展示问题"
+                },
+                {
+                    "title": "内容无法编辑",
+                    "desc": "内容是否展示无法设置（价格、时间、语言栏等）"
+                },
+                {
+                    "title": "内容无法编辑",
+                    "desc": "文字内容无法修改"
+                },
+                {
+                    "title": "区块功能bug",
+                    "desc": "重复添加导致代码冲突"
+                },
+                {
+                    "title": "区块功能bug",
+                    "desc": "区块功能不可用"
+                },
+                {
+                    "title": "区块功能bug",
+                    "desc": "其他bug"
+                },
+                {
+                    "title": "功能缺失",
+                    "desc": "特效无法设置（动效、悬浮效果等）"
+                },
+                {
+                    "title": "功能缺失",
+                    "desc": "跳转方式无法设置（当前页、新窗口）"
+                },
+                {
+                    "title": "样式无法编辑",
+                    "desc": "间距写死"
+                },
+                {
+                    "title": "样式无法编辑",
+                    "desc": "文字样式写死（字体、颜色、换行等）"
+                },
+                {
+                    "title": "样式无法编辑",
+                    "desc": "样式写死，无法调整"
+                },
+                {
+                    "title": "图片问题",
+                    "desc": "图片压缩，非原图"
+                },
+                {
+                    "title": "图片问题",
+                    "desc": "图片拉伸变形"
+                },
+                {
+                    "title": "图片问题",
+                    "desc": "图片展示不全"
+                },
+                {
+                    "title": "表格问题",
+                    "desc": "表格响应问题"
+                },
+                {
+                    "title": "多端响应问题",
+                    "desc": "文字展示不全、文字展示太多"
+                },
+                {
+                    "title": "多端响应问题",
+                    "desc": "展示错乱"
+                },
+                {
+                    "title": "移动端样式问题",
+                    "desc": "移动端样式不美观"
+                },
+                {
+                    "title": "移动端样式问题",
+                    "desc": "移动端样式无法单独设置"
+                },
+                {
+                    "title": "组件样式bug",
+                    "desc": "展示错乱"
+                },
+                {
+                    "title": "组件功能bug",
+                    "desc": "组件功能不可用"
+                },
+                {
+                    "title": "组件功能缺失",
+                    "desc": "组件内容无法修改"
+                },
+                {
+                    "title": "组件功能缺失",
+                    "desc": "多组件搭建无法对其、响应不好,无法单独设置"
+                },
+                {
+                    "title": "移动端隐藏",
+                    "desc": ""
+                },
+                {
+                    "title": "系统功能不支持",
+                    "desc": ""
+                },
+                {
+                    "title": "系统功能bug",
+                    "desc": ""
+                },
+                {
+                    "title": "区块样式编辑问题",
+                    "desc": "样式代码未生成"
+                },
+                {
+                    "title": "区块样式编辑问题",
+                    "desc": "样式代码生成，但是被覆盖"
+                },
+                {
+                    "title": "区块样式编辑问题",
+                    "desc": "样式编辑影响到区块内部样式（icon等）"
+                },
+                {
+                    "title": "组件样式编辑问题",
+                    "desc": "样式代码未生成"
+                },
+                {
+                    "title": "组件样式编辑问题",
+                    "desc": "样式代码生成，但是被覆盖"
+                },
+                {
+                    "title": "国际化问题",
+                    "desc": "未做国际化"
+                },
+                {
+                    "title": "国际化问题",
+                    "desc": "国际化内容无法修改"
+                },
+                {
+                    "title": "小语种样式问题",
+                    "desc": "右对齐小语种样式问题"
+                },
+                {
+                    "title": "网站速度优化",
+                    "desc": "样式收集失败或错乱"
+                },
+                {
+                    "title": "网站速度优化",
+                    "desc": "css、js加载顺序问题（和预览不一样）"
+                },
+                {
+                    "title": "网站速度优化",
+                    "desc": "模式调整（体验优先，兼容模式）"
+                },
+                {
+                    "title": "网站速度优化",
+                    "desc": "template包裹问题"
+                },
+                {
+                    "title": "发布相关",
+                    "desc": "发布延迟"
+                },
+                {
+                    "title": "发布相关",
+                    "desc": "发布不生效"
+                },
+                {
+                    "title": "国际化翻译文案",
+                    "desc": "无法修改"
+                },
+                {
+                    "title": "国际化翻译文案",
+                    "desc": "翻译错误"
+                },
+                {
+                    "title": "翻译缺失",
+                    "desc": ""
+                },
+                {
+                    "title": "组件丢失",
+                    "desc": ""
+                },
+                {
+                    "title": "pc端兼容性问题",
+                    "desc": "同系统，不同浏览器"
+                },
+                {
+                    "title": "pc端兼容性问题",
+                    "desc": "不同系统，同浏览器"
+                },
+                {
+                    "title": "手机端兼容性问题",
+                    "desc": "同系统，不同浏览器"
+                },
+                {
+                    "title": "手机端兼容性问题",
+                    "desc": "不同系统，同浏览器"
+                },
+                {
+                    "title": "低版本浏览器不兼容",
+                    "desc": ""
+                },
+                {
+                    "title": "富文本内容问题",
+                    "desc": "空格问题"
+                },
+                {
+                    "title": "富文本内容问题",
+                    "desc": "富文本删除完后，无法编辑"
+                },
+                {
+                    "title": "富文本样式问题",
+                    "desc": "样式设置不生效"
+                },
+                {
+                    "title": "富文本样式问题",
+                    "desc": "复制问题"
+                },
+                {
+                    "title": "设置问题",
+                    "desc": "有设置入口未设置"
+                },
+                {
+                    "title": "设置问题",
+                    "desc": "设置项设置有误"
+                },
+                {
+                    "title": "代码影响",
+                    "desc": "第三方代码影响"
+                },
+                {
+                    "title": "代码影响",
+                    "desc": "自定义代码影响（自己写的，技术客服写的）"
+                },
+                {
+                    "title": "技术咨询",
+                    "desc": "第三方代码如何安装"
+                },
+                {
+                    "title": "技术咨询",
+                    "desc": "SEO优化问题"
+                },
+                {
+                    "title": "技术咨询",
+                    "desc": "searchconsole问题"
+                },
+                {
+                    "title": "技术咨询",
+                    "desc": "需求评估"
+                },
+                {
+                    "title": "技术咨询",
+                    "desc": "amp相关问题"
+                },
+                {
+                    "title": "网站速度问题",
+                    "desc": "网站速度不达标"
+                },
+                {
+                    "title": "个性化需求",
+                    "desc": "完全没有共性问题"
+                },
+                {
+                    "title": "其他",
+                    "desc": "前后台不一致"
+                },
+                {
+                    "title": "其他",
+                    "desc": "服务端缓存"
+                }
+            ],
             injectWorkerHtml: `
+            <div class="workorder-search">
+                <div class="workorder-search-input">
+                    <input type="text" id="workorder-search-keywords">
+                </div>
+                <div class="workorder-cfn-list">
+                    
+                </div>
+            </div>
             <div class="workorder-plug">
                 <div class="workorder-plug-start-btn plug-btn">
                     <svg t="1670207631120" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9834" width="32" height="32"><path d="M512 0C229.228 0 0 229.228 0 512s229.228 512 512 512c282.773 0 512-229.228 512-512S794.772 0 512 0z m0 954.183C267.818 954.183 69.818 756.205 69.818 512c0-244.205 198-442.182 442.182-442.182 244.228 0 442.182 197.977 442.182 442.182S756.228 954.183 512 954.183z" p-id="9835"></path><path d="M750.545 481.772l-349.09-201.545a34.843 34.843 0 0 0-34.91 0 34.897 34.897 0 0 0-17.454 30.228v403.09c0 12.478 6.659 24 17.454 30.228A34.85 34.85 0 0 0 384 748.456a34.85 34.85 0 0 0 17.455-4.683l349.09-201.545A34.896 34.896 0 0 0 768 512c0-12.477-6.659-24-17.455-30.228zM418.909 653.079V370.92L663.272 512 418.909 653.079z" p-id="9836"></path></svg>
@@ -47,6 +382,8 @@ var setAllHelper = function () {
                             _that.initWorkStateData();
                             // 初始化按钮对应事件
                             _that.bindBtnEvent();
+                            // 初始化工单分类列表
+                            _that.initWorkOrderCnfList(_that.state.workOrderCnfList);
                             resolve('success');
                         }
                     });
@@ -115,6 +452,7 @@ var setAllHelper = function () {
             this.state.nextBtn = _wordHtml.find(".workorder-plug-next-btn");
             this.state.toggleBtn = _wordHtml.find(".workorder-plug-toggle-btn");
             this.state.continueBtn = _wordHtml.find(".workorder-plug-continue-btn");
+            this.state.cfnContainerEl = _wordHtml.find(".workorder-cfn-list");
             $("body").append(_wordHtml);
         },
         /**
@@ -154,8 +492,8 @@ var setAllHelper = function () {
                  */
                 continueBtnFun: function () {
                     var _that = this;
-                    if(_that.state.continueBtn){
-                        _that.state.continueBtn.unbind('click').bind('click',function(){
+                    if (_that.state.continueBtn) {
+                        _that.state.continueBtn.unbind('click').bind('click', function () {
                             // 隐藏按钮
                             _that.state.continueBtn.hide();
                             _that.openWorkOrderDetail();
@@ -165,12 +503,12 @@ var setAllHelper = function () {
                 /**
                  * 上一条
                  */
-                prevBtnFun: function(){
+                prevBtnFun: function () {
                     var _that = this;
-                    if(_that.state.prevBtn){
-                        _that.state.prevBtn.unbind('click').bind('click',function(){
+                    if (_that.state.prevBtn) {
+                        _that.state.prevBtn.unbind('click').bind('click', function () {
                             _that.state.currentWorkOrderIndex--;
-                            if(_that.state.currentWorkOrderIndex < 0){
+                            if (_that.state.currentWorkOrderIndex < 0) {
                                 _that.state.currentWorkOrderIndex = 0;
                                 alert('哎呀,已经到顶了');
                                 return;
@@ -185,11 +523,11 @@ var setAllHelper = function () {
                  */
                 nextBtnFun: function () {
                     var _that = this;
-                    if(_that.state.nextBtn){
-                        _that.state.nextBtn.unbind('click').bind('click',function(){
+                    if (_that.state.nextBtn) {
+                        _that.state.nextBtn.unbind('click').bind('click', function () {
                             _that.state.currentWorkOrderIndex++;
-                            let {workOrderList,currentWorkOrderIndex} = _that.state;
-                            if(workOrderList && workOrderList.list && currentWorkOrderIndex > workOrderList.list.length -1 ){
+                            let { workOrderList, currentWorkOrderIndex } = _that.state;
+                            if (workOrderList && workOrderList.list && currentWorkOrderIndex > workOrderList.list.length - 1) {
                                 _that.state.currentWorkOrderIndex = 0;
                             }
                             _that.setLocalStorageWorkOrder.set("currentWorkOrderIndex", _that.state.currentWorkOrderIndex);
@@ -202,6 +540,21 @@ var setAllHelper = function () {
             btnEvent.continueBtnFun.call(this);
             btnEvent.prevBtnFun.call(this);
             btnEvent.nextBtnFun.call(this);
+        },
+        /**
+         * 初始化工单分类列表
+         */
+        initWorkOrderCnfList(workOrderCnfList){
+            var _that = this;
+            debugger;
+            workOrderCnfList.forEach((item,index,array) => {
+                let _cnfContainerEl = $(`<div class="workorder-cfn-list-item"></div>`);
+                let _cnfTitle = $(`<div class="workorder-cfn-list-item-title">${item.title}</div>`);
+                let _cnfDesc = $(`<div class="workorder-cfn-list-item-desc">${item.desc}</div>`);
+                _cnfContainerEl.append(_cnfTitle);
+                _cnfContainerEl.append(_cnfDesc);
+                _that.state.cfnContainerEl && _that.state.cfnContainerEl.append(_cnfContainerEl);
+            })
         },
         /**
          * 打开工单详情页面
