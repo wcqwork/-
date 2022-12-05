@@ -21,18 +21,36 @@
 		}
 		let backFun = {
 			"msg-dialog": function () {
-				if(GoogleContentScript.startFlag){
+				if (GoogleContentScript.startFlag) {
 					GoogleContentScript.startFlag = false;
 					var script = document.createElement("script");
 					script.innerHTML = `
 					window.startTreeStyle();
 					`
 					document.head.appendChild(script);
-				}else{
+				} else {
 					console.log("请勿重复start");
 					alert('已初始化成功，请勿重复点击！')
 				}
-				
+
+				sendResponse({ status: true });
+			},
+			"msg-dialog-cfn": function () {
+				var script = document.createElement("script");
+				script.innerHTML = `
+					window.startWordOrder();
+					`
+				document.head.appendChild(script);
+
+				sendResponse({ status: true });
+			},
+			"msg-dialog-faq": function () {
+				var script = document.createElement("script");
+				script.innerHTML = `
+					window.startWordOrder();
+					`
+				document.head.appendChild(script);
+
 				sendResponse({ status: true });
 			}
 		}

@@ -1,0 +1,25 @@
+.workorder-plug{
+    position: fixed;
+    right: 6%;
+    bottom: 6%;
+}
+
+.workorder-plug-toggle-btn{
+    display: flex;
+}
+
+.workorder-plug-toggle-btn .item-btn,.workorder-plug .plug-btn{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    cursor: pointer;
+}
+
+.workorder-plug-toggle-btn .item-btn:first-child{
+    margin-right: 30px;
+}
+
+.workorder-plug-toggle-btn .item-btn svg,.workorder-plug .plug-btn svg{
+    margin-bottom: 10px;
+}
