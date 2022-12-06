@@ -10,6 +10,7 @@ var setAllHelper = function () {
             nextBtn: null,
             continueBtn: null,
             cfnContainerEl:null,
+            workorderSearchKeywords:null,
             workOrderCnfList:   [
                 {
                     "title": "样式无法编辑",
@@ -383,7 +384,7 @@ var setAllHelper = function () {
                             // 初始化按钮对应事件
                             _that.bindBtnEvent();
                             // 初始化工单分类列表
-                            _that.initWorkOrderCnfList(_that.state.workOrderCnfList);
+                            _that.renderWorkOrderCnfList(_that.state.workOrderCnfList);
                             resolve('success');
                         }
                     });
@@ -453,6 +454,7 @@ var setAllHelper = function () {
             this.state.toggleBtn = _wordHtml.find(".workorder-plug-toggle-btn");
             this.state.continueBtn = _wordHtml.find(".workorder-plug-continue-btn");
             this.state.cfnContainerEl = _wordHtml.find(".workorder-cfn-list");
+            this.state.workorderSearchKeywords = _wordHtml.find("#workorder-search-keywords");
             $("body").append(_wordHtml);
         },
         /**
@@ -535,26 +537,67 @@ var setAllHelper = function () {
                         })
                     }
                 },
+                /**
+                 * 分类列表搜索关键词
+                 */
+                searchCnfKeyWords: function(){
+                    var _that = this;
+                    let { workorderSearchKeywords } = _that.state;
+                    if(workorderSearchKeywords){
+                        workorderSearchKeywords.unbind('input').bind('input',_that.debounce(function(){
+                            let keyword = workorderSearchKeywords.val();
+                            console.log(keyword);
+                            // 关键词搜索
+                            if(keyword){
+                               let reusltArr = _that.searchCnfKeyWordsFun(keyword,_that.state.workOrderCnfList);
+                               _that.renderWorkOrderCnfList(reusltArr);
+                            }else{
+                                _that.renderWorkOrderCnfList(_that.state.workOrderCnfList);
+                            }
+                        },200));
+                    }
+                }
             }
             btnEvent.startBtnFun.call(this);
             btnEvent.continueBtnFun.call(this);
             btnEvent.prevBtnFun.call(this);
             btnEvent.nextBtnFun.call(this);
+            btnEvent.searchCnfKeyWords.call(this);
         },
         /**
          * 初始化工单分类列表
          */
-        initWorkOrderCnfList(workOrderCnfList){
+        renderWorkOrderCnfList(workOrderCnfList){
             var _that = this;
-            debugger;
+            _that.state.cfnContainerEl.html('');
             workOrderCnfList.forEach((item,index,array) => {
                 let _cnfContainerEl = $(`<div class="workorder-cfn-list-item"></div>`);
-                let _cnfTitle = $(`<div class="workorder-cfn-list-item-title">${item.title}</div>`);
-                let _cnfDesc = $(`<div class="workorder-cfn-list-item-desc">${item.desc}</div>`);
+                let _cnfTitle = $(`<div class="workorder-cfn-list-item-title">${item.desc}</div>`);
+                let _cnfDesc = $(`<div class="workorder-cfn-list-item-desc">${item.title}</div>`);
                 _cnfContainerEl.append(_cnfTitle);
                 _cnfContainerEl.append(_cnfDesc);
                 _that.state.cfnContainerEl && _that.state.cfnContainerEl.append(_cnfContainerEl);
             })
+        },
+        /**
+         * 关键词搜索
+         * 分类关键词过滤
+         */
+        searchCnfKeyWordsFun: function(keyword,cnfList){
+            let resultArr = [];
+            cnfList.forEach((item,index,array) => {
+                if(Object.prototype.toString.call(item).slice(8,-1) == 'Object'){
+                    for(let keyVal of Object.values(item)){
+                        var _keywordName = keyword.replace(/(\s*$)/g,""); //清除空格
+                        var reg = new RegExp(_keywordName);
+                        if(reg.test(keyVal)){
+                            resultArr.push(item);
+                            return;
+                        }
+                    }
+                }
+            })
+            return resultArr;
         },
         /**
          * 打开工单详情页面
@@ -593,6 +636,28 @@ var setAllHelper = function () {
                 startBtn.hide();
                 // toggleBtn.hide();
             }
+        },
+        /**
+         * 防抖
+         */
+         debounce: function(fn, delay = 500) {
+            // 是闭包中的
+            let timer
+            
+            // input事件调用的函数，相当于obj调用函数 this指向Input
+            return function() {
+               // 这个if 判断不做也没关系，判断了（除第一次非空的情况）也就是执行从第二次开始，在延迟时间内多次触发才会走该判断
+               if(timer) {clearTimeout(timer)}
+               // 此时的箭头函数的this 和 arguments 都是从外部函数继承而来
+               // 如果用普通函数就要用词法作用域 var that = this var arg = arguments
+               timer = setTimeout(() =>{
+                  // 使得传入的回调函数的this 指向Input这个元素对象
+                  // arguments是该事件的详情，可以获得该函数被调用时的所有参数,是一个event 对象（所有Dom事件都会传event对象进入）
+                  // 直接使用 fn() 问题也不大
+                  fn.apply(this,arguments) 
+                  timer = null
+               },delay)
+           }
         }
     }
 }
