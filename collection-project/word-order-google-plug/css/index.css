@@ -1,3 +1,16 @@
+.hide{
+    display: none;
+}
+
+#cateTags{
+    background-color: red;
+    display: inline-block;
+    color: white;
+    padding: 5px 6px;
+    margin-left: 15px;
+    border-radius: 4px;
+}
+
 
 /* 搜索 */
 .workorder-search{
@@ -20,7 +33,7 @@
 }
 
 .workorder-search .workorder-search-input{
-    border-bottom: 1px solid rgb(222, 226, 230)
+    border-bottom: 2px solid rgb(222, 226, 230)
 }
 
 .workorder-cfn-list{
@@ -47,6 +60,15 @@
 
 .workorder-cfn-list .workorder-cfn-list-item{
     padding: 6px 12px;
+}
+
+/* 选中的分类 */
+.workorder-cfn-list .workorder-cfn-list-item.active{
+    background-color: #f5222d !important;
+}
+
+.workorder-cfn-list .workorder-cfn-list-item.active *{
+    color: white !important;
 }
 
 .workorder-cfn-list .workorder-cfn-list-item:hover{

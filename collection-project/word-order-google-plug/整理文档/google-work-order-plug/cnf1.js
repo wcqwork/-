@@ -1,4 +1,5 @@
-[
+
+let list = [
     {
         "title": "样式无法编辑",
         "desc": "间距写死"
@@ -324,3 +325,7 @@
         "desc": "服务端缓存"
     }
 ]
+
+for(var i = 0;i<list.length;i++){
+    list[i]['cateId'] = i;
+}
