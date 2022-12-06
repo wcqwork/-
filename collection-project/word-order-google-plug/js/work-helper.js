@@ -580,14 +580,17 @@ var setAllHelper = function () {
                  */
                 startBtnFun: function () {
                     var _that = this;
-                    if (_that.state.startBtn) {
-                        _that.state.startBtn.unbind('click').bind('click', function () {
-                            // 隐藏开始按钮
-                            _that.state.startBtn.hide();
+                    let { startBtn,workerInstance } = _that.state;
+                    if (startBtn) {
+                        startBtn.unbind('click').bind('click', function () {
+                            // 更新实例数据
+                            workerInstance.init();
                             // 获取筛选条件对应的工单记录
-                            let result = _that.state.workerInstance.getWordListProxy();
+                            let result = workerInstance.getWordListProxy();
                             result.then(res => {
                                 if (res) {
+                                    // 隐藏开始按钮
+                                    startBtn.hide();
                                     // 保存数据
                                     _that.state.workOrderList = res.value;
                                     _that.setLocalStorageWorkOrder.set("workOrderList", JSON.stringify(_that.state.workOrderList));
@@ -609,9 +612,11 @@ var setAllHelper = function () {
                     var _that = this;
                     if (_that.state.continueBtn) {
                         _that.state.continueBtn.unbind('click').bind('click', function () {
-                            // 隐藏按钮
-                            _that.state.continueBtn.hide();
-                            _that.openWorkOrderDetail();
+                            let result = _that.openWorkOrderDetail();
+                            if(result){
+                                // 隐藏按钮
+                                _that.state.continueBtn.hide();
+                            }
                         })
                     }
                 },
@@ -642,7 +647,7 @@ var setAllHelper = function () {
                         _that.state.nextBtn.unbind('click').bind('click', function () {
                             let { workOrderList, currentWorkOrderIndex } = _that.state;
                             if(!workOrderList){ // 没有对应列表
-                                alert('需要先选择日期，点击开始分类');
+                                alert('需要先选择日期过滤，然后点击开始分类');
                                 return;
                             }
                             _that.state.currentWorkOrderIndex++;
@@ -798,7 +803,13 @@ var setAllHelper = function () {
             let detailUrl = '/order/viewdetail/';
             let { workOrderList, currentWorkOrderIndex } = this.state;
             let id = workOrderList && workOrderList.list && workOrderList.list[currentWorkOrderIndex] && workOrderList.list[currentWorkOrderIndex].id;
-            location.href = detailUrl + id;
+            if(id){
+                location.href = detailUrl + id;
+                return true;
+            }else{
+                alert('未查询到工单id，请先点击开始分类');
+                return false;
+            }
         },
         /**
          * 保存数据
@@ -824,12 +835,15 @@ var setAllHelper = function () {
             this.state.workOrderCateList = (_workOrderCateList && JSON.parse(_workOrderCateList)) || {};
 
             // 初始化按钮等页面状态
-            let { workOrderList, startBtn, toggleBtn,workOrderCateList } = this.state;
+            let { workOrderList, startBtn, toggleBtn,workOrderCateList,workerInstance } = this.state;
             // if (workOrderList) { // 已经分类过了
             //     // 隐藏开始按钮
             //     startBtn.hide();
             //     toggleBtn.hide();
             // }
+
+            // 更新一下实例化数据
+            workerInstance.init();
 
             // 初始化工单类型
             initWorkerOrderCate.call(this,workOrderCateList);
@@ -891,6 +905,11 @@ var setAllHelper = function () {
          */
         exportExcelHelper: function(){
             var _that = this;
+            let workerOrderLen = Object.keys( _that.state.workOrderCateList).length;
+            if(workerOrderLen <= 0){
+                alert('未检测到已经分类的工单');
+                return;
+            }
             // 1、要导出的json数据
             let jsonData = [];
             let { workOrderCnfList } = _that.state;
@@ -932,7 +951,7 @@ var setAllHelper = function () {
             const link = document.createElement("a");
             link.href = uri;
             // 对下载的文件命名
-            link.download =  "json数据表.csv";
+            link.download =  "技术支持工单分类.csv";
             link.click();
         },
         /**
