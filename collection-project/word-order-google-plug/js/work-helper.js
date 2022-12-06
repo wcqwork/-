@@ -71,7 +71,7 @@ var setAllHelper = function () {
                 },
                 {
                     "title": "图片问题",
-                    "desc": "图片压缩,非原图",
+                    "desc": "图片压缩非原图",
                     "cateId": 11
                 },
                 {
@@ -146,7 +146,7 @@ var setAllHelper = function () {
                 },
                 {
                     "title": "图片问题",
-                    "desc": "图片压缩,非原图",
+                    "desc": "图片压缩非原图",
                     "cateId": 26
                 },
                 {
@@ -201,7 +201,7 @@ var setAllHelper = function () {
                 },
                 {
                     "title": "组件功能缺失",
-                    "desc": "多组件搭建无法对其、响应不好,无法单独设置",
+                    "desc": "多组件搭建无法对其、响应不好 无法单独设置",
                     "cateId": 37
                 },
                 {
@@ -815,7 +815,6 @@ var setAllHelper = function () {
          * 初始化工单状态  || 工单是否之前已经分过类别
          */
         initWorkStateData: function () {
-            debugger;
             // 初始化数据
             let _workOrderListStorage = this.setLocalStorageWorkOrder.get("workOrderList");
             let _currentWorkOrderIndexStorage = this.setLocalStorageWorkOrder.get("currentWorkOrderIndex");
@@ -900,18 +899,23 @@ var setAllHelper = function () {
                 _itemObj["title"] = item.title;
                 _itemObj["desc"] = item.desc;
                 _itemObj["orderid"] = findCateWorkId(_that,item.cateId);
+                _itemObj["num"] = findCateWorkId(_that,item.cateId,'1');
                 jsonData.push(_itemObj);
             })
 
-            function findCateWorkId(_that,cateId){
+            function findCateWorkId(_that,cateId,type){
                 let { workOrderCateList } =  _that.state;
-                let strId = "";
+                let strIdArr = [];
                 for(let key in workOrderCateList){
                     if(workOrderCateList[key] == cateId){
-                        strId += key + '，';
+                        strIdArr.push(key)
                     }
                 }
-                return strId;
+                if(type == '1'){
+                    return strIdArr.length;
+                }else{
+                    return strIdArr.join('，');
+                }
             }
             // 2、列标题，逗号隔开，每一个逗号就是隔开一个单元格
             let str = `工单问题类型,工单详细问题分类,工单号,计数\n`;
