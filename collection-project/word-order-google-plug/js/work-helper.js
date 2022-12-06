@@ -662,7 +662,7 @@ var setAllHelper = function () {
                     let { exportExcelBtn } = _that.state;
                     if(exportExcelBtn){
                         exportExcelBtn.unbind('click').bind('click',function(){
-                            
+                            _that.exportExcelHelper();
                         });
                     }
                 },
@@ -750,6 +750,7 @@ var setAllHelper = function () {
             btnEvent.continueBtnFun.call(this);
             btnEvent.prevBtnFun.call(this);
             btnEvent.nextBtnFun.call(this);
+            btnEvent.exportExcelBtnFun.call(this);
             btnEvent.searchCnfKeyWords.call(this);
             btnEvent.chooseCateFun.call(this);
             btnEvent.isShowSearchCnfFun.call(this);
@@ -885,6 +886,50 @@ var setAllHelper = function () {
                     }
                 }
             }
+        },
+        /**
+         * 导出excel
+         */
+        exportExcelHelper: function(){
+            var _that = this;
+            // 1、要导出的json数据
+            let jsonData = [];
+            let { workOrderCnfList } = _that.state;
+            workOrderCnfList.forEach(function(item){
+                let _itemObj = {};
+                _itemObj["title"] = item.title;
+                _itemObj["desc"] = item.desc;
+                _itemObj["orderid"] = findCateWorkId(_that,item.cateId);
+                jsonData.push(_itemObj);
+            })
+
+            function findCateWorkId(_that,cateId){
+                let { workOrderCateList } =  _that.state;
+                let strId = "";
+                for(let key in workOrderCateList){
+                    if(workOrderCateList[key] == cateId){
+                        strId += key + '，';
+                    }
+                }
+                return strId;
+            }
+            // 2、列标题，逗号隔开，每一个逗号就是隔开一个单元格
+            let str = `工单问题类型,工单详细问题分类,工单号,计数\n`;
+            // 增加\t为了不让表格显示科学计数法或者其他格式
+            for(let i = 0 ; i < jsonData.length ; i++ ){
+                for(const key in jsonData[i]){
+                    str+=`${jsonData[i][key] + '\t'},`;     
+                }
+                str+='\n';
+            }
+            // encodeURIComponent解决中文乱码
+            const uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+            // 通过创建a标签实现
+            const link = document.createElement("a");
+            link.href = uri;
+            // 对下载的文件命名
+            link.download =  "json数据表.csv";
+            link.click();
         },
         /**
          * 防抖
