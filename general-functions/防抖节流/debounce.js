@@ -22,3 +22,22 @@ input.addEventListener('keyup', debounce(() => {
    // 可直接使用this.value获得输入框的值; arguments可用于获取具体触发事件的信息
    console.log(input.value)
 }), 600)
+
+
+var throttle = function(func, delay) {
+   var timer = null;
+   return function() {
+       var context = this;
+       var args = arguments;
+       if (!timer) {
+           timer = setTimeout(function() {
+               func.apply(context, args);
+               timer = null;
+           }, delay);
+       }
+   }
+}
+function handle() {
+   console.log(Math.random());
+}
+window.addEventListener('scroll', throttle(handle, 1000));
