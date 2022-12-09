@@ -721,15 +721,32 @@ var setAllHelper = function () {
                  */
                 isShowSearchCnfFun: function(){
                     var _that = this;
+                    let { workorderSearchKeywords } = _that.state;
+                    let cnfContainerEl = _that.getWorkerVal.getCnfSearchContainer();
+                    if(workorderSearchKeywords){
+                        cnfContainerEl.draggable && cnfContainerEl.draggable({cancel:".title"});
+
+                        workorderSearchKeywords.click(function(){
+                            workorderSearchKeywords.focus();
+                        });
+                    }
                     document.onkeydown = function(event){
-                        let cnfContainerEl = _that.getWorkerVal.getCnfSearchContainer();
                         if(event.altKey && event.keyCode == 81){
                            cnfContainerEl.toggleClass('hide');
+                           workorderSearchKeywords.focus();
                         }
                         if(event.keyCode == 27){
                             cnfContainerEl.toggleClass('hide');
+                            workorderSearchKeywords.focus();
                         }
                     }
+
+                    // 单击工单号 支持分类
+                    let workOrderContainer = _that.getWorkerVal.getCateTagContainer();
+                    workOrderContainer && workOrderContainer.unbind('click').bind('click',function(){
+                        cnfContainerEl.toggleClass('hide');
+                        workorderSearchKeywords.focus();
+                    })
                 },
                 /**
                  * 路由改变了，数据维护
