@@ -13,6 +13,7 @@ var setAllHelper = function () {
             cfnContainerEl:null,
             workorderSearchKeywords:null,
             workOrderCateList:{}, // 工单分类结果
+            outputWorkOrderObj:{},
             workOrderCnfList: [
                 {
                     "title": "样式无法编辑",
@@ -871,6 +872,82 @@ var setAllHelper = function () {
                     this.setWorkerCateTag(workOrderCateList[workOrderId]);
                 }
             }
+
+            // 初始化工单统计tag
+            this.initWorkOrderTotalTag();
+        },
+        /**
+         * 初始化工单统计tag
+         */
+        initWorkOrderTotalTag:function(){
+            var _that = this;
+            var {outputWorkOrderObj,workOrderCateList,currentWorkOrderIndex,workOrderList} = _that.state;
+            var cateTotalObj = {
+                alreadyWorkOrderNum:Object.keys(workOrderCateList).length,
+                currentWorkOrder:currentWorkOrderIndex,
+                totalWorkOrder:workOrderList?workOrderList.list.length : '未开始',
+                skipAlreadyWorkOder: _that.setLocalStorageWorkOrder.get("skipAlreadyWorkOder") == '1' ? true : false,
+            }
+            _that.state.outputWorkOrderObj = cateTotalObj;
+            var injectTotalDom = $( `
+            <div class="workorder-plug-tip">
+                    <div class="plug-tip-item">
+                        已经分类工单数量：${cateTotalObj.alreadyWorkOrderNum}
+                    </div>
+                    <div class="plug-tip-item">
+                        当前工单位置: ${cateTotalObj.currentWorkOrder}
+                    </div>
+                    <div class="plug-tip-item">
+                        总工单数：${cateTotalObj.totalWorkOrder}
+                    </div>
+                    <div class="plug-tip-item">
+                        <label for="alreadyWorkOrderNum">跳过已经分类的工单</label>
+                        <input type="checkbox" name="sex" id="alreadyWorkOrderNum" value="alreadyWorkOrderNum">
+                    </div>
+                    <div class="plug-tip-item">
+                        <button class="clearAlreadyWorkOrder">清空所有已经分类工单</button>
+                    </div>
+                </div>
+            `);
+            skipWorkOrder();
+            injectTotalDom.find(".clearAlreadyWorkOrder").unbind('click').bind('click',function(){
+                clearAlreadyWorkOrderFun(_that);
+            });
+            $(".workorder-plug-tip").remove();
+            $("body").append(injectTotalDom);
+
+            /**
+             * 跳过已经分类的工单
+             */
+            function skipWorkOrder(){
+                var skipInput =  injectTotalDom.find("#alreadyWorkOrderNum");
+                // 跳过已经分类的工单
+                if(cateTotalObj.skipAlreadyWorkOder){
+                    skipInput.attr("checked","checked");
+                }
+                skipInput.unbind('change').bind('change',function(){
+                    var isState = '0';
+                    if($(this).is(':checked')){
+                        isState = '1';
+                    }
+                    _that.setLocalStorageWorkOrder.set("skipAlreadyWorkOder",isState);
+                });
+            }
+
+            /**
+             * 清空所有已经分类的工单
+             */
+           function clearAlreadyWorkOrderFun(_that){
+                var result = confirm('是否确认清空');
+                if(result){
+                    var _ok = confirm('请再次确认');
+                    if(_ok){
+                        _that.setLocalStorageWorkOrder.set("workOrderCateList",JSON.stringify({}));
+                        location.reload();
+                        alert('清除成功');
+                    }
+                }
+           }
         },
         /**workOrderId 工单id
          * cateId 分类id
@@ -916,6 +993,8 @@ var setAllHelper = function () {
                     }
                 }
             }
+             // 初始化工单统计tag
+             this.initWorkOrderTotalTag();
         },
         /**
          * 导出excel

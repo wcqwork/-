@@ -115,3 +115,30 @@
 .workorder-plug-toggle-btn .item-btn svg,.workorder-plug .plug-btn svg{
     margin-bottom: 10px;
 }
+
+/* 统计 */
+.workorder-plug-tip{
+    position: fixed;
+    top: 17px;
+    left: 50%;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    transform: translateX(-50%);
+    z-index: 999999999999999999;
+}
+
+.workorder-plug-tip .plug-tip-item{
+    margin-right: 12px;
+
+    display: flex;
+    align-items: center;
+}
+
+.workorder-plug-tip .clearAlreadyWorkOrder{
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+    border: 0;
+}
