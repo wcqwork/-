@@ -9,11 +9,11 @@ var setAllHelper = function () {
             prevBtn: null,
             nextBtn: null,
             continueBtn: null,
-            exportExcelBtn:null,
-            cfnContainerEl:null,
-            workorderSearchKeywords:null,
-            workOrderCateList:{}, // 工单分类结果
-            outputWorkOrderObj:{},
+            exportExcelBtn: null,
+            cfnContainerEl: null,
+            workorderSearchKeywords: null,
+            workOrderCateList: {}, // 工单分类结果
+            outputWorkOrderObj: {},// 展示状态结果
             workOrderCnfList: [
                 {
                     "title": "样式无法编辑",
@@ -498,21 +498,21 @@ var setAllHelper = function () {
             /**
              * 获取当前工单的id
              */
-            getWorkOrderId: function(){
-                let workOrderId=  $("section.m-b-md .box-body>div:first-child .color-c").text().replace(/(\s*$)/g,""); //清除空格;
+            getWorkOrderId: function () {
+                let workOrderId = $("section.m-b-md .box-body>div:first-child .color-c").text().replace(/(\s*$)/g, ""); //清除空格;
                 return workOrderId;
             },
             /**
              * 分类搜索容器
              * @returns 
              */
-            getCnfSearchContainer: function(){
+            getCnfSearchContainer: function () {
                 return $(".workorder-search");
             },
             /**
              * 工单类型容器
              */
-            getCateTagContainer: function(){
+            getCateTagContainer: function () {
                 return $("section.m-b-md .box-body>div:first-child .color-c");
             }
         },
@@ -581,7 +581,7 @@ var setAllHelper = function () {
                  */
                 startBtnFun: function () {
                     var _that = this;
-                    let { startBtn,workerInstance } = _that.state;
+                    let { startBtn, workerInstance } = _that.state;
                     if (startBtn) {
                         startBtn.unbind('click').bind('click', function () {
                             // 更新实例数据
@@ -614,7 +614,7 @@ var setAllHelper = function () {
                     if (_that.state.continueBtn) {
                         _that.state.continueBtn.unbind('click').bind('click', function () {
                             let result = _that.openWorkOrderDetail();
-                            if(result){
+                            if (result) {
                                 // 隐藏按钮
                                 _that.state.continueBtn.hide();
                             }
@@ -646,28 +646,55 @@ var setAllHelper = function () {
                     var _that = this;
                     if (_that.state.nextBtn) {
                         _that.state.nextBtn.unbind('click').bind('click', function () {
-                            let { workOrderList, currentWorkOrderIndex } = _that.state;
-                            if(!workOrderList){ // 没有对应列表
+                            let { workOrderList, currentWorkOrderIndex, outputWorkOrderObj } = _that.state;
+                            if (!workOrderList) { // 没有对应列表
                                 alert('需要先选择日期过滤，然后点击开始分类');
                                 return;
                             }
                             _that.state.currentWorkOrderIndex++;
+                            var _isFlag = outputWorkOrderObj.skipAlreadyWorkOder || false;
+                            while (_isFlag) {
+                                findCurrentWorkOrderCate.call(_that);
+                            }
                             if (workOrderList && workOrderList.list && currentWorkOrderIndex > workOrderList.list.length - 1) {
                                 _that.state.currentWorkOrderIndex = 0;
                             }
                             _that.setLocalStorageWorkOrder.set("currentWorkOrderIndex", _that.state.currentWorkOrderIndex);
                             _that.openWorkOrderDetail();
+
+                            /**
+                             * 查询当前工单是否分类
+                             */
+                            function findCurrentWorkOrderCate() {
+                                var _that = this;
+                                var { workOrderList, currentWorkOrderIndex, outputWorkOrderObj, workOrderCateList } = this.state;
+                                if (workOrderList && workOrderList.list && currentWorkOrderIndex > workOrderList.list.length - 1) {
+                                    _that.state.currentWorkOrderIndex = 0;
+                                    _isFlag = false;
+                                    return;
+                                }
+                                // 跳过
+                                let orderCode = workOrderList && workOrderList.list && workOrderList.list[currentWorkOrderIndex] && workOrderList.list[currentWorkOrderIndex].orderCode;
+                                // 工单是否已经分过类别
+                                if (orderCode && workOrderCateList && workOrderCateList[orderCode]) {
+                                    _isFlag = true;
+                                    _that.state.currentWorkOrderIndex++;    
+                                    return;
+                                }else{
+                                    _isFlag = false;
+                                }
+                            }
                         })
                     }
                 },
                 /**
                  * 导出excel
                  */
-                exportExcelBtnFun: function(){
+                exportExcelBtnFun: function () {
                     var _that = this;
                     let { exportExcelBtn } = _that.state;
-                    if(exportExcelBtn){
-                        exportExcelBtn.unbind('click').bind('click',function(){
+                    if (exportExcelBtn) {
+                        exportExcelBtn.unbind('click').bind('click', function () {
                             _that.exportExcelHelper();
                         });
                     }
@@ -675,43 +702,43 @@ var setAllHelper = function () {
                 /**
                  * 分类列表搜索关键词
                  */
-                searchCnfKeyWords: function(){
+                searchCnfKeyWords: function () {
                     var _that = this;
                     let { workorderSearchKeywords } = _that.state;
-                    if(workorderSearchKeywords){
-                        workorderSearchKeywords.unbind('input').bind('input',_that.debounce(function(){
+                    if (workorderSearchKeywords) {
+                        workorderSearchKeywords.unbind('input').bind('input', _that.debounce(function () {
                             let keyword = workorderSearchKeywords.val();
                             console.log(keyword);
                             // 关键词搜索
-                            if(keyword){
-                               let reusltArr = _that.searchCnfKeyWordsFun(keyword,_that.state.workOrderCnfList);
-                               _that.renderWorkOrderCnfList(reusltArr);
-                            }else{
+                            if (keyword) {
+                                let reusltArr = _that.searchCnfKeyWordsFun(keyword, _that.state.workOrderCnfList);
+                                _that.renderWorkOrderCnfList(reusltArr);
+                            } else {
                                 _that.renderWorkOrderCnfList(_that.state.workOrderCnfList);
                             }
-                        },200));
+                        }, 200));
                     }
                 },
                 /**
                  * 选择对应的分类
                  */
-                chooseCateFun: function(){
+                chooseCateFun: function () {
                     var _that = this;
                     let { cfnContainerEl } = _that.state;
-                    if(cfnContainerEl){
-                        cfnContainerEl.on("click",".workorder-cfn-list-item",function(){
+                    if (cfnContainerEl) {
+                        cfnContainerEl.on("click", ".workorder-cfn-list-item", function () {
                             cfnContainerEl.find(".workorder-cfn-list-item").removeClass("active");
                             $(this).addClass("active");
                             let cateId = $(this).attr("data-cateid");
                             let workOrderId = _that.getWorkerVal.getWorkOrderId();
-                            if(workOrderId){
-                                _that.setWorkOrderCateResult(workOrderId,cateId);
+                            if (workOrderId) {
+                                _that.setWorkOrderCateResult(workOrderId, cateId);
                                 let cnfContainerEl = _that.getWorkerVal.getCnfSearchContainer();
                                 cnfContainerEl.toggleClass('hide');
 
                                 // 设置工单对应tag
                                 _that.setWorkerCateTag(cateId);
-                            }else{
+                            } else {
                                 alert('无法获取到当前分类的工单id，请在工单详情页进行工单分类');
                             }
                         })
@@ -720,23 +747,23 @@ var setAllHelper = function () {
                 /**
                  * 搜索框快捷键
                  */
-                isShowSearchCnfFun: function(){
+                isShowSearchCnfFun: function () {
                     var _that = this;
                     let { workorderSearchKeywords } = _that.state;
                     let cnfContainerEl = _that.getWorkerVal.getCnfSearchContainer();
-                    if(workorderSearchKeywords){
-                        cnfContainerEl.draggable && cnfContainerEl.draggable({cancel:".title"});
+                    if (workorderSearchKeywords) {
+                        cnfContainerEl.draggable && cnfContainerEl.draggable({ cancel: ".title" });
 
-                        workorderSearchKeywords.click(function(){
+                        workorderSearchKeywords.click(function () {
                             workorderSearchKeywords.focus();
                         });
                     }
-                    document.onkeydown = function(event){
-                        if(event.altKey && event.keyCode == 81){
-                           cnfContainerEl.toggleClass('hide');
-                           workorderSearchKeywords.focus();
+                    document.onkeydown = function (event) {
+                        if (event.altKey && event.keyCode == 81) {
+                            cnfContainerEl.toggleClass('hide');
+                            workorderSearchKeywords.focus();
                         }
-                        if(event.keyCode == 27){
+                        if (event.keyCode == 27) {
                             cnfContainerEl.toggleClass('hide');
                             workorderSearchKeywords.focus();
                         }
@@ -744,7 +771,7 @@ var setAllHelper = function () {
 
                     // 单击工单号 支持分类
                     let workOrderContainer = _that.getWorkerVal.getCateTagContainer();
-                    workOrderContainer && workOrderContainer.unbind('click').bind('click',function(){
+                    workOrderContainer && workOrderContainer.unbind('click').bind('click', function () {
                         cnfContainerEl.toggleClass('hide');
                         workorderSearchKeywords.focus();
                     })
@@ -752,20 +779,20 @@ var setAllHelper = function () {
                 /**
                  * 路由改变了，数据维护
                  */
-                bindLocationChange: function(){
+                bindLocationChange: function () {
                     var _that = this;
-                    const _historyWrap = function(type) { const orig = history[type]; const e = new Event(type); return function() { const rv = orig.apply(this, arguments); e.arguments = arguments; window.dispatchEvent(e); return rv; }; }; history.pushState = _historyWrap('pushState'); history.replaceState = _historyWrap('replaceState');
-                    window.addEventListener('pushState', function(e) { 
+                    const _historyWrap = function (type) { const orig = history[type]; const e = new Event(type); return function () { const rv = orig.apply(this, arguments); e.arguments = arguments; window.dispatchEvent(e); return rv; }; }; history.pushState = _historyWrap('pushState'); history.replaceState = _historyWrap('replaceState');
+                    window.addEventListener('pushState', function (e) {
                         // 工单是否已经分过类 初始化数据
-                        setTimeout(function(){
+                        setTimeout(function () {
                             _that.initWorkStateData();
-                        },1000);
-                    }); 
-                    window.addEventListener('replaceState', function(e) { 
+                        }, 1000);
+                    });
+                    window.addEventListener('replaceState', function (e) {
                         // 工单是否已经分过类 初始化数据
-                        setTimeout(function(){
+                        setTimeout(function () {
                             _that.initWorkStateData();
-                        },1000);
+                        }, 1000);
                     });
                 }
             }
@@ -782,10 +809,10 @@ var setAllHelper = function () {
         /**
          * 初始化工单分类列表
          */
-        renderWorkOrderCnfList(workOrderCnfList){
+        renderWorkOrderCnfList(workOrderCnfList) {
             var _that = this;
             _that.state.cfnContainerEl.html('');
-            workOrderCnfList.forEach((item,index,array) => {
+            workOrderCnfList.forEach((item, index, array) => {
                 let _cnfContainerEl = $(`<div class="workorder-cfn-list-item" data-cateid="${item.cateId}"></div>`);
                 let _cnfTitle = $(`<div class="workorder-cfn-list-item-title">${item.desc}</div>`);
                 let _cnfDesc = $(`<div class="workorder-cfn-list-item-desc">${item.title}</div>`);
@@ -798,14 +825,14 @@ var setAllHelper = function () {
          * 关键词搜索
          * 分类关键词过滤
          */
-        searchCnfKeyWordsFun: function(keyword,cnfList){
+        searchCnfKeyWordsFun: function (keyword, cnfList) {
             let resultArr = [];
-            cnfList.forEach((item,index,array) => {
-                if(Object.prototype.toString.call(item).slice(8,-1) == 'Object'){
-                    for(let keyVal of Object.values(item)){
-                        var _keywordName = keyword.replace(/(\s*$)/g,""); //清除空格
+            cnfList.forEach((item, index, array) => {
+                if (Object.prototype.toString.call(item).slice(8, -1) == 'Object') {
+                    for (let keyVal of Object.values(item)) {
+                        var _keywordName = keyword.replace(/(\s*$)/g, ""); //清除空格
                         var reg = new RegExp(_keywordName);
-                        if(reg.test(keyVal)){
+                        if (reg.test(keyVal)) {
                             resultArr.push(item);
                             return;
                         }
@@ -821,10 +848,10 @@ var setAllHelper = function () {
             let detailUrl = '/order/viewdetail/';
             let { workOrderList, currentWorkOrderIndex } = this.state;
             let id = workOrderList && workOrderList.list && workOrderList.list[currentWorkOrderIndex] && workOrderList.list[currentWorkOrderIndex].id;
-            if(id){
+            if (id) {
                 location.href = detailUrl + id;
                 return true;
-            }else{
+            } else {
                 alert('未查询到工单id，请先点击开始分类');
                 return false;
             }
@@ -844,6 +871,7 @@ var setAllHelper = function () {
          * 初始化工单状态  || 工单是否之前已经分过类别
          */
         initWorkStateData: function () {
+            var _that = this;
             // 初始化数据
             let _workOrderListStorage = this.setLocalStorageWorkOrder.get("workOrderList");
             let _currentWorkOrderIndexStorage = this.setLocalStorageWorkOrder.get("currentWorkOrderIndex");
@@ -853,7 +881,7 @@ var setAllHelper = function () {
             this.state.workOrderCateList = (_workOrderCateList && JSON.parse(_workOrderCateList)) || {};
 
             // 初始化按钮等页面状态
-            let { workOrderList, startBtn, toggleBtn,workOrderCateList,workerInstance } = this.state;
+            let { workOrderList, startBtn, toggleBtn, workOrderCateList, workerInstance } = this.state;
             // if (workOrderList) { // 已经分类过了
             //     // 隐藏开始按钮
             //     startBtn.hide();
@@ -864,13 +892,15 @@ var setAllHelper = function () {
             workerInstance.init();
 
             // 初始化工单类型
-            initWorkerOrderCate.call(this,workOrderCateList);
-            function initWorkerOrderCate(workOrderCateList){
-                let workOrderId = this.getWorkerVal.getWorkOrderId();
-                // 工单是否已经分过类别
-                if(workOrderId && workOrderCateList && workOrderCateList[workOrderId]){
-                    this.setWorkerCateTag(workOrderCateList[workOrderId]);
-                }
+            initWorkerOrderCate.call(this, workOrderCateList);
+            function initWorkerOrderCate(workOrderCateList) {
+                setTimeout(function(){
+                    let workOrderId = _that.getWorkerVal.getWorkOrderId();
+                    // 工单是否已经分过类别
+                    if (workOrderId && workOrderCateList && workOrderCateList[workOrderId]) {
+                        _that.setWorkerCateTag(workOrderCateList[workOrderId]);
+                    }
+                },500);
             }
 
             // 初始化工单统计tag
@@ -879,17 +909,17 @@ var setAllHelper = function () {
         /**
          * 初始化工单统计tag
          */
-        initWorkOrderTotalTag:function(){
+        initWorkOrderTotalTag: function () {
             var _that = this;
-            var {outputWorkOrderObj,workOrderCateList,currentWorkOrderIndex,workOrderList} = _that.state;
+            var { outputWorkOrderObj, workOrderCateList, currentWorkOrderIndex, workOrderList } = _that.state;
             var cateTotalObj = {
-                alreadyWorkOrderNum:Object.keys(workOrderCateList).length,
-                currentWorkOrder:currentWorkOrderIndex,
-                totalWorkOrder:workOrderList?workOrderList.list.length : '未开始',
+                alreadyWorkOrderNum: Object.keys(workOrderCateList).length,
+                currentWorkOrder: currentWorkOrderIndex,
+                totalWorkOrder: workOrderList ? workOrderList.list.length : '未开始',
                 skipAlreadyWorkOder: _that.setLocalStorageWorkOrder.get("skipAlreadyWorkOder") == '1' ? true : false,
             }
             _that.state.outputWorkOrderObj = cateTotalObj;
-            var injectTotalDom = $( `
+            var injectTotalDom = $(`
             <div class="workorder-plug-tip">
                     <div class="plug-tip-item">
                         已经分类工单数量：${cateTotalObj.alreadyWorkOrderNum}
@@ -905,79 +935,97 @@ var setAllHelper = function () {
                         <input type="checkbox" name="sex" id="alreadyWorkOrderNum" value="alreadyWorkOrderNum">
                     </div>
                     <div class="plug-tip-item">
+                        <button class="exportJson">导出已经分类工单json</button>
+                    </div>
+                    <div class="plug-tip-item">
                         <button class="clearAlreadyWorkOrder">清空所有已经分类工单</button>
                     </div>
                 </div>
             `);
             skipWorkOrder();
-            injectTotalDom.find(".clearAlreadyWorkOrder").unbind('click').bind('click',function(){
+            // 导出json
+            injectTotalDom.find(".exportJson").unbind('click').bind('click',function(){
+                $("#exportInnerJsonHtml").remove();
+                var _workOrderCateList = JSON.stringify(_that.state.workOrderCateList);
+                var exportHtml = $(`<textarea id="exportInnerJsonHtml" readonly>
+                    ${_workOrderCateList};
+                </textarea>`)
+                $("body").append(exportHtml);
+                $("#exportInnerJsonHtml").select();
+                document.execCommand("copy");
+                _that.showMessage("已复制到剪贴板，请粘贴保存",1);
+            });
+
+            // 清空
+            injectTotalDom.find(".clearAlreadyWorkOrder").unbind('click').bind('click', function () {
                 clearAlreadyWorkOrderFun(_that);
             });
+
             $(".workorder-plug-tip").remove();
             $("body").append(injectTotalDom);
 
             /**
              * 跳过已经分类的工单
              */
-            function skipWorkOrder(){
-                var skipInput =  injectTotalDom.find("#alreadyWorkOrderNum");
+            function skipWorkOrder() {
+                var skipInput = injectTotalDom.find("#alreadyWorkOrderNum");
                 // 跳过已经分类的工单
-                if(cateTotalObj.skipAlreadyWorkOder){
-                    skipInput.attr("checked","checked");
+                if (cateTotalObj.skipAlreadyWorkOder) {
+                    skipInput.attr("checked", "checked");
                 }
-                skipInput.unbind('change').bind('change',function(){
+                skipInput.unbind('change').bind('change', function () {
                     var isState = '0';
-                    if($(this).is(':checked')){
+                    if ($(this).is(':checked')) {
                         isState = '1';
                     }
-                    _that.setLocalStorageWorkOrder.set("skipAlreadyWorkOder",isState);
+                    _that.setLocalStorageWorkOrder.set("skipAlreadyWorkOder", isState);
                 });
             }
 
             /**
              * 清空所有已经分类的工单
              */
-           function clearAlreadyWorkOrderFun(_that){
+            function clearAlreadyWorkOrderFun(_that) {
                 var result = confirm('是否确认清空');
-                if(result){
+                if (result) {
                     var _ok = confirm('请再次确认');
-                    if(_ok){
-                        _that.setLocalStorageWorkOrder.set("workOrderCateList",JSON.stringify({}));
+                    if (_ok) {
+                        _that.setLocalStorageWorkOrder.set("workOrderCateList", JSON.stringify({}));
                         location.reload();
                         alert('清除成功');
                     }
                 }
-           }
+            }
         },
         /**workOrderId 工单id
          * cateId 分类id
          * 设置工单分类的结果
          */
-        setWorkOrderCateResult: function(workOrderId,cateId){
+        setWorkOrderCateResult: function (workOrderId, cateId) {
             this.state.workOrderCateList[workOrderId] = cateId;
             let cnfList = this.setLocalStorageWorkOrder.get("workOrderCateList");
-            if(cnfList){
+            if (cnfList) {
                 cnfList = JSON.parse(cnfList);
                 let _orginLen = Object.keys(cnfList).length;
                 let _len = Object.keys(this.state.workOrderCateList).length;
-                if(_len <= 1 && _orginLen.length > 0 ){
+                if (_len <= 1 && _orginLen.length > 0) {
                     console.log('异常,补齐');
                     cnfList[workOrderId] = cateId;
                     this.state.workOrderCateList = JSON.parse(JSON.stringify(cnfList));
-                }else{
-                    this.setLocalStorageWorkOrder.set("workOrderCateList",JSON.stringify(this.state.workOrderCateList));
+                } else {
+                    this.setLocalStorageWorkOrder.set("workOrderCateList", JSON.stringify(this.state.workOrderCateList));
                 }
-            }else{
-                this.setLocalStorageWorkOrder.set("workOrderCateList",JSON.stringify(this.state.workOrderCateList));
+            } else {
+                this.setLocalStorageWorkOrder.set("workOrderCateList", JSON.stringify(this.state.workOrderCateList));
             }
         },
         /**
          * 设置工单的tag标签
          */
-        setWorkerCateTag: function(cateId){
+        setWorkerCateTag: function (cateId) {
             var _that = this;
-            let cateName = findCateName(_that,cateId);
-            if(!cateName){
+            let cateName = findCateName(_that, cateId);
+            if (!cateName) {
                 alert('找不到对应分类');
                 return;
             }
@@ -986,60 +1034,60 @@ var setAllHelper = function () {
             let cateTagContainer = this.getWorkerVal.getCateTagContainer();
             cateTagContainer && cateTagContainer.append(cateTagEl);
 
-            function findCateName(_that,cateId){
-                for(let item of _that.state.workOrderCnfList){
-                    if(item.cateId == parseInt(cateId)){
+            function findCateName(_that, cateId) {
+                for (let item of _that.state.workOrderCnfList) {
+                    if (item.cateId == parseInt(cateId)) {
                         return item.desc;
                     }
                 }
             }
-             // 初始化工单统计tag
-             this.initWorkOrderTotalTag();
+            // 初始化工单统计tag
+            this.initWorkOrderTotalTag();
         },
         /**
          * 导出excel
          */
-        exportExcelHelper: function(){
+        exportExcelHelper: function () {
             var _that = this;
-            let workerOrderLen = Object.keys( _that.state.workOrderCateList).length;
-            if(workerOrderLen <= 0){
+            let workerOrderLen = Object.keys(_that.state.workOrderCateList).length;
+            if (workerOrderLen <= 0) {
                 alert('未检测到已经分类的工单');
                 return;
             }
             // 1、要导出的json数据
             let jsonData = [];
             let { workOrderCnfList } = _that.state;
-            workOrderCnfList.forEach(function(item){
+            workOrderCnfList.forEach(function (item) {
                 let _itemObj = {};
                 _itemObj["title"] = item.title;
                 _itemObj["desc"] = item.desc;
-                _itemObj["orderid"] = findCateWorkId(_that,item.cateId);
-                _itemObj["num"] = findCateWorkId(_that,item.cateId,'1');
+                _itemObj["orderid"] = findCateWorkId(_that, item.cateId);
+                _itemObj["num"] = findCateWorkId(_that, item.cateId, '1');
                 jsonData.push(_itemObj);
             })
 
-            function findCateWorkId(_that,cateId,type){
-                let { workOrderCateList } =  _that.state;
+            function findCateWorkId(_that, cateId, type) {
+                let { workOrderCateList } = _that.state;
                 let strIdArr = [];
-                for(let key in workOrderCateList){
-                    if(workOrderCateList[key] == cateId){
+                for (let key in workOrderCateList) {
+                    if (workOrderCateList[key] == cateId) {
                         strIdArr.push(key)
                     }
                 }
-                if(type == '1'){
+                if (type == '1') {
                     return strIdArr.length;
-                }else{
+                } else {
                     return strIdArr.join('，');
                 }
             }
             // 2、列标题，逗号隔开，每一个逗号就是隔开一个单元格
             let str = `工单问题类型,工单详细问题分类,工单号,计数\n`;
             // 增加\t为了不让表格显示科学计数法或者其他格式
-            for(let i = 0 ; i < jsonData.length ; i++ ){
-                for(const key in jsonData[i]){
-                    str+=`${jsonData[i][key] + '\t'},`;     
+            for (let i = 0; i < jsonData.length; i++) {
+                for (const key in jsonData[i]) {
+                    str += `${jsonData[i][key] + '\t'},`;
                 }
-                str+='\n';
+                str += '\n';
             }
             // encodeURIComponent解决中文乱码
             const uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
@@ -1047,30 +1095,54 @@ var setAllHelper = function () {
             const link = document.createElement("a");
             link.href = uri;
             // 对下载的文件命名
-            link.download =  "技术支持工单分类.csv";
+            link.download = "技术支持工单分类.csv";
             link.click();
+        },
+        showMessage: function(message, type) {
+            let messageJQ= $(`
+                <div class='showMessage'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="9" fill="#04AE1C"/>
+                    <path d="M5 9L8 11.5C8 11.5 11.0474 8.25736 13 6.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                    <span style='margin-left:10px;'>${message}</span>
+                </div>
+            `);
+            if (type == 0) {
+                messageJQ.addClass("showMessageError");
+            } else if (type == 1) {
+                messageJQ.addClass("showMessageSuccess");
+            }
+            // 先将原始隐藏，然后添加到页面，最后以400毫秒的速度下拉显示出来
+            messageJQ.hide().appendTo("body").slideDown(400);
+            // 4秒之后自动删除生成的元素
+            window.setTimeout(function() {
+                messageJQ.show().slideUp(400, function() {
+                    messageJQ.remove();
+                })
+            }, 3000);
         },
         /**
          * 防抖
          */
-         debounce: function(fn, delay = 500) {
+        debounce: function (fn, delay = 500) {
             // 是闭包中的
             let timer
-            
+
             // input事件调用的函数，相当于obj调用函数 this指向Input
-            return function() {
-               // 这个if 判断不做也没关系，判断了（除第一次非空的情况）也就是执行从第二次开始，在延迟时间内多次触发才会走该判断
-               if(timer) {clearTimeout(timer)}
-               // 此时的箭头函数的this 和 arguments 都是从外部函数继承而来
-               // 如果用普通函数就要用词法作用域 var that = this var arg = arguments
-               timer = setTimeout(() =>{
-                  // 使得传入的回调函数的this 指向Input这个元素对象
-                  // arguments是该事件的详情，可以获得该函数被调用时的所有参数,是一个event 对象（所有Dom事件都会传event对象进入）
-                  // 直接使用 fn() 问题也不大
-                  fn.apply(this,arguments) 
-                  timer = null
-               },delay)
-           }
+            return function () {
+                // 这个if 判断不做也没关系，判断了（除第一次非空的情况）也就是执行从第二次开始，在延迟时间内多次触发才会走该判断
+                if (timer) { clearTimeout(timer) }
+                // 此时的箭头函数的this 和 arguments 都是从外部函数继承而来
+                // 如果用普通函数就要用词法作用域 var that = this var arg = arguments
+                timer = setTimeout(() => {
+                    // 使得传入的回调函数的this 指向Input这个元素对象
+                    // arguments是该事件的详情，可以获得该函数被调用时的所有参数,是一个event 对象（所有Dom事件都会传event对象进入）
+                    // 直接使用 fn() 问题也不大
+                    fn.apply(this, arguments)
+                    timer = null
+                }, delay)
+            }
         }
     }
 }
