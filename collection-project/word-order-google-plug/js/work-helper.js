@@ -11,14 +11,19 @@ var setAllHelper = function () {
             continueBtn: null,
             exportExcelBtn: null,
             cfnContainerEl: null,
+            cfnContainerFaqEl:null,//faq 容器
             workorderSearchKeywords: null,
             workOrderCateList: {}, // 工单分类结果
             outputWorkOrderObj: {},// 展示状态结果
+            workOrderCnfHeader:["工单问题大类","工单问题类型","工单详细问题分类","工单号","计数"],
             workOrderCnfList: [
                 {
                     "title": "样式无法编辑",
                     "desc": "间距写死",
-                    "cateId": 0
+                    "cateId": 0,
+                    "category":"区块样式问题",
+                    "category_rowspan":"16",
+                    "title_rowspan": "5",
                 },
                 {
                     "title": "样式无法编辑",
@@ -43,7 +48,8 @@ var setAllHelper = function () {
                 {
                     "title": "移动端样式问题",
                     "desc": "移动端文字样式无法单独设置",
-                    "cateId": 5
+                    "cateId": 5,
+                    "title_rowspan": "3",
                 },
                 {
                     "title": "移动端样式问题",
@@ -58,7 +64,8 @@ var setAllHelper = function () {
                 {
                     "title": "多端响应问题",
                     "desc": "文字展示不全、文字展示太多",
-                    "cateId": 8
+                    "cateId": 8,
+                    "title_rowspan": "3",
                 },
                 {
                     "title": "多端响应问题",
@@ -73,7 +80,8 @@ var setAllHelper = function () {
                 {
                     "title": "图片问题",
                     "desc": "图片压缩非原图",
-                    "cateId": 11
+                    "cateId": 11,
+                    "title_rowspan": "3",
                 },
                 {
                     "title": "图片问题",
@@ -88,7 +96,8 @@ var setAllHelper = function () {
                 {
                     "title": "区块样式bug",
                     "desc": "后台编辑问题",
-                    "cateId": 14
+                    "cateId": 14,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "区块样式bug",
@@ -98,7 +107,10 @@ var setAllHelper = function () {
                 {
                     "title": "内容无法编辑",
                     "desc": "内容是否展示无法设置（价格、时间、语言栏等）",
-                    "cateId": 16
+                    "cateId": 16,
+                    "category":"区块功能问题",
+                    "category_rowspan":"7",
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "内容无法编辑",
@@ -113,7 +125,8 @@ var setAllHelper = function () {
                 {
                     "title": "区块功能bug",
                     "desc": "区块功能不可用",
-                    "cateId": 19
+                    "cateId": 19,
+                    "title_rowspan": "3",
                 },
                 {
                     "title": "区块功能bug",
@@ -123,7 +136,8 @@ var setAllHelper = function () {
                 {
                     "title": "功能缺失",
                     "desc": "特效无法设置（动效、悬浮效果等）",
-                    "cateId": 21
+                    "cateId": 21,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "功能缺失",
@@ -133,7 +147,10 @@ var setAllHelper = function () {
                 {
                     "title": "样式无法编辑",
                     "desc": "间距写死",
-                    "cateId": 23
+                    "cateId": 23,
+                    "category":"组件样式问题",
+                    "category_rowspan":"12",
+                    "title_rowspan": "3",
                 },
                 {
                     "title": "样式无法编辑",
@@ -148,7 +165,8 @@ var setAllHelper = function () {
                 {
                     "title": "图片问题",
                     "desc": "图片压缩非原图",
-                    "cateId": 26
+                    "cateId": 26,
+                    "title_rowspan": "3",
                 },
                 {
                     "title": "图片问题",
@@ -163,12 +181,13 @@ var setAllHelper = function () {
                 {
                     "title": "表格问题",
                     "desc": "表格响应问题",
-                    "cateId": 29
+                    "cateId": 29,
                 },
                 {
                     "title": "多端响应问题",
                     "desc": "文字展示不全、文字展示太多",
-                    "cateId": 30
+                    "cateId": 30,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "多端响应问题",
@@ -178,7 +197,8 @@ var setAllHelper = function () {
                 {
                     "title": "移动端样式问题",
                     "desc": "移动端样式不美观",
-                    "cateId": 32
+                    "cateId": 32,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "移动端样式问题",
@@ -193,12 +213,16 @@ var setAllHelper = function () {
                 {
                     "title": "组件功能bug",
                     "desc": "组件功能不可用",
-                    "cateId": 35
+                    "cateId": 35,
+                    "category":"组件功能问题",
+                    "category_rowspan":"3",
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "组件功能缺失",
                     "desc": "组件内容无法修改",
-                    "cateId": 36
+                    "cateId": 36,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "组件功能缺失",
@@ -208,7 +232,10 @@ var setAllHelper = function () {
                 {
                     "title": "移动端隐藏",
                     "desc": "",
-                    "cateId": 38
+                    "cateId": 38,
+                    "category":"移动端隐藏",
+                    "category_rowspan":"3",
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "系统功能不支持",
@@ -223,7 +250,10 @@ var setAllHelper = function () {
                 {
                     "title": "区块样式编辑问题",
                     "desc": "样式代码未生成",
-                    "cateId": 41
+                    "cateId": 41,
+                    "category":"样式编辑问题",
+                    "category_rowspan":"5",
+                    "title_rowspan": "3",
                 },
                 {
                     "title": "区块样式编辑问题",
@@ -238,7 +268,8 @@ var setAllHelper = function () {
                 {
                     "title": "组件样式编辑问题",
                     "desc": "样式代码未生成",
-                    "cateId": 44
+                    "cateId": 44,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "组件样式编辑问题",
@@ -248,7 +279,10 @@ var setAllHelper = function () {
                 {
                     "title": "国际化问题",
                     "desc": "未做国际化",
-                    "cateId": 46
+                    "cateId": 46,
+                    "category":"小语种问题",
+                    "category_rowspan":"3",
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "国际化问题",
@@ -263,7 +297,10 @@ var setAllHelper = function () {
                 {
                     "title": "网站速度优化",
                     "desc": "样式收集失败或错乱",
-                    "cateId": 49
+                    "cateId": 49,
+                    "category":"发布问题",
+                    "category_rowspan":"6",
+                    "title_rowspan": "4",
                 },
                 {
                     "title": "网站速度优化",
@@ -283,7 +320,8 @@ var setAllHelper = function () {
                 {
                     "title": "发布相关",
                     "desc": "发布延迟",
-                    "cateId": 53
+                    "cateId": 53,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "发布相关",
@@ -293,7 +331,10 @@ var setAllHelper = function () {
                 {
                     "title": "国际化翻译文案",
                     "desc": "无法修改",
-                    "cateId": 55
+                    "cateId": 55,
+                    "category":"翻译问题",
+                    "category_rowspan":"4",
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "国际化翻译文案",
@@ -313,7 +354,10 @@ var setAllHelper = function () {
                 {
                     "title": "pc端兼容性问题",
                     "desc": "同系统，不同浏览器",
-                    "cateId": 59
+                    "cateId": 59,
+                    "category":"兼容性问题",
+                    "category_rowspan":"5",
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "pc端兼容性问题",
@@ -323,7 +367,8 @@ var setAllHelper = function () {
                 {
                     "title": "手机端兼容性问题",
                     "desc": "同系统，不同浏览器",
-                    "cateId": 61
+                    "cateId": 61,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "手机端兼容性问题",
@@ -338,7 +383,10 @@ var setAllHelper = function () {
                 {
                     "title": "富文本内容问题",
                     "desc": "空格问题",
-                    "cateId": 64
+                    "cateId": 64,
+                    "category":"富文本问题",
+                    "category_rowspan":"4",
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "富文本内容问题",
@@ -348,7 +396,8 @@ var setAllHelper = function () {
                 {
                     "title": "富文本样式问题",
                     "desc": "样式设置不生效",
-                    "cateId": 66
+                    "cateId": 66,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "富文本样式问题",
@@ -358,7 +407,10 @@ var setAllHelper = function () {
                 {
                     "title": "设置问题",
                     "desc": "有设置入口未设置",
-                    "cateId": 68
+                    "cateId": 68,
+                    "category":"其他问题",
+                    "category_rowspan":"11",
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "设置问题",
@@ -368,7 +420,8 @@ var setAllHelper = function () {
                 {
                     "title": "代码影响",
                     "desc": "第三方代码影响",
-                    "cateId": 70
+                    "cateId": 70,
+                    "title_rowspan": "2",
                 },
                 {
                     "title": "代码影响",
@@ -378,7 +431,8 @@ var setAllHelper = function () {
                 {
                     "title": "技术咨询",
                     "desc": "第三方代码如何安装",
-                    "cateId": 72
+                    "cateId": 72,
+                    "title_rowspan": "5",
                 },
                 {
                     "title": "技术咨询",
@@ -427,6 +481,14 @@ var setAllHelper = function () {
                     <input type="text" id="workorder-search-keywords">
                 </div>
                 <div class="workorder-cfn-list">
+                    
+                </div>
+            </div>
+            <div class="workorder-search-faq hide">
+                <div class="workorder-search-input-faq">
+                    <input type="text" id="workorder-search-keywords-faq">
+                </div>
+                <div class="workorder-cfn-list-faq">
                     
                 </div>
             </div>
@@ -536,7 +598,8 @@ var setAllHelper = function () {
             let isloadFullNum = 0;
             var jsArr = [
                 "//cdn.bootcdn.net/ajax/libs/jquery/1.8.3/jquery.min.js",
-                '//code.jquery.com/ui/1.10.4/jquery-ui.js'
+                '//code.jquery.com/ui/1.10.4/jquery-ui.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.4/xlsx.full.min.js'
             ]
             jsArr.forEach(link => {
                 loadScript(link, function () {
@@ -708,7 +771,8 @@ var setAllHelper = function () {
                     let { exportExcelBtn } = _that.state;
                     if (exportExcelBtn) {
                         exportExcelBtn.unbind('click').bind('click', function () {
-                            _that.exportExcelHelper();
+                            // _that.exportExcelHelper();
+                            _that.exportExcel();
                         });
                     }
                 },
@@ -1115,6 +1179,77 @@ var setAllHelper = function () {
             link.download = "技术支持工单分类.csv";
             link.click();
         },
+        exportExcel:function(){
+            var _that = this;
+            let workerOrderLen = Object.keys(_that.state.workOrderCateList).length;
+            if (workerOrderLen <= 0) {
+                alert('未检测到已经分类的工单');
+                return;
+            }
+            // 1、要导出的json数据
+            let jsonData = [];
+            let { workOrderCnfList,workOrderCnfHeader } = _that.state;
+            workOrderCnfList.forEach(function (item) {
+                let _itemObj = {};
+                _itemObj = JSON.parse(JSON.stringify(item));
+                _itemObj["orderid"] = findCateWorkId(_that, item.cateId);
+                _itemObj["num"] = findCateWorkId(_that, item.cateId, '1');
+                jsonData.push(_itemObj);
+            })
+
+            let _tableEl = $("<table id='table_excel'></table>");
+            createTableHeader(_tableEl,workOrderCnfHeader);
+            createTableContent(_tableEl,jsonData);
+            debugger;
+
+            function createTableHeader(_tableEl,headList){
+                var _headTr = $("<tr></tr>");
+                headList.forEach((item,index) => {
+                    _headTr.append(`<td>${item}</td>`)
+                });
+                _tableEl.append(_headTr);
+            }
+
+            function createTableContent(_tableEl,jsonData){
+                jsonData.forEach((item,index) => {
+                    let _trEl =  $("<tr></tr>");
+                    // 工单问题大类
+                    if(item.category){
+                        let _cateTd = $(``);
+                    }
+                    // 工单问题类型
+
+                    // 工单详细问题分类
+
+                    // 工单号
+
+                    // 计数
+                    let 
+                })
+            }
+
+            function findCateWorkId(_that, cateId, type) {
+                let { workOrderCateList } = _that.state;
+                let strIdArr = [];
+                for (let key in workOrderCateList) {
+                    if (workOrderCateList[key] == cateId) {
+                        strIdArr.push(key)
+                    }
+                }
+                if (type == '1') {
+                    return strIdArr.length;
+                } else {
+                    return strIdArr.join('，');
+                }
+            }
+            const table = document.getElementsByClassName("table1")[0]
+            //将table转成工作簿
+            //raw:true
+            //表示类型都为文字类型即无 需自动转换各种类型，这里仅为处理100%转换成数字100的问题
+            const wb = XLSX.utils.table_to_book(table)
+            //导出
+            XLSX.writeFile(wb,"SheetJS.xlsx")
+          },
         showMessage: function (message, type) {
             let messageJQ = $(`
                 <div class='showMessage'>
@@ -1165,11 +1300,17 @@ var setAllHelper = function () {
 
     window.smartRecommendFaq = {
         state: {
-
+            cfnContainerFaqEl:null,
         },
         initSmartFaq: function () {
+            // 
+            this.injectWorkOrderHtml();
+            // 注入推荐的faq
             var recommendList = this.recommendFaqFun();
             this.injectSmartFaqFun(recommendList);
+
+            // 初始化工单分类列表
+            // window.allWorkFaq && this.renderWorkOrderCnfList(window.allWorkFaq);
         },
         getContent: {
             getTitle: {
@@ -1253,6 +1394,24 @@ var setAllHelper = function () {
                 _containerElList.append('暂无推荐');
             }
             _container.after(faqListContainerEl);
+        },
+         // 初始化工单分类列表
+        renderWorkOrderCnfList: function(workOrderCnfList){
+            var _that = this;
+            _that.state.cfnContainerFaqEl.html('');
+            workOrderCnfList.forEach((item, index, array) => {
+                let _cnfContainerEl = $(`<div class="workorder-cfn-list-item" data-cateid="${item.cateId}"></div>`);
+                let _cnfTitle = $(`<div class="workorder-cfn-list-item-title">${item.desc}</div>`);
+                let _cnfDesc = $(`<div class="workorder-cfn-list-item-desc">${item.title}</div>`);
+                _cnfContainerEl.append(_cnfTitle);
+                _cnfContainerEl.append(_cnfDesc);
+                _that.state.cfnContainerEl && _that.state.cfnContainerEl.append(_cnfContainerEl);
+            })
+        },
+        injectWorkOrderHtml: function(){
+            var _that = this;
+            let { cfnContainerFaqEl } = _that.state;
+            cfnContainerFaqEl = $(".workorder-search-faq").find(".workorder-cfn-list-faq");
         }
     }
 }
