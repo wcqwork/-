@@ -467,7 +467,6 @@ var setAllHelper = function () {
                         if (isload) {
                             $(function () {
                                 setTimeout(function(){
-                                    debugger;
                                     // 注入页面dom
                                     _that.injectWorkOrderHtml();
                                     // 工单是否已经分过类 初始化数据
@@ -507,7 +506,13 @@ var setAllHelper = function () {
              * 获取当前工单的id
              */
             getWorkOrderId: function () {
-                let workOrderId = $("section.m-b-md .box-body>div:first-child .color-c").text().replace(/(\s*$)/g, ""); //清除空格;
+                // debugger;
+                var _paraentEl = $("section.m-b-md .box-body>div:first-child .color-c");
+                let workOrderId = _paraentEl.text().replace(/(\s*$)/g, ""); //清除空格;
+                let  catetag = _paraentEl.find("#cateTags").text();
+                if(catetag){
+                    workOrderId = workOrderId.replace(catetag,'');
+                }
                 return workOrderId;
             },
             /**
@@ -1049,7 +1054,7 @@ var setAllHelper = function () {
             function findCateName(_that, cateId) {
                 for (let item of _that.state.workOrderCnfList) {
                     if (item.cateId == parseInt(cateId)) {
-                        return item.desc;
+                        return item.desc || item.title;
                     }
                 }
             }
@@ -1062,7 +1067,6 @@ var setAllHelper = function () {
         exportExcelHelper: function () {
             var _that = this;
             let workerOrderLen = Object.keys(_that.state.workOrderCateList).length;
-            debugger;
             if (workerOrderLen <= 0) {
                 alert('未检测到已经分类的工单');
                 return;
