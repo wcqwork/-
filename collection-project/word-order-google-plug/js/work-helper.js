@@ -465,15 +465,23 @@ var setAllHelper = function () {
                     // 注入第三方资源
                     this.injectDetectionLinkJs((isload) => {
                         if (isload) {
-                            // 注入页面dom
-                            _that.injectWorkOrderHtml();
-                            // 工单是否已经分过类 初始化数据
-                            _that.initWorkStateData();
-                            // 初始化按钮对应事件
-                            _that.bindBtnEvent();
-                            // 初始化工单分类列表
-                            _that.renderWorkOrderCnfList(_that.state.workOrderCnfList);
-                            resolve('success');
+                            $(function () {
+                                setTimeout(function(){
+                                    debugger;
+                                    // 注入页面dom
+                                    _that.injectWorkOrderHtml();
+                                    // 工单是否已经分过类 初始化数据
+                                    _that.initWorkStateData();
+                                    // 初始化按钮对应事件
+                                    _that.bindBtnEvent();
+                                    // 初始化工单分类列表
+                                    _that.renderWorkOrderCnfList(_that.state.workOrderCnfList);
+    
+                                    // 工单faq 
+                                    smartRecommendFaq && smartRecommendFaq.initSmartFaq();
+                                    resolve('success');
+                                },500)
+                            });
                         }
                     });
 
@@ -678,9 +686,9 @@ var setAllHelper = function () {
                                 // 工单是否已经分过类别
                                 if (orderCode && workOrderCateList && workOrderCateList[orderCode]) {
                                     _isFlag = true;
-                                    _that.state.currentWorkOrderIndex++;    
+                                    _that.state.currentWorkOrderIndex++;
                                     return;
-                                }else{
+                                } else {
                                     _isFlag = false;
                                 }
                             }
@@ -786,12 +794,16 @@ var setAllHelper = function () {
                         // 工单是否已经分过类 初始化数据
                         setTimeout(function () {
                             _that.initWorkStateData();
+                            // 工单faq 
+                            smartRecommendFaq && smartRecommendFaq.initSmartFaq();
                         }, 1000);
                     });
                     window.addEventListener('replaceState', function (e) {
                         // 工单是否已经分过类 初始化数据
                         setTimeout(function () {
                             _that.initWorkStateData();
+                            // 工单faq 
+                            smartRecommendFaq && smartRecommendFaq.initSmartFaq();
                         }, 1000);
                     });
                 }
@@ -894,13 +906,13 @@ var setAllHelper = function () {
             // 初始化工单类型
             initWorkerOrderCate.call(this, workOrderCateList);
             function initWorkerOrderCate(workOrderCateList) {
-                setTimeout(function(){
+                setTimeout(function () {
                     let workOrderId = _that.getWorkerVal.getWorkOrderId();
                     // 工单是否已经分过类别
                     if (workOrderId && workOrderCateList && workOrderCateList[workOrderId]) {
                         _that.setWorkerCateTag(workOrderCateList[workOrderId]);
                     }
-                },500);
+                }, 500);
             }
 
             // 初始化工单统计tag
@@ -944,7 +956,7 @@ var setAllHelper = function () {
             `);
             skipWorkOrder();
             // 导出json
-            injectTotalDom.find(".exportJson").unbind('click').bind('click',function(){
+            injectTotalDom.find(".exportJson").unbind('click').bind('click', function () {
                 $("#exportInnerJsonHtml").remove();
                 var _workOrderCateList = JSON.stringify(_that.state.workOrderCateList);
                 var exportHtml = $(`<textarea id="exportInnerJsonHtml" readonly>
@@ -953,7 +965,7 @@ var setAllHelper = function () {
                 $("body").append(exportHtml);
                 $("#exportInnerJsonHtml").select();
                 document.execCommand("copy");
-                _that.showMessage("已复制到剪贴板，请粘贴保存",1);
+                _that.showMessage("已复制到剪贴板，请粘贴保存", 1);
             });
 
             // 清空
@@ -1050,6 +1062,7 @@ var setAllHelper = function () {
         exportExcelHelper: function () {
             var _that = this;
             let workerOrderLen = Object.keys(_that.state.workOrderCateList).length;
+            debugger;
             if (workerOrderLen <= 0) {
                 alert('未检测到已经分类的工单');
                 return;
@@ -1098,8 +1111,8 @@ var setAllHelper = function () {
             link.download = "技术支持工单分类.csv";
             link.click();
         },
-        showMessage: function(message, type) {
-            let messageJQ= $(`
+        showMessage: function (message, type) {
+            let messageJQ = $(`
                 <div class='showMessage'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                     <circle cx="9" cy="9" r="9" fill="#04AE1C"/>
@@ -1116,8 +1129,8 @@ var setAllHelper = function () {
             // 先将原始隐藏，然后添加到页面，最后以400毫秒的速度下拉显示出来
             messageJQ.hide().appendTo("body").slideDown(400);
             // 4秒之后自动删除生成的元素
-            window.setTimeout(function() {
-                messageJQ.show().slideUp(400, function() {
+            window.setTimeout(function () {
+                messageJQ.show().slideUp(400, function () {
                     messageJQ.remove();
                 })
             }, 3000);
@@ -1143,6 +1156,99 @@ var setAllHelper = function () {
                     timer = null
                 }, delay)
             }
+        }
+    }
+
+    window.smartRecommendFaq = {
+        state: {
+
+        },
+        initSmartFaq: function () {
+            var recommendList = this.recommendFaqFun();
+            this.injectSmartFaqFun(recommendList);
+        },
+        getContent: {
+            getTitle: {
+                getTxt: function () {
+                    // debugger;
+                    var _container = this.getContent.getMapEl('工单标题', $(".m-b-md .box-body>div"));
+                    return _container && _container.find(".text-break").text();
+                },
+                getEl: function () {
+                    var _container = this.getContent.getMapEl('工单标题', $(".m-b-md .box-body>div"));
+                    return _container;
+                }
+            },
+            getDesc: {
+                getTxt: function () {
+                    var _container = this.getContent.getMapEl('工单描述', $(".m-b-md .box-body>div"));
+                    return _container && _container.find(".text-break").text();
+                },
+                getEl: function () {
+                    var _container = this.getContent.getMapEl('工单描述', $(".m-b-md .box-body>div"));
+                    return _container;
+                }
+            },
+            getMapEl: function (name, containerEl) {
+                for (var item of Array.from(containerEl)) {
+                    var _text = $(item).find(".color-a").text();
+                    if (_text.indexOf(name) != -1) {
+                        return $(item);
+                    }
+                }
+            }
+        },
+        /**
+         * 获取智能推荐faq
+         * @returns 
+         */
+        recommendFaqFun: function () {
+            var _that = this;
+            // debugger;
+            var _title = _that.getContent.getTitle.getTxt.call(_that).replace(/(\s*$)/g, "");
+            var _desc = _that.getContent.getDesc.getTxt.call(_that).replace(/(\s*$)/g, "");
+            // 工单标签/工单描述
+            var recommendList = [];
+            if (window.allWorkFaq) {
+                for (var faqItem of window.allWorkFaq) {
+                    for (var faqKeyWord of faqItem.keywords) {
+                        if (faqKeyWord) {
+                            var reg = new RegExp(faqKeyWord);
+                            if (reg.test(_title) || reg.test(_desc)) {
+                                recommendList.push(faqItem);
+                            }
+                        }
+                    }
+                }
+            }
+            return recommendList;
+        },
+        /**
+         * 注入推荐的faq
+         */
+        injectSmartFaqFun: function (recommendList) {
+            var _that = this;
+            var _container = this.getContent.getDesc.getEl.call(_that);
+            var faqListContainerEl = $(`
+            <div _ngcontent-c6="" fxlayout="row" style="margin-bottom: 20px; flex-direction: row; box-sizing: border-box; display: flex;">
+                <div _ngcontent-c6="" class="color-a" fxflex="25" fxflex.sm="40" fxflex.xs="35" style="flex: 1 1 100%; box-sizing: border-box; max-width: 25%;color:red;">FAQ智能推荐：</div>
+                <div _ngcontent-c6="" class="color-c text-break faqSmartListComtainer" fxflex="75" fxflex.sm="60" fxflex.xs="66" style="flex: 1 1 100%; box-sizing: border-box; max-width: 75%;color:red;">
+                    
+                </div>
+            </div>
+            `);
+            var _containerElList = faqListContainerEl.find(".faqSmartListComtainer");
+            if(recommendList.length>0){
+                recommendList.forEach(item => {
+                    var _itemEl = $(`
+                        <div style="margin-bottom:8px;"><a target="_blank" style="color:red;" href="${item.address}">${item.title}</a></div>
+                    `);
+                    _containerElList.append(_itemEl);
+                });
+            }else{
+                _containerElList.append('暂无推荐');
+            }
+            _container.after(faqListContainerEl);
         }
     }
 }
