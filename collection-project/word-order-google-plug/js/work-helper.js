@@ -11,213 +11,245 @@ var setAllHelper = function () {
             continueBtn: null,
             exportExcelBtn: null,
             cfnContainerEl: null,
-            cfnContainerFaqEl:null,//faq 容器
             workorderSearchKeywords: null,
+            cfnCateEl: null,
             workOrderCateList: {}, // 工单分类结果
             outputWorkOrderObj: {},// 展示状态结果
-            workOrderCnfHeader:["工单问题大类","工单问题类型","工单详细问题分类","工单号","计数"],
+            workOrderCnfHeader: ["工单问题大类", "工单问题类型", "工单详细问题分类", "工单号", "计数"],
             workOrderCnfList: [
                 {
                     "title": "样式无法编辑",
                     "desc": "间距写死",
                     "cateId": 0,
-                    "category":"区块样式问题",
-                    "category_rowspan":"16",
+                    "category": "区块样式问题",
+                    "category_rowspan": "16",
                     "title_rowspan": "5",
                 },
                 {
                     "title": "样式无法编辑",
                     "desc": "展示形式无法设置（横向、竖向、对齐方式等）",
-                    "cateId": 1
+                    "cateId": 1,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "样式无法编辑",
                     "desc": "特殊样式（下划线、色块等）无法取消、修改",
-                    "cateId": 2
+                    "cateId": 2,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "样式无法编辑",
                     "desc": "文字样式写死，无设置入口（字体、颜色、换行等）",
-                    "cateId": 3
+                    "cateId": 3,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "样式无法编辑",
                     "desc": "部分样式写死，也无设置入口（按钮、下拉菜单等）",
-                    "cateId": 4
+                    "cateId": 4,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "移动端样式问题",
                     "desc": "移动端文字样式无法单独设置",
                     "cateId": 5,
                     "title_rowspan": "3",
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "移动端样式问题",
                     "desc": "移动端间距无法调整",
-                    "cateId": 6
+                    "cateId": 6,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "移动端样式问题",
                     "desc": "移动端样式不美观",
-                    "cateId": 7
+                    "cateId": 7,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "多端响应问题",
                     "desc": "文字展示不全、文字展示太多",
                     "cateId": 8,
                     "title_rowspan": "3",
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "多端响应问题",
                     "desc": "展示错乱",
-                    "cateId": 9
+                    "cateId": 9,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "多端响应问题",
                     "desc": "响应不美观",
-                    "cateId": 10
+                    "cateId": 10,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "图片问题",
                     "desc": "图片压缩非原图",
                     "cateId": 11,
                     "title_rowspan": "3",
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "图片问题",
                     "desc": "图片拉伸变形",
-                    "cateId": 12
+                    "cateId": 12,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "图片问题",
                     "desc": "图片展示不全",
-                    "cateId": 13
+                    "cateId": 13,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "区块样式bug",
                     "desc": "后台编辑问题",
                     "cateId": 14,
                     "title_rowspan": "2",
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "区块样式bug",
                     "desc": "前台展示问题",
-                    "cateId": 15
+                    "cateId": 15,
+                    "category": "区块样式问题",
                 },
                 {
                     "title": "内容无法编辑",
                     "desc": "内容是否展示无法设置（价格、时间、语言栏等）",
                     "cateId": 16,
-                    "category":"区块功能问题",
-                    "category_rowspan":"7",
+                    "category": "区块功能问题",
+                    "category_rowspan": "7",
                     "title_rowspan": "2",
                 },
                 {
                     "title": "内容无法编辑",
                     "desc": "文字内容无法修改",
-                    "cateId": 17
+                    "cateId": 17,
+                    "category": "区块功能问题",
                 },
                 {
                     "title": "区块功能bug",
                     "desc": "重复添加导致代码冲突",
                     "cateId": 18,
                     "title_rowspan": "3",
+                    "category": "区块功能问题",
                 },
                 {
                     "title": "区块功能bug",
                     "desc": "区块功能不可用",
                     "cateId": 19,
+                    "category": "区块功能问题",
                 },
                 {
                     "title": "区块功能bug",
                     "desc": "其他bug",
-                    "cateId": 20
+                    "cateId": 20,
+                    "category": "区块功能问题",
                 },
                 {
                     "title": "功能缺失",
                     "desc": "特效无法设置（动效、悬浮效果等）",
                     "cateId": 21,
                     "title_rowspan": "2",
+                    "category": "区块功能问题",
                 },
                 {
                     "title": "功能缺失",
                     "desc": "跳转方式无法设置（当前页、新窗口）",
-                    "cateId": 22
+                    "cateId": 22,
+                    "category": "区块功能问题",
                 },
                 {
                     "title": "样式无法编辑",
                     "desc": "间距写死",
                     "cateId": 23,
-                    "category":"组件样式问题",
-                    "category_rowspan":"12",
+                    "category": "组件样式问题",
+                    "category_rowspan": "12",
                     "title_rowspan": "3",
                 },
                 {
                     "title": "样式无法编辑",
                     "desc": "文字样式写死（字体、颜色、换行等）",
-                    "cateId": 24
+                    "cateId": 24,
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "样式无法编辑",
                     "desc": "样式写死，无法调整",
-                    "cateId": 25
+                    "cateId": 25,
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "图片问题",
                     "desc": "图片压缩非原图",
                     "cateId": 26,
                     "title_rowspan": "3",
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "图片问题",
                     "desc": "图片拉伸变形",
-                    "cateId": 27
+                    "cateId": 27,
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "图片问题",
                     "desc": "图片展示不全",
-                    "cateId": 28
+                    "cateId": 28,
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "表格问题",
                     "desc": "表格响应问题",
                     "cateId": 29,
                     "title_rowspan": "1",
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "多端响应问题",
                     "desc": "文字展示不全、文字展示太多",
                     "cateId": 30,
                     "title_rowspan": "2",
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "多端响应问题",
                     "desc": "展示错乱",
-                    "cateId": 31
+                    "cateId": 31,
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "移动端样式问题",
                     "desc": "移动端样式不美观",
                     "cateId": 32,
                     "title_rowspan": "2",
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "移动端样式问题",
                     "desc": "移动端样式无法单独设置",
-                    "cateId": 33
+                    "cateId": 33,
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "组件样式bug",
                     "desc": "展示错乱",
                     "cateId": 34,
                     "title_rowspan": "1",
+                    "category": "组件样式问题",
                 },
                 {
                     "title": "组件功能bug",
                     "desc": "组件功能不可用",
                     "cateId": 35,
-                    "category":"组件功能问题",
-                    "category_rowspan":"3",
+                    "category": "组件功能问题",
+                    "category_rowspan": "3",
                     "title_rowspan": "1",
                 },
                 {
@@ -225,18 +257,20 @@ var setAllHelper = function () {
                     "desc": "组件内容无法修改",
                     "cateId": 36,
                     "title_rowspan": "2",
+                    "category": "组件功能问题",
                 },
                 {
                     "title": "组件功能缺失",
                     "desc": "多组件搭建无法对其、响应不好 无法单独设置",
-                    "cateId": 37
+                    "cateId": 37,
+                    "category": "组件功能问题",
                 },
                 {
                     "title": "移动端隐藏",
                     "desc": "",
                     "cateId": 38,
-                    "category":"系统功能问题",
-                    "category_rowspan":"3",
+                    "category": "系统功能问题",
+                    "category_rowspan": "3",
                     "title_rowspan": "1",
                 },
                 {
@@ -244,256 +278,290 @@ var setAllHelper = function () {
                     "desc": "",
                     "cateId": 39,
                     "title_rowspan": "1",
+                    "category": "系统功能问题",
                 },
                 {
                     "title": "系统功能bug",
                     "desc": "",
                     "cateId": 40,
                     "title_rowspan": "1",
+                    "category": "系统功能问题",
                 },
                 {
                     "title": "区块样式编辑问题",
                     "desc": "样式代码未生成",
                     "cateId": 41,
-                    "category":"样式编辑问题",
-                    "category_rowspan":"5",
+                    "category": "样式编辑问题",
+                    "category_rowspan": "5",
                     "title_rowspan": "3",
                 },
                 {
                     "title": "区块样式编辑问题",
                     "desc": "样式代码生成，但是被覆盖",
-                    "cateId": 42
+                    "cateId": 42,
+                    "category": "样式编辑问题",
                 },
                 {
                     "title": "区块样式编辑问题",
                     "desc": "样式编辑影响到区块内部样式（icon等）",
-                    "cateId": 43
+                    "cateId": 43,
+                    "category": "样式编辑问题",
                 },
                 {
                     "title": "组件样式编辑问题",
                     "desc": "样式代码未生成",
                     "cateId": 44,
                     "title_rowspan": "2",
+                    "category": "样式编辑问题",
                 },
                 {
                     "title": "组件样式编辑问题",
                     "desc": "样式代码生成，但是被覆盖",
-                    "cateId": 45
+                    "cateId": 45,
+                    "category": "样式编辑问题",
                 },
                 {
                     "title": "国际化问题",
                     "desc": "未做国际化",
                     "cateId": 46,
-                    "category":"小语种问题",
-                    "category_rowspan":"3",
+                    "category": "小语种问题",
+                    "category_rowspan": "3",
                     "title_rowspan": "2",
                 },
                 {
                     "title": "国际化问题",
                     "desc": "国际化内容无法修改",
-                    "cateId": 47
+                    "cateId": 47,
+                    "category": "小语种问题",
                 },
                 {
                     "title": "小语种样式问题",
                     "desc": "右对齐小语种样式问题",
                     "cateId": 48,
                     "title_rowspan": "1",
+                    "category": "小语种问题",
                 },
                 {
                     "title": "网站速度优化",
                     "desc": "样式收集失败或错乱",
                     "cateId": 49,
-                    "category":"发布问题",
-                    "category_rowspan":"6",
+                    "category": "发布问题",
+                    "category_rowspan": "6",
                     "title_rowspan": "4",
                 },
                 {
                     "title": "网站速度优化",
                     "desc": "css、js加载顺序问题（和预览不一样）",
-                    "cateId": 50
+                    "cateId": 50,
+                    "category": "发布问题",
                 },
                 {
                     "title": "网站速度优化",
                     "desc": "模式调整（体验优先，兼容模式）",
-                    "cateId": 51
+                    "cateId": 51,
+                    "category": "发布问题",
                 },
                 {
                     "title": "网站速度优化",
                     "desc": "template包裹问题",
-                    "cateId": 52
+                    "cateId": 52,
+                    "category": "发布问题",
                 },
                 {
                     "title": "发布相关",
                     "desc": "发布延迟",
                     "cateId": 53,
                     "title_rowspan": "2",
+                    "category": "发布问题",
                 },
                 {
                     "title": "发布相关",
                     "desc": "发布不生效",
-                    "cateId": 54
+                    "cateId": 54,
+                    "category": "发布问题",
                 },
                 {
                     "title": "国际化翻译文案",
                     "desc": "无法修改",
                     "cateId": 55,
-                    "category":"翻译问题",
-                    "category_rowspan":"4",
+                    "category": "翻译问题",
+                    "category_rowspan": "4",
                     "title_rowspan": "2",
                 },
                 {
                     "title": "国际化翻译文案",
                     "desc": "翻译错误",
                     "cateId": 56,
+                    "category": "翻译问题",
                 },
                 {
                     "title": "翻译缺失",
                     "desc": "",
                     "cateId": 57,
                     "title_rowspan": "1",
+                    "category": "翻译问题",
                 },
                 {
                     "title": "组件丢失",
                     "desc": "",
                     "cateId": 58,
                     "title_rowspan": "1",
+                    "category": "翻译问题",
                 },
                 {
                     "title": "pc端兼容性问题",
                     "desc": "同系统，不同浏览器",
                     "cateId": 59,
-                    "category":"兼容性问题",
-                    "category_rowspan":"5",
+                    "category": "兼容性问题",
+                    "category_rowspan": "5",
                     "title_rowspan": "2",
                 },
                 {
                     "title": "pc端兼容性问题",
                     "desc": "不同系统，同浏览器",
-                    "cateId": 60
+                    "cateId": 60,
+                    "category": "兼容性问题",
                 },
                 {
                     "title": "手机端兼容性问题",
                     "desc": "同系统，不同浏览器",
                     "cateId": 61,
                     "title_rowspan": "2",
+                    "category": "兼容性问题",
                 },
                 {
                     "title": "手机端兼容性问题",
                     "desc": "不同系统，同浏览器",
-                    "cateId": 62
+                    "cateId": 62,
+                    "category": "兼容性问题",
                 },
                 {
                     "title": "低版本浏览器不兼容",
                     "desc": "",
                     "cateId": 63,
                     "title_rowspan": "1",
+                    "category": "兼容性问题",
                 },
                 {
                     "title": "富文本内容问题",
                     "desc": "空格问题",
                     "cateId": 64,
-                    "category":"富文本问题",
-                    "category_rowspan":"4",
+                    "category": "富文本问题",
+                    "category_rowspan": "4",
                     "title_rowspan": "2",
                 },
                 {
                     "title": "富文本内容问题",
                     "desc": "富文本删除完后，无法编辑",
-                    "cateId": 65
+                    "cateId": 65,
+                    "category": "富文本问题",
                 },
                 {
                     "title": "富文本样式问题",
                     "desc": "样式设置不生效",
                     "cateId": 66,
                     "title_rowspan": "2",
+                    "category": "富文本问题",
                 },
                 {
                     "title": "富文本样式问题",
                     "desc": "复制问题",
-                    "cateId": 67
+                    "cateId": 67,
+                    "category": "富文本问题",
                 },
                 {
                     "title": "设置问题",
                     "desc": "有设置入口未设置",
                     "cateId": 68,
-                    "category":"其他问题",
-                    "category_rowspan":"11",
+                    "category": "其他问题",
+                    "category_rowspan": "11",
                     "title_rowspan": "2",
                 },
                 {
                     "title": "设置问题",
                     "desc": "设置项设置有误",
-                    "cateId": 69
+                    "cateId": 69,
+                    "category": "其他问题",
                 },
                 {
                     "title": "代码影响",
                     "desc": "第三方代码影响",
                     "cateId": 70,
                     "title_rowspan": "2",
+                    "category": "其他问题",
                 },
                 {
                     "title": "代码影响",
                     "desc": "自定义代码影响（自己写的，技术客服写的）",
-                    "cateId": 71
+                    "cateId": 71,
+                    "category": "其他问题",
                 },
                 {
                     "title": "技术咨询",
                     "desc": "第三方代码如何安装",
                     "cateId": 72,
                     "title_rowspan": "5",
+                    "category": "其他问题",
                 },
                 {
                     "title": "技术咨询",
                     "desc": "SEO优化问题",
-                    "cateId": 73
+                    "cateId": 73,
+                    "category": "其他问题",
                 },
                 {
                     "title": "技术咨询",
                     "desc": "searchconsole问题",
-                    "cateId": 74
+                    "cateId": 74,
+                    "category": "其他问题",
                 },
                 {
                     "title": "技术咨询",
                     "desc": "需求评估",
-                    "cateId": 75
+                    "cateId": 75,
+                    "category": "其他问题",
                 },
                 {
                     "title": "技术咨询",
                     "desc": "amp相关问题",
-                    "cateId": 76
+                    "cateId": 76,
+                    "category": "其他问题",
                 },
                 {
                     "title": "网站速度问题",
                     "desc": "网站速度不达标",
                     "cateId": 77,
                     "title_rowspan": "1",
+                    "category": "其他问题",
                 },
                 {
                     "title": "个性化需求",
                     "desc": "完全没有共性问题",
                     "cateId": 78,
                     "title_rowspan": "1",
+                    "category": "其他问题",
                 },
                 {
                     "title": "前后台不一致",
                     "desc": "前后台不一致",
                     "cateId": 79,
-                    "category":"其他",
-                    "category_rowspan":"1",
+                    "category": "其他",
+                    "category_rowspan": "2",
                     "title_rowspan": "1",
                 },
                 {
                     "title": "服务端缓存",
                     "desc": "服务端缓存",
                     "cateId": 80,
-                    "category":"其他",
-                    "category_rowspan":"1",
+                    "category": "其他",
                     "title_rowspan": "1",
                 }
             ],
             injectWorkerHtml: `
             <div class="workorder-search hide">
                 <div class="workorder-search-input">
+                    <select id="workOrderClassification">
+                    </select>
                     <input type="text" id="workorder-search-keywords">
                 </div>
                 <div class="workorder-cfn-list">
@@ -544,20 +612,22 @@ var setAllHelper = function () {
                     this.injectDetectionLinkJs((isload) => {
                         if (isload) {
                             $(function () {
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     // 注入页面dom
                                     _that.injectWorkOrderHtml();
                                     // 工单是否已经分过类 初始化数据
                                     _that.initWorkStateData();
                                     // 初始化按钮对应事件
                                     _that.bindBtnEvent();
+                                    // 初始化工单分类
+                                    _that.renderWorkOrderCateFun(_that.state.workOrderCnfList);
                                     // 初始化工单分类列表
                                     _that.renderWorkOrderCnfList(_that.state.workOrderCnfList);
-    
+
                                     // 工单faq 
                                     smartRecommendFaq && smartRecommendFaq.initSmartFaq();
                                     resolve('success');
-                                },500)
+                                }, 500)
                             });
                         }
                     });
@@ -587,9 +657,9 @@ var setAllHelper = function () {
                 // debugger;
                 var _paraentEl = $("section.m-b-md .box-body>div:first-child .color-c");
                 let workOrderId = _paraentEl.text().replace(/(\s*$)/g, ""); //清除空格;
-                let  catetag = _paraentEl.find("#cateTags").text();
-                if(catetag){
-                    workOrderId = workOrderId.replace(catetag,'');
+                let catetag = _paraentEl.find("#cateTags").text();
+                if (catetag) {
+                    workOrderId = workOrderId.replace(catetag, '');
                 }
                 return workOrderId;
             },
@@ -661,6 +731,7 @@ var setAllHelper = function () {
             this.state.continueBtn = _wordHtml.find(".workorder-plug-continue-btn");
             this.state.exportExcelBtn = _wordHtml.find(".workorder-plug-export-excel");
             this.state.cfnContainerEl = _wordHtml.find(".workorder-cfn-list");
+            this.state.cfnCateEl = _wordHtml.find("#workOrderClassification");
             this.state.workorderSearchKeywords = _wordHtml.find("#workorder-search-keywords");
             $("body").append(_wordHtml);
         },
@@ -846,13 +917,13 @@ var setAllHelper = function () {
                     let { workorderSearchKeywords } = _that.state;
                     let cnfContainerEl = _that.getWorkerVal.getCnfSearchContainer();
                     if (workorderSearchKeywords) {
-                        cnfContainerEl.draggable && cnfContainerEl.draggable({ cancel: ".title" });
+                        cnfContainerEl.draggable && cnfContainerEl.draggable({ cancel: "#workOrderClassification" });
 
                         workorderSearchKeywords.click(function () {
                             workorderSearchKeywords.focus();
                         });
                     }
-                    document.onkeydown = function (event) {
+                    $(document).on('keydown', function () {
                         if (event.altKey && event.keyCode == 81) {
                             cnfContainerEl.toggleClass('hide');
                             workorderSearchKeywords.focus();
@@ -861,13 +932,19 @@ var setAllHelper = function () {
                             cnfContainerEl.toggleClass('hide');
                             workorderSearchKeywords.focus();
                         }
-                    }
+                    })
+
+                    $(document).on('click', '.container', function () {
+                        cnfContainerEl.addClass('hide');
+                        workorderSearchKeywords.focus();
+                    })
 
                     // 单击工单号 支持分类
                     let workOrderContainer = _that.getWorkerVal.getCateTagContainer();
                     workOrderContainer && workOrderContainer.unbind('click').bind('click', function () {
                         cnfContainerEl.toggleClass('hide');
                         workorderSearchKeywords.focus();
+                        return false;
                     })
                 },
                 /**
@@ -881,7 +958,7 @@ var setAllHelper = function () {
                         setTimeout(function () {
                             _that.initWorkStateData();
                             // 工单faq 
-                            smartRecommendFaq && smartRecommendFaq.initSmartFaq();
+                            smartRecommendFaq && smartRecommendFaq.initWorkStateData();
                         }, 1000);
                     });
                     window.addEventListener('replaceState', function (e) {
@@ -889,9 +966,17 @@ var setAllHelper = function () {
                         setTimeout(function () {
                             _that.initWorkStateData();
                             // 工单faq 
-                            smartRecommendFaq && smartRecommendFaq.initSmartFaq();
+                            smartRecommendFaq && smartRecommendFaq.initWorkStateData();
                         }, 1000);
                     });
+                },
+                bindCate: function () {
+                    var _that = this;
+                    let { cfnCateEl, workOrderCnfList } = _that.state;
+                    cfnCateEl.unbind('change').bind('change', function () {
+                        let reusltArr = _that.searchCnfKeyWordsFun('', _that.state.workOrderCnfList);
+                        _that.renderWorkOrderCnfList(reusltArr);
+                    })
                 }
             }
             btnEvent.startBtnFun.call(this);
@@ -903,6 +988,23 @@ var setAllHelper = function () {
             btnEvent.chooseCateFun.call(this);
             btnEvent.isShowSearchCnfFun.call(this);
             btnEvent.bindLocationChange.call(this);
+            btnEvent.bindCate.call(this);
+        },
+        renderWorkOrderCateFun: function (workOrderCnfList) {
+            var _that = this;
+            _that.state.cfnCateEl.html('');
+            _that.state.cfnCateEl.append($(`<option value="">请选择分类</option>`));
+            let allCateList = [];
+            workOrderCnfList.forEach((item, index, array) => {
+                if (item.category) {
+                    allCateList.push(item.category);
+                }
+            })
+            allCateList = [...new Set(allCateList)];
+            allCateList.forEach(item => {
+                var _optionEl = $(`<option value="${item}">${item}</option>`);
+                _that.state.cfnCateEl && _that.state.cfnCateEl.append(_optionEl);
+            })
         },
         /**
          * 初始化工单分类列表
@@ -912,10 +1014,10 @@ var setAllHelper = function () {
             _that.state.cfnContainerEl.html('');
             workOrderCnfList.forEach((item, index, array) => {
                 let _cnfContainerEl = $(`<div class="workorder-cfn-list-item" data-cateid="${item.cateId}"></div>`);
-                let _cnfTitle = $(`<div class="workorder-cfn-list-item-title">${item.desc}</div>`);
-                let _cnfDesc = $(`<div class="workorder-cfn-list-item-desc">${item.title}</div>`);
+                let _cnfTitle = $(`<div class="workorder-cfn-list-item-title">${item.desc || item.title}</div>`);
+                // let _cnfDesc = $(`<div class="workorder-cfn-list-item-desc">${item.title}</div>`);
                 _cnfContainerEl.append(_cnfTitle);
-                _cnfContainerEl.append(_cnfDesc);
+                // _cnfContainerEl.append(_cnfDesc);
                 _that.state.cfnContainerEl && _that.state.cfnContainerEl.append(_cnfContainerEl);
             })
         },
@@ -924,6 +1026,15 @@ var setAllHelper = function () {
          * 分类关键词过滤
          */
         searchCnfKeyWordsFun: function (keyword, cnfList) {
+            var _that = this;
+            let { cfnCateEl } = _that.state;
+            // 过滤当前筛选的当前分类
+            if (cfnCateEl.val()) {
+                cnfList = filterCateList(cfnCateEl.val(), cnfList);
+            }
+            if(!keyword){
+                return cnfList;
+            }
             let resultArr = [];
             cnfList.forEach((item, index, array) => {
                 if (Object.prototype.toString.call(item).slice(8, -1) == 'Object') {
@@ -938,6 +1049,17 @@ var setAllHelper = function () {
                 }
             })
             return resultArr;
+
+            // 过滤分类
+            function filterCateList(category, cnfList) {
+                let cateList = [];
+                cnfList.forEach(item => {
+                    if (item.category == category) {
+                        cateList.push(item);
+                    }
+                })
+                return cateList;
+            }
         },
         /**
          * 打开工单详情页面
@@ -1037,6 +1159,12 @@ var setAllHelper = function () {
                     </div>
                     <div class="plug-tip-item">
                         <button class="clearAlreadyWorkOrder">清空所有已经分类工单</button>
+                    </div>
+                    <div class="plug-tip-item" style="color: red;">
+                        工单分类快捷键（alt+Q）
+                    </div>
+                    <div class="plug-tip-item" style="color: red;">
+                        FAQ快捷键（alt+W）
                     </div>
                 </div>
             `);
@@ -1196,7 +1324,7 @@ var setAllHelper = function () {
             link.download = "技术支持工单分类.csv";
             link.click();
         },
-        exportExcel:function(){
+        exportExcel: function () {
             var _that = this;
             let workerOrderLen = Object.keys(_that.state.workOrderCateList).length;
             if (workerOrderLen <= 0) {
@@ -1205,7 +1333,7 @@ var setAllHelper = function () {
             }
             // 1、要导出的json数据
             let jsonData = [];
-            let { workOrderCnfList,workOrderCnfHeader } = _that.state;
+            let { workOrderCnfList, workOrderCnfHeader } = _that.state;
             workOrderCnfList.forEach(function (item) {
                 let _itemObj = {};
                 _itemObj = JSON.parse(JSON.stringify(item));
@@ -1215,32 +1343,31 @@ var setAllHelper = function () {
             })
 
             let _tableEl = $("<table id='table_excel'></table>");
-            createTableHeader(_tableEl,workOrderCnfHeader);
-            createTableContent(_tableEl,jsonData);
-            debugger;
+            createTableHeader(_tableEl, workOrderCnfHeader);
+            createTableContent(_tableEl, jsonData);
             // $("body").append(_tableEl);
             tableToExcel(_tableEl[0]);
 
             // 创建表格头
-            function createTableHeader(_tableEl,headList){
+            function createTableHeader(_tableEl, headList) {
                 var _headTr = $("<tr></tr>");
-                headList.forEach((item,index) => {
+                headList.forEach((item, index) => {
                     _headTr.append(`<td>${item}</td>`)
                 });
                 _tableEl.append(_headTr);
             }
 
             // 创建表格内容
-            function createTableContent(_tableEl,jsonData){
-                jsonData.forEach((item,index) => {
-                    let _trEl =  $("<tr></tr>");
+            function createTableContent(_tableEl, jsonData) {
+                jsonData.forEach((item, index) => {
+                    let _trEl = $("<tr></tr>");
                     // 工单问题大类
-                    if(item.category){
+                    if (item.category_rowspan) {
                         let _cateTd = $(`<td rowspan="${item.category_rowspan}">${item.category}</td>`);
                         _trEl.append(_cateTd);
                     }
                     // 工单问题类型
-                    if(item.title_rowspan){
+                    if (item.title_rowspan) {
                         let _titelCate = $(`<td rowspan="${item.title_rowspan}">${item.title}</td>`);
                         _trEl.append(_titelCate);
                     }
@@ -1275,18 +1402,17 @@ var setAllHelper = function () {
                 }
             }
 
-            function tableToExcel(tableEl){
+            function tableToExcel(tableEl) {
                 //将table转成工作簿
                 //raw:true
                 //表示类型都为文字类型即无 需自动转换各种类型，这里仅为处理100%转换成数字100的问题
                 const wb = XLSX.utils.table_to_book(tableEl)
                 //导出
-                debugger;
-                wb["Sheets"]["Sheet1"]["!cols"] = [ { wch: 20 },{ wch: 20 },{ wch: 50 },{ wch: 100 },{ wch: 10 } ]; 
+                wb["Sheets"]["Sheet1"]["!cols"] = [{ wch: 20 }, { wch: 20 }, { wch: 50 }, { wch: 100 }, { wch: 10 }];
 
-                XLSX.writeFile(wb,"技术客服工单分类.xlsx")
+                XLSX.writeFile(wb, "技术客服工单分类.xlsx")
             }
-          },
+        },
         showMessage: function (message, type) {
             let messageJQ = $(`
                 <div class='showMessage'>
@@ -1337,17 +1463,35 @@ var setAllHelper = function () {
 
     window.smartRecommendFaq = {
         state: {
-            cfnContainerFaqEl:null,
+            cfnContainerFaqEl: null,// faq搜索列表
+            workorderSearchKeywordsFaq: null,//关键词搜索
         },
         initSmartFaq: function () {
             // 
             this.injectWorkOrderHtml();
             // 注入推荐的faq
-            var recommendList = this.recommendFaqFun();
-            this.injectSmartFaqFun(recommendList);
+            try {
+                var recommendList = this.recommendFaqFun();
+                this.injectSmartFaqFun(recommendList);
+            } catch (e) {
+                console.log('列表页，找不到工单标题和描述，无法推荐faq');
+            }
 
             // 初始化工单分类列表
-            // window.allWorkFaq && this.renderWorkOrderCnfList(window.allWorkFaq);
+            window.allWorkFaq && this.renderWorkOrderCnfList(window.allWorkFaq);
+
+            // 绑定事件
+            this.bindBtnEvent();
+        },
+        // 刷新数据
+        initWorkStateData: function () {
+            // 注入推荐的faq
+            try {
+                var recommendList = this.recommendFaqFun();
+                this.injectSmartFaqFun(recommendList);
+            } catch (e) {
+                console.log('列表页，找不到工单标题和描述，无法推荐faq');
+            }
         },
         getContent: {
             getTitle: {
@@ -1420,36 +1564,126 @@ var setAllHelper = function () {
             </div>
             `);
             var _containerElList = faqListContainerEl.find(".faqSmartListComtainer");
-            if(recommendList.length>0){
+            if (recommendList.length > 0) {
                 recommendList.forEach(item => {
                     var _itemEl = $(`
                         <div style="margin-bottom:8px;"><a target="_blank" style="color:red;" href="${item.address}">${item.title}</a></div>
                     `);
                     _containerElList.append(_itemEl);
                 });
-            }else{
+            } else {
                 _containerElList.append('暂无推荐');
             }
             _container.after(faqListContainerEl);
         },
-         // 初始化工单分类列表
-        renderWorkOrderCnfList: function(workOrderCnfList){
+        // 初始化工单分类列表
+        renderWorkOrderCnfList: function (workOrderCnfList) {
             var _that = this;
             _that.state.cfnContainerFaqEl.html('');
             workOrderCnfList.forEach((item, index, array) => {
-                let _cnfContainerEl = $(`<div class="workorder-cfn-list-item" data-cateid="${item.cateId}"></div>`);
-                let _cnfTitle = $(`<div class="workorder-cfn-list-item-title">${item.desc}</div>`);
-                let _cnfDesc = $(`<div class="workorder-cfn-list-item-desc">${item.title}</div>`);
-                _cnfContainerEl.append(_cnfTitle);
+                let _cnfContainerEl = $(`<div class="workorder-cfn-list-item"></div>`);
+                let _cnfDesc = $(`<a href="${item.address}" target="_blank"><span class="workorder-cfn-list-item-desc">${item.title}</span></a>`);
                 _cnfContainerEl.append(_cnfDesc);
-                _that.state.cfnContainerEl && _that.state.cfnContainerEl.append(_cnfContainerEl);
+                _that.state.cfnContainerFaqEl && _that.state.cfnContainerFaqEl.append(_cnfContainerEl);
             })
         },
-        injectWorkOrderHtml: function(){
+        injectWorkOrderHtml: function () {
             var _that = this;
-            let { cfnContainerFaqEl } = _that.state;
-            cfnContainerFaqEl = $(".workorder-search-faq").find(".workorder-cfn-list-faq");
-        }
+            _that.state.cfnContainerFaqEl = $(".workorder-search-faq").find(".workorder-cfn-list-faq");
+            _that.state.workorderSearchKeywordsFaq = $(".workorder-search-faq").find("#workorder-search-keywords-faq");
+        },
+        /**
+         * 获取对应值
+         */
+        getWorkerVal: {
+            /**
+             * 分类搜索容器
+             * @returns 
+             */
+            getCnfSearchContainer: function () {
+                return $(".workorder-search-faq");
+            },
+        },
+        /**
+         * 绑定事件
+         */
+        bindBtnEvent: function () {
+            var btnEvent = {
+                /**
+               * 分类列表搜索关键词
+               */
+                searchCnfKeyWords: function () {
+                    var _that = this;
+                    let { workorderSearchKeywordsFaq } = _that.state;
+                    if (workorderSearchKeywordsFaq) {
+                        workorderSearchKeywordsFaq.unbind('input').bind('input', workerHelper.debounce(function () {
+                            let keyword = workorderSearchKeywordsFaq.val();
+                            console.log(keyword);
+                            // 关键词搜索
+                            if (keyword) {
+                                let reusltArr = _that.searchCnfKeyWordsFun(keyword, window.allWorkFaq);
+                                _that.renderWorkOrderCnfList(reusltArr);
+                            } else {
+                                _that.renderWorkOrderCnfList(window.allWorkFaq);
+                            }
+                        }, 200));
+                    }
+                },
+                /**
+                 * 搜索框快捷键
+                 */
+                isShowSearchCnfFun: function () {
+                    var _that = this;
+                    let { workorderSearchKeywordsFaq } = _that.state;
+                    let cnfContainerEl = _that.getWorkerVal.getCnfSearchContainer();
+                    if (workorderSearchKeywordsFaq) {
+                        cnfContainerEl.draggable && cnfContainerEl.draggable({ cancel: ".title" });
+
+                        workorderSearchKeywordsFaq.click(function () {
+                            workorderSearchKeywordsFaq.focus();
+                        });
+                    }
+                    $(document).on('keydown', function () {
+                        if (event.altKey && event.keyCode == 87) {
+                            cnfContainerEl.toggleClass('hide');
+                            workorderSearchKeywordsFaq.focus();
+                        }
+                        if (event.keyCode == 27) {
+                            cnfContainerEl.toggleClass('hide');
+                            workorderSearchKeywordsFaq.focus();
+                        }
+                    })
+
+                    $(document).on('click', '.container', function () {
+                        cnfContainerEl.addClass('hide');
+                        workorderSearchKeywordsFaq.focus();
+                    })
+                },
+            }
+            btnEvent.searchCnfKeyWords.call(this);
+            btnEvent.isShowSearchCnfFun.call(this);
+        },
+        /**
+         * 关键词搜索
+         * 分类关键词过滤
+         */
+        searchCnfKeyWordsFun: function (keyword, cnfList) {
+            var _that = this;
+            let resultArr = [];
+            cnfList.forEach((item, index, array) => {
+                if (Object.prototype.toString.call(item).slice(8, -1) == 'Object') {
+                    for (let keyVal of Object.values(item)) {
+                        var _keywordName = keyword.replace(/(\s*$)/g, ""); //清除空格
+                        var reg = new RegExp(_keywordName);
+                        if (reg.test(keyVal)) {
+                            resultArr.push(item);
+                            return;
+                        }
+                    }
+                }
+            })
+            return resultArr;
+        },
     }
 }
 
