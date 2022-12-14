@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script lang="javascript" src="./xlsx.full.min.js"></script>
+    <script lang="javascript" src="../../js/jquery-1.8.3.js"></script>
+  </head>
+  <body>
+    <table class="table1">
+      <tbody>
+        <tr>
+          <td data-t="s" data-v="工单问题大类" id="sjs-A1">工单问题大类</td>
+          <td data-t="s" data-v="工单问题类型" id="sjs-B1">工单问题类型</td>
+          <td id="sjs-C1"></td>
+          <td data-t="s" data-v="工单详细问题分类" id="sjs-D1">工单详细问题分类</td>
+          <td data-t="s" data-v="工单号" id="sjs-E1">工单号</td>
+          <td data-t="s" data-v="计数" id="sjs-F1">计数</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="16"
+            data-t="s"
+            data-v="区块样式问题"
+            id="sjs-A2">区块样式问题</td>
+          <td
+            rowspan="5"
+            data-t="s"
+            data-v="样式无法编辑"
+            id="sjs-B2">样式无法编辑</td>
+          <td data-t="s" data-v="样式无法编辑" id="sjs-C2">样式无法编辑</td>
+          <td data-t="s" data-v="间距写死" id="sjs-D2">
+            <span style="font-size:11pt;">间距</span>
+            <span style="font-size:11pt;">写死</span>
+          </td>
+          <td data-t="s"
+            data-v="20220930N0001,20220930N0024（按钮间距），20221008N0045，20221008N0046，20221008N0048，20221009N0003，20221009N0027，20221010N0030，20221011N0001，20221011N0010"
+            id="sjs-E2">20220930N0001,20220930N0024（按钮间距），20221008N0045，20221008N0046，20221008N0048，20221009N0003，20221009N0027，20221010N0030，20221011N0001，20221011N0010</td>
+          <td data-t="n" data-v="10" id="sjs-F2">10</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="样式无法编辑" id="sjs-C3">样式无法编辑</td>
+          <td data-t="s" data-v="展示形式无法设置（横向、竖向、对齐方式等）" id="sjs-D3">
+            <span style="font-size:11pt;">展示形式</span>
+            <span style="font-size:11pt;">无法设置（横向、竖向、对齐方式等）</span>
+          </td>
+          <td data-t="s" data-v="20220930N0028(对齐方式)，20221009N0026，"
+            id="sjs-E3">20220930N0028(对齐方式)，20221009N0026，</td>
+          <td data-t="n" data-v="2" id="sjs-F3">2</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="样式无法编辑" id="sjs-C4">样式无法编辑</td>
+          <td data-t="s" data-v="特殊样式（下划线、色块等）无法取消、修改" id="sjs-D4">
+            <span style="font-size:11pt;">特殊样式</span>
+            <span style="font-size:11pt;">（</span>
+            <span style="font-size:11pt;">下划线、色块</span>
+            <span style="font-size:11pt;">等）无法取消、修改</span>
+          </td>
+          <td data-t="s" data-v="20220930N0013，20221008N0002，" id="sjs-E4">20220930N0013，20221008N0002，</td>
+          <td data-t="n" data-v="2" id="sjs-F4">2</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="样式无法编辑" id="sjs-C5">样式无法编辑</td>
+          <td data-t="s" data-v="文字样式写死，无设置入口（字体、颜色、换行等）" id="sjs-D5">
+            <span style="font-size:11pt;">文字样式</span>
+            <span style="font-size:11pt;">写死，无设置入口（字体、颜色、换行等）</span>
+          </td>
+          <td data-t="s"
+            data-v="20220930N0027(字体颜色)，20221008N0015（字号），20221011N0028"
+            id="sjs-E5">20220930N0027(字体颜色)，20221008N0015（字号），20221011N0028</td>
+          <td data-t="n" data-v="3" id="sjs-F5">3</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="样式无法编辑" id="sjs-C6">样式无法编辑</td>
+          <td data-t="s" data-v="部分样式写死，也无设置入口（按钮、下拉菜单等）" id="sjs-D6">
+            <span style="font-size:11pt;">部分样式</span>
+            <span style="font-size:11pt;">写死，也无设置入口（</span>
+            <span style="font-size:11pt;">按钮、下拉菜单</span>
+            <span style="font-size:11pt;">等）</span>
+          </td>
+          <td data-t="s"
+            data-v="20220930N0002（区块内部样式与自定义样式冲突），20220930N0004，20220930N0038，20221008N0014，20221008N0042（悬浮样式），20221010N0018（鼠标悬浮小手），20221011N0004（悬浮放大），20221011N0040"
+            id="sjs-E6">20220930N0002（区块内部样式与自定义样式冲突），20220930N0004，20220930N0038，20221008N0014，20221008N0042（悬浮样式），20221010N0018（鼠标悬浮小手），20221011N0004（悬浮放大），20221011N0040</td>
+          <td data-t="n" data-v="8" id="sjs-F6">8</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="移动端样式问题"
+            id="sjs-B7">移动端样式
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td data-t="s" data-v="移动端样式问题" id="sjs-C7">移动端样式问题</td>
+          <td data-t="s" data-v="移动端文字样式无法单独设置" id="sjs-D7">
+            <span style="font-size:11pt;">移动端文字样式</span>
+            <span style="font-size:11pt;">无法单独设置</span>
+          </td>
+          <td data-t="s" data-v="20220930N0020，20221009N0025，20221010N0020（字体），"
+            id="sjs-E7">20220930N0020，20221009N0025，20221010N0020（字体），</td>
+          <td data-t="n" data-v="3" id="sjs-F7">3</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="移动端样式问题" id="sjs-C8">移动端样式问题</td>
+          <td data-t="s" data-v="移动端间距无法调整" id="sjs-D8">
+            <span style="font-size:11pt;">移动端间距</span>
+            <span style="font-size:11pt;">无法调整</span>
+          </td>
+          <td data-t="s" data-v="20220930N0025，20220930N0042，20220930N0043"
+            id="sjs-E8">20220930N0025，20220930N0042，20220930N0043</td>
+          <td data-t="n" data-v="3" id="sjs-F8">3</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="移动端样式问题" id="sjs-C9">移动端样式问题</td>
+          <td data-t="s" data-v="移动端样式不美观" id="sjs-D9">
+            <span style="font-size:11pt;">移动端样式</span>
+            <span style="font-size:11pt;">不美观</span>
+          </td>
+          <td data-t="s"
+            data-v="20220930N0016，20220930N0031（文字重叠），20220930N0041（一行两个），20221008N0021（间距过大），20221011N0026（文字居中），20221011N0029（文字居中），20221011N0044"
+            id="sjs-E9">20220930N0016，20220930N0031（文字重叠），20220930N0041（一行两个），20221008N0021（间距过大），20221011N0026（文字居中），20221011N0029（文字居中），20221011N0044</td>
+          <td data-t="n" data-v="7" id="sjs-F9">7</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="多端响应问题"
+            id="sjs-B10">多端响应问题</td>
+          <td data-t="s" data-v="多端响应问题" id="sjs-C10">多端响应问题</td>
+          <td data-t="s" data-v="文字展示不全、文字展示太多" id="sjs-D10">
+            <span style="font-size:11pt;">文字展示</span>
+            <span style="font-size:11pt;">不全、文字展示太多</span>
+          </td>
+          <td data-t="s" data-v="20221008N0032（纵向导航），20221011N0022"
+            id="sjs-E10">20221008N0032（纵向导航），20221011N0022</td>
+          <td data-t="n" data-v="2" id="sjs-F10">2</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="多端响应问题" id="sjs-C11">多端响应问题</td>
+          <td data-t="s" data-v="展示错乱" id="sjs-D11">展示错乱</td>
+          <td id="sjs-E11"></td>
+          <td id="sjs-F11"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="多端响应问题" id="sjs-C12">多端响应问题</td>
+          <td data-t="s" data-v="响应不美观" id="sjs-D12">响应不美观</td>
+          <td data-t="s"
+            data-v="20221008N0003，20221008N0006(轮播图)，20221008N0029，20221008N0031(轮播点)，20221011N0032（导航文字），20221011N0045"
+            id="sjs-E12">20221008N0003，20221008N0006(轮播图)，20221008N0029，20221008N0031(轮播点)，20221011N0032（导航文字），20221011N0045</td>
+          <td data-t="n" data-v="6" id="sjs-F12">6</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="图片问题"
+            id="sjs-B13">图片
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td data-t="s" data-v="图片问题" id="sjs-C13">图片问题</td>
+          <td data-t="s" data-v="图片压缩，非原图" id="sjs-D13">图片压缩，非原图</td>
+          <td data-t="s" data-v="20221008N0022，20221009N0005，20221010N0022"
+            id="sjs-E13">20221008N0022，20221009N0005，20221010N0022</td>
+          <td data-t="n" data-v="3" id="sjs-F13">3</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="图片问题" id="sjs-C14">图片问题</td>
+          <td data-t="s" data-v="图片拉伸变形" id="sjs-D14">图片拉伸变形</td>
+          <td data-t="s" data-v="20221009U0015，20221011N0016，20221011N0021"
+            id="sjs-E14">20221009U0015，20221011N0016，20221011N0021</td>
+          <td data-t="n" data-v="3" id="sjs-F14">3</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="图片问题" id="sjs-C15">图片问题</td>
+          <td data-t="s" data-v="图片展示不全" id="sjs-D15">图片展示不全</td>
+          <td id="sjs-E15"></td>
+          <td id="sjs-F15"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="区块样式bug"
+            id="sjs-B16">区块
+            <span style="font-size:11pt;">样式bug</span>
+          </td>
+          <td data-t="s" data-v="区块样式bug" id="sjs-C16">区块样式bug</td>
+          <td data-t="s" data-v="后台编辑问题" id="sjs-D16">后台编辑问题</td>
+          <td data-t="s" data-v="20221011N0006" id="sjs-E16">20221011N0006</td>
+          <td data-t="n" data-v="1" id="sjs-F16">1</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="区块样式bug" id="sjs-C17">区块样式bug</td>
+          <td data-t="s" data-v="前台展示问题" id="sjs-D17">前台展示问题</td>
+          <td data-t="s" data-v="20220928N0034(文字没有按单词换行)，20220930N0019，"
+            id="sjs-E17">20220928N0034(文字没有按单词换行)，20220930N0019，</td>
+          <td data-t="n" data-v="2" id="sjs-F17">2</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="7"
+            data-t="s"
+            data-v="区块功能问题"
+            id="sjs-A18">区块功能问题</td>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="内容无法编辑"
+            id="sjs-B18">内容无法编辑</td>
+          <td data-t="s" data-v="内容无法编辑" id="sjs-C18">内容无法编辑</td>
+          <td data-t="s" data-v="内容是否展示无法设置（价格、时间、语言栏等）" id="sjs-D18">
+            <span style="font-size:11pt;">内容是否展示无法设置（</span>
+            <span style="font-size:11pt;">价格、时间、语言栏</span>
+            <span style="font-size:11pt;">等）</span>
+          </td>
+          <td data-t="s"
+            data-v="20220930N0007(语言栏)，20220929N0032,20220929N0057（删除语言栏），20220930N0017（价格不能居中），20220930N0023（去除页头购物车和登录按钮），20220930N0048（删除页头得购物车和登录按钮），20221007N0004（删除导航栏），20221008N0019（删除页头得购物车和登录按钮），20221008N0028（删除语言栏），20221008N0047（删除语言栏），20221011N0024（语言栏），"
+            id="sjs-E18">20220930N0007(语言栏)，20220929N0032,20220929N0057（删除语言栏），20220930N0017（价格不能居中），20220930N0023（去除页头购物车和登录按钮），20220930N0048（删除页头得购物车和登录按钮），20221007N0004（删除导航栏），20221008N0019（删除页头得购物车和登录按钮），20221008N0028（删除语言栏），20221008N0047（删除语言栏），20221011N0024（语言栏），</td>
+          <td data-t="n" data-v="11" id="sjs-F18">11</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="内容无法编辑" id="sjs-C19">内容无法编辑</td>
+          <td data-t="s" data-v="文字内容无法修改" id="sjs-D19">文字内容无法修改</td>
+          <td id="sjs-E19"></td>
+          <td id="sjs-F19"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="区块功能bug"
+            id="sjs-B20">区块
+            <span style="font-size:11pt;">功能bug</span>
+          </td>
+          <td data-t="s" data-v="区块功能bug" id="sjs-C20">区块功能bug</td>
+          <td data-t="s" data-v="重复添加导致代码冲突" id="sjs-D20">重复添加导致代码冲突</td>
+          <td id="sjs-E20"></td>
+          <td id="sjs-F20"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="区块功能bug" id="sjs-C21">区块功能bug</td>
+          <td data-t="s" data-v="区块功能不可用" id="sjs-D21">区块功能不可用</td>
+          <td id="sjs-E21"></td>
+          <td id="sjs-F21"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="区块功能bug" id="sjs-C22">区块功能bug</td>
+          <td data-t="s" data-v="其他bug" id="sjs-D22">其他bug</td>
+          <td data-t="s" data-v="20220930N0039，20221011N0036，20221011N0047"
+            id="sjs-E22">20220930N0039，20221011N0036，20221011N0047</td>
+          <td data-t="n" data-v="3" id="sjs-F22">3</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="功能缺失"
+            id="sjs-B23">功能缺失</td>
+          <td data-t="s" data-v="功能缺失" id="sjs-C23">功能缺失</td>
+          <td data-t="s" data-v="特效无法设置（动效、悬浮效果等）" id="sjs-D23">
+            <span style="font-size:11pt;">特效</span>
+            <span style="font-size:11pt;">无法设置（</span>
+            <span style="font-size:11pt;">动效、悬浮效果</span>
+            <span style="font-size:11pt;">等）</span>
+          </td>
+          <td data-t="s"
+            data-v="20221009N0020(内容展示有上限)，20221009N0031（悬浮），20221009N0034，"
+            id="sjs-E23">20221009N0020(内容展示有上限)，20221009N0031（悬浮），20221009N0034，</td>
+          <td data-t="n" data-v="3" id="sjs-F23">3</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="功能缺失" id="sjs-C24">功能缺失</td>
+          <td data-t="s" data-v="跳转方式无法设置（当前页、新窗口）" id="sjs-D24">
+            <span style="font-size:11pt;">跳转方式</span>
+            <span style="font-size:11pt;">无法设置（当前页、新窗口）</span>
+          </td>
+          <td id="sjs-E24"></td>
+          <td id="sjs-F24"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="12"
+            data-t="s"
+            data-v="组件样式问题"
+            id="sjs-A25">组件样式问题</td>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="样式无法编辑"
+            id="sjs-B25">样式无法编辑</td>
+          <td data-t="s" data-v="样式无法编辑" id="sjs-C25">样式无法编辑</td>
+          <td data-t="s" data-v="间距写死" id="sjs-D25">间距写死</td>
+          <td data-t="s" data-v="20221009N0004" id="sjs-E25">20221009N0004</td>
+          <td data-t="n" data-v="1" id="sjs-F25">1</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="样式无法编辑" id="sjs-C26">样式无法编辑</td>
+          <td data-t="s" data-v="文字样式写死（字体、颜色、换行等）" id="sjs-D26">文字样式写死（字体、颜色、换行等）</td>
+          <td data-t="s" data-v="20221009N0016，20221010N0011" id="sjs-E26">20221009N0016，20221010N0011</td>
+          <td data-t="n" data-v="2" id="sjs-F26">2</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="样式无法编辑" id="sjs-C27">样式无法编辑</td>
+          <td data-t="s" data-v="样式写死，无法调整" id="sjs-D27">样式写死，无法调整</td>
+          <td data-t="s"
+            data-v="20221009N0017，20221010N0003，20221010N0012，20221010N0013(字体),20221011N0023，"
+            id="sjs-E27">20221009N0017，20221010N0003，20221010N0012，20221010N0013(字体),20221011N0023，</td>
+          <td data-t="n" data-v="5" id="sjs-F27">5</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="图片问题"
+            id="sjs-B28">图片
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td data-t="s" data-v="图片问题" id="sjs-C28">图片问题</td>
+          <td data-t="s" data-v="图片压缩，非原图" id="sjs-D28">图片压缩，非原图</td>
+          <td id="sjs-E28"></td>
+          <td id="sjs-F28"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="图片问题" id="sjs-C29">图片问题</td>
+          <td data-t="s" data-v="图片拉伸变形" id="sjs-D29">图片拉伸变形</td>
+          <td id="sjs-E29"></td>
+          <td id="sjs-F29"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="图片问题" id="sjs-C30">图片问题</td>
+          <td data-t="s" data-v="图片展示不全" id="sjs-D30">图片展示不全</td>
+          <td id="sjs-E30"></td>
+          <td id="sjs-F30"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="表格问题" id="sjs-B31">表格
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td data-t="s" data-v="表格问题" id="sjs-C31">表格问题</td>
+          <td data-t="s" data-v="表格响应问题" id="sjs-D31">表格响应问题</td>
+          <td id="sjs-E31"></td>
+          <td id="sjs-F31"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="多端响应问题"
+            id="sjs-B32">多端响应问题</td>
+          <td data-t="s" data-v="多端响应问题" id="sjs-C32">多端响应问题</td>
+          <td data-t="s" data-v="文字展示不全、文字展示太多" id="sjs-D32">文字展示不全、文字展示太多</td>
+          <td id="sjs-E32"></td>
+          <td id="sjs-F32"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="多端响应问题" id="sjs-C33">多端响应问题</td>
+          <td data-t="s" data-v="展示错乱" id="sjs-D33">展示错乱</td>
+          <td id="sjs-E33"></td>
+          <td id="sjs-F33"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="移动端样式问题"
+            id="sjs-B34">移动端样式问题</td>
+          <td data-t="s" data-v="移动端样式问题" id="sjs-C34">移动端样式问题</td>
+          <td data-t="s" data-v="移动端样式不美观" id="sjs-D34">移动端样式不美观</td>
+          <td id="sjs-E34"></td>
+          <td id="sjs-F34"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="移动端样式问题" id="sjs-C35">移动端样式问题</td>
+          <td data-t="s" data-v="移动端样式无法单独设置" id="sjs-D35">移动端样式无法单独设置</td>
+          <td id="sjs-E35"></td>
+          <td id="sjs-F35"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="组件样式bug" id="sjs-B36">组件
+            <span style="font-size:11pt;">样式bug</span>
+          </td>
+          <td data-t="s" data-v="组件样式bug" id="sjs-C36">组件样式bug</td>
+          <td data-t="s" data-v="展示错乱" id="sjs-D36">展示错乱</td>
+          <td data-t="s" data-v="20221009N0039(产品属性)，20221010N0029（语言栏展示不全）"
+            id="sjs-E36">20221009N0039(产品属性)，20221010N0029（语言栏展示不全）</td>
+          <td data-t="n" data-v="2" id="sjs-F36">2</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="组件功能问题"
+            id="sjs-A37">组件功能问题</td>
+          <td data-t="s" data-v="组件功能bug" id="sjs-B37">组件
+            <span style="font-size:11pt;">功能bug</span>
+          </td>
+          <td data-t="s" data-v="组件功能bug" id="sjs-C37">组件功能bug</td>
+          <td data-t="s" data-v="组件功能不可用" id="sjs-D37">组件功能不可用</td>
+          <td id="sjs-E37"></td>
+          <td id="sjs-F37"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="组件功能缺失"
+            id="sjs-B38">组件功能缺失</td>
+          <td data-t="s" data-v="组件功能缺失" id="sjs-C38">组件功能缺失</td>
+          <td data-t="s" data-v="组件内容无法修改" id="sjs-D38">组件内容无法修改</td>
+          <td data-t="s" data-v="20221009N0012(分页器样式)，20221010N0007"
+            id="sjs-E38">20221009N0012(分页器样式)，20221010N0007</td>
+          <td data-t="n" data-v="2" id="sjs-F38">2</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="组件功能缺失" id="sjs-C39">组件功能缺失</td>
+          <td data-t="s" data-v="多组件搭建无法对其、响应不好,无法单独设置" id="sjs-D39">
+            <span style="font-size:11pt;">多组件搭建</span>
+            <span style="font-size:11pt;">无法对其、响应不好,无法单独设置</span>
+          </td>
+          <td data-t="s" data-v="20221008N0024，20221009N0033" id="sjs-E39">20221008N0024，20221009N0033</td>
+          <td data-t="n" data-v="2" id="sjs-F39">2</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="系统功能问题"
+            id="sjs-A40">系统功能问题</td>
+          <td data-t="s" data-v="移动端隐藏" id="sjs-B40">移动端隐藏</td>
+          <td data-t="s" data-v="移动端隐藏" id="sjs-C40">移动端隐藏</td>
+          <td id="sjs-D40"></td>
+          <td id="sjs-E40"></td>
+          <td id="sjs-F40"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="系统功能不支持" id="sjs-B41">系统功能不支持</td>
+          <td data-t="s" data-v="系统功能不支持" id="sjs-C41">系统功能不支持</td>
+          <td id="sjs-D41"></td>
+          <td id="sjs-E41"></td>
+          <td id="sjs-F41"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="系统功能bug" id="sjs-B42">系统功能bug</td>
+          <td data-t="s" data-v="系统功能bug" id="sjs-C42">系统功能bug</td>
+          <td id="sjs-D42"></td>
+          <td id="sjs-E42"></td>
+          <td id="sjs-F42"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="5"
+            data-t="s"
+            data-v="样式编辑问题"
+            id="sjs-A43">样式编辑问题</td>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="区块样式编辑问题"
+            id="sjs-B43">区块
+            <span style="font-size:11pt;">样式编辑</span>
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td data-t="s" data-v="区块样式编辑问题" id="sjs-C43">区块样式编辑问题</td>
+          <td data-t="s" data-v="样式代码未生成" id="sjs-D43">样式代码未生成</td>
+          <td id="sjs-E43"></td>
+          <td id="sjs-F43"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="区块样式编辑问题" id="sjs-C44">区块样式编辑问题</td>
+          <td data-t="s" data-v="样式代码生成，但是被覆盖" id="sjs-D44">样式代码生成，但是被覆盖</td>
+          <td id="sjs-E44"></td>
+          <td id="sjs-F44"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="区块样式编辑问题" id="sjs-C45">区块样式编辑问题</td>
+          <td data-t="s" data-v="样式编辑影响到区块内部样式（icon等）" id="sjs-D45">样式编辑影响到区块内部样式（icon等）</td>
+          <td id="sjs-E45"></td>
+          <td id="sjs-F45"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="组件样式编辑问题"
+            id="sjs-B46">组件样式编辑问题</td>
+          <td data-t="s" data-v="组件样式编辑问题" id="sjs-C46">组件样式编辑问题</td>
+          <td data-t="s" data-v="样式代码未生成" id="sjs-D46">样式代码未生成</td>
+          <td id="sjs-E46"></td>
+          <td id="sjs-F46"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="组件样式编辑问题" id="sjs-C47">组件样式编辑问题</td>
+          <td data-t="s" data-v="样式代码生成，但是被覆盖" id="sjs-D47">样式代码生成，但是被覆盖</td>
+          <td data-t="s" data-v="20221008N0009" id="sjs-E47">20221008N0009</td>
+          <td data-t="n" data-v="1" id="sjs-F47">1</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="3"
+            data-t="s"
+            data-v="小语种问题"
+            id="sjs-A48">小语种问题</td>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="国际化问题"
+            id="sjs-B48">国际化
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td data-t="s" data-v="国际化问题" id="sjs-C48">国际化问题</td>
+          <td data-t="s" data-v="未做国际化" id="sjs-D48">未做国际化</td>
+          <td data-t="s" data-v="20221009N0037" id="sjs-E48">20221009N0037</td>
+          <td data-t="n" data-v="1" id="sjs-F48">1</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="国际化问题" id="sjs-C49">国际化问题</td>
+          <td data-t="s" data-v="国际化内容无法修改" id="sjs-D49">国际化内容无法修改</td>
+          <td id="sjs-E49"></td>
+          <td id="sjs-F49"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="小语种样式问题" id="sjs-B50">小语种样式
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td data-t="s" data-v="小语种样式问题" id="sjs-C50">小语种样式问题</td>
+          <td data-t="s" data-v="右对齐小语种样式问题" id="sjs-D50">右对齐小语种样式问题</td>
+          <td data-t="s"
+            data-v="20221002N0001，20221002N0002，20221002N0003，20221005N0002，20221008N0040，20221008N0044，20221009N0040，20221011N0013"
+            id="sjs-E50">20221002N0001，20221002N0002，20221002N0003，20221005N0002，20221008N0040，20221008N0044，20221009N0040，20221011N0013</td>
+          <td data-t="n" data-v="8" id="sjs-F50">8</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="6"
+            data-t="s"
+            data-v="发布问题"
+            id="sjs-A51">发布问题</td>
+          <td
+            rowspan="4"
+            data-t="s"
+            data-v="网站速度优化"
+            id="sjs-B51">网站速度优化</td>
+          <td data-t="s" data-v="网站速度优化" id="sjs-C51">网站速度优化</td>
+          <td data-t="s" data-v="样式收集失败或错乱" id="sjs-D51">
+            <span style="font-size:11pt;">样式收集</span>
+            <span style="font-size:11pt;">失败或错乱</span>
+          </td>
+          <td data-t="s"
+            data-v="20220930N0044，20220930N0049，20221001N0001，20221010N0027"
+            id="sjs-E51">20220930N0044，20220930N0049，20221001N0001，20221010N0027</td>
+          <td data-t="n" data-v="4" id="sjs-F51">4</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="网站速度优化" id="sjs-C52">网站速度优化</td>
+          <td data-t="s" data-v="css、js加载顺序问题（和预览不一样）" id="sjs-D52">css、js加载顺序问题（和预览不一样）</td>
+          <td data-t="s" data-v="20220930N0040，" id="sjs-E52">20220930N0040，</td>
+          <td data-t="n" data-v="1" id="sjs-F52">1</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="网站速度优化" id="sjs-C53">网站速度优化</td>
+          <td data-t="s" data-v="模式调整（体验优先，兼容模式）" id="sjs-D53">模式调整（体验优先，兼容模式）</td>
+          <td data-t="s" data-v="20220930U0014，20221008N0038，20221010N0025"
+            id="sjs-E53">20220930U0014，20221008N0038，20221010N0025</td>
+          <td data-t="n" data-v="3" id="sjs-F53">3</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="网站速度优化" id="sjs-C54">网站速度优化</td>
+          <td data-t="s" data-v="template包裹问题" id="sjs-D54">
+            <span style="font-size:11pt;">template包裹</span>
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td data-t="s" data-v="20220930N0005，20221009U0029，" id="sjs-E54">20220930N0005，20221009U0029，</td>
+          <td data-t="n" data-v="2" id="sjs-F54">2</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="发布相关"
+            id="sjs-B55">发布相关</td>
+          <td data-t="s" data-v="发布相关" id="sjs-C55">发布相关</td>
+          <td data-t="s" data-v="发布延迟" id="sjs-D55">发布延迟</td>
+          <td data-t="s" data-v="20220930N0008，" id="sjs-E55">20220930N0008，</td>
+          <td data-t="n" data-v="1" id="sjs-F55">1</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="发布相关" id="sjs-C56">发布相关</td>
+          <td data-t="s" data-v="发布不生效" id="sjs-D56">发布不生效</td>
+          <td data-t="s" data-v="20220930N0012，20221008N0016" id="sjs-E56">20220930N0012，20221008N0016</td>
+          <td data-t="n" data-v="2" id="sjs-F56">2</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="4"
+            data-t="s"
+            data-v="翻译问题"
+            id="sjs-A57">翻译问题</td>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="国际化翻译文案"
+            id="sjs-B57">国际化
+            <span style="font-size:11pt;">翻译文案</span>
+          </td>
+          <td data-t="s" data-v="国际化翻译文案" id="sjs-C57">国际化翻译文案</td>
+          <td data-t="s" data-v="无法修改" id="sjs-D57">无法修改</td>
+          <td id="sjs-E57"></td>
+          <td id="sjs-F57"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="国际化翻译文案" id="sjs-C58">国际化翻译文案</td>
+          <td data-t="s" data-v="翻译错误" id="sjs-D58">翻译错误</td>
+          <td data-t="s" data-v="20221008N0034" id="sjs-E58">20221008N0034</td>
+          <td data-t="n" data-v="1" id="sjs-F58">1</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="翻译缺失" id="sjs-B59">翻译缺失</td>
+          <td data-t="s" data-v="翻译缺失" id="sjs-C59">翻译缺失</td>
+          <td id="sjs-D59"></td>
+          <td id="sjs-E59"></td>
+          <td id="sjs-F59"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="组件丢失" id="sjs-B60">组件丢失</td>
+          <td data-t="s" data-v="组件丢失" id="sjs-C60">组件丢失</td>
+          <td id="sjs-D60"></td>
+          <td data-t="s" data-v="20221011N0008" id="sjs-E60">20221011N0008</td>
+          <td data-t="n" data-v="1" id="sjs-F60">1</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="5"
+            data-t="s"
+            data-v="兼容性问题"
+            id="sjs-A61">
+            <span style="font-size:11pt;">兼容性</span>
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="pc端兼容性问题"
+            id="sjs-B61">pc端兼容性问题</td>
+          <td data-t="s" data-v="pc端兼容性问题" id="sjs-C61">pc端兼容性问题</td>
+          <td data-t="s" data-v="同系统，不同浏览器" id="sjs-D61">同系统，不同浏览器</td>
+          <td id="sjs-E61"></td>
+          <td id="sjs-F61"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="pc端兼容性问题" id="sjs-C62">pc端兼容性问题</td>
+          <td data-t="s" data-v="不同系统，同浏览器" id="sjs-D62">不同系统，同浏览器</td>
+          <td id="sjs-E62"></td>
+          <td id="sjs-F62"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="手机端兼容性问题"
+            id="sjs-B63">手机端兼容性问题</td>
+          <td data-t="s" data-v="手机端兼容性问题" id="sjs-C63">手机端兼容性问题</td>
+          <td data-t="s" data-v="同系统，不同浏览器" id="sjs-D63">同系统，不同浏览器</td>
+          <td id="sjs-E63"></td>
+          <td id="sjs-F63"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="手机端兼容性问题" id="sjs-C64">手机端兼容性问题</td>
+          <td data-t="s" data-v="不同系统，同浏览器" id="sjs-D64">不同系统，同浏览器</td>
+          <td data-t="s" data-v="20220930N0050，20221011N0011，" id="sjs-E64">20220930N0050，20221011N0011，</td>
+          <td data-t="n" data-v="2" id="sjs-F64">2</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="低版本浏览器不兼容" id="sjs-B65">
+            <span style="font-size:11pt;">低版本浏览器</span>
+            <span style="font-size:11pt;">不兼容</span>
+          </td>
+          <td data-t="s" data-v="低版本浏览器不兼容" id="sjs-C65">
+            <span style="font-size:11pt;">低版本浏览器</span>
+            <span style="font-size:11pt;">不兼容</span>
+          </td>
+          <td id="sjs-D65"></td>
+          <td id="sjs-E65"></td>
+          <td id="sjs-F65"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="4"
+            data-t="s"
+            data-v="富文本问题"
+            id="sjs-A66">
+            <span style="font-size:11pt;">富文本</span>
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="富文本内容问题"
+            id="sjs-B66">富文本内容问题</td>
+          <td data-t="s" data-v="富文本内容问题" id="sjs-C66">富文本内容问题</td>
+          <td data-t="s" data-v="空格问题" id="sjs-D66">空格问题</td>
+          <td id="sjs-E66"></td>
+          <td id="sjs-F66"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="富文本内容问题" id="sjs-C67">富文本内容问题</td>
+          <td data-t="s" data-v="富文本删除完后，无法编辑" id="sjs-D67">富文本删除完后，无法编辑</td>
+          <td id="sjs-E67"></td>
+          <td id="sjs-F67"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="富文本样式问题"
+            id="sjs-B68">富文本样式问题</td>
+          <td data-t="s" data-v="富文本样式问题" id="sjs-C68">富文本样式问题</td>
+          <td data-t="s" data-v="样式设置不生效" id="sjs-D68">样式设置不生效</td>
+          <td data-t="s" data-v="20221008N0010" id="sjs-E68">20221008N0010</td>
+          <td data-t="n" data-v="1" id="sjs-F68">1</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="富文本样式问题" id="sjs-C69">富文本样式问题</td>
+          <td data-t="s" data-v="复制问题" id="sjs-D69">
+            <span style="font-size:11pt;">复制</span>
+            <span style="font-size:11pt;">问题</span>
+          </td>
+          <td id="sjs-E69"></td>
+          <td id="sjs-F69"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="11"
+            data-t="s"
+            data-v="其他问题"
+            id="sjs-A70">其他问题</td>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="设置问题"
+            id="sjs-B70">设置问题</td>
+          <td data-t="s" data-v="设置问题" id="sjs-C70">设置问题</td>
+          <td data-t="s" data-v="有设置入口未设置" id="sjs-D70">有设置入口未设置</td>
+          <td data-t="s" data-v="20221011N0020" id="sjs-E70">20221011N0020</td>
+          <td data-t="n" data-v="1" id="sjs-F70">1</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="设置问题" id="sjs-C71">设置问题</td>
+          <td data-t="s" data-v="设置项设置有误" id="sjs-D71">设置项设置有误</td>
+          <td id="sjs-E71"></td>
+          <td id="sjs-F71"></td>
+        </tr>
+        <tr>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="代码影响"
+            id="sjs-B72">代码影响</td>
+          <td data-t="s" data-v="代码影响" id="sjs-C72">代码影响</td>
+          <td data-t="s" data-v="第三方代码影响" id="sjs-D72">第三方代码影响</td>
+          <td data-t="s"
+            data-v="20221008N0013，20221009N0018，20221009N0023，20221010N0026，20221011N0005"
+            id="sjs-E72">20221008N0013，20221009N0018，20221009N0023，20221010N0026，20221011N0005</td>
+          <td data-t="n" data-v="5" id="sjs-F72">5</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="代码影响" id="sjs-C73">代码影响</td>
+          <td data-t="s" data-v="自定义代码影响（自己写的，技术客服写的）" id="sjs-D73">自定义代码影响（自己写的，技术客服写的）</td>
+          <td data-t="s"
+            data-v="20220930N0006，20220930N0033，20221008N0007，20221008N0049，20221009U0028，20221009N0032，20221011U0007，20221011N0015"
+            id="sjs-E73">20220930N0006，20220930N0033，20221008N0007，20221008N0049，20221009U0028，20221009N0032，20221011U0007，20221011N0015</td>
+          <td data-t="n" data-v="8" id="sjs-F73">8</td>
+        </tr>
+        <tr>
+          <td
+            rowspan="5"
+            data-t="s"
+            data-v="技术咨询"
+            id="sjs-B74">技术咨询</td>
+          <td data-t="s" data-v="技术咨询" id="sjs-C74">技术咨询</td>
+          <td data-t="s" data-v="第三方代码如何安装" id="sjs-D74">第三方代码如何安装</td>
+          <td id="sjs-E74"></td>
+          <td id="sjs-F74"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="技术咨询" id="sjs-C75">技术咨询</td>
+          <td data-t="s" data-v="SEO优化问题" id="sjs-D75">SEO优化问题</td>
+          <td id="sjs-E75"></td>
+          <td id="sjs-F75"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="技术咨询" id="sjs-C76">技术咨询</td>
+          <td data-t="s" data-v="searchconsole问题" id="sjs-D76">searchconsole问题</td>
+          <td data-t="s"
+            data-v="20221005N0001，20221007N0005，20221009U0001，20221011N0027"
+            id="sjs-E76">20221005N0001，20221007N0005，20221009U0001，20221011N0027</td>
+          <td data-t="n" data-v="4" id="sjs-F76">4</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="技术咨询" id="sjs-C77">技术咨询</td>
+          <td data-t="s" data-v="需求评估" id="sjs-D77">需求评估</td>
+          <td id="sjs-E77"></td>
+          <td id="sjs-F77"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="技术咨询" id="sjs-C78">技术咨询</td>
+          <td data-t="s" data-v="amp相关问题" id="sjs-D78">amp相关问题</td>
+          <td id="sjs-E78"></td>
+          <td id="sjs-F78"></td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="网站速度问题" id="sjs-B79">网站速度问题</td>
+          <td data-t="s" data-v="网站速度问题" id="sjs-C79">网站速度问题</td>
+          <td data-t="s" data-v="网站速度不达标" id="sjs-D79">网站速度不达标</td>
+          <td data-t="s"
+            data-v="20220930N0030，20221008U0005，20221008U0012，20221008N0043，20221009N0010，20221009N0011，20221009N0036，20221010U0004，20221011U0017，20221011U0031"
+            id="sjs-E79">20220930N0030，20221008U0005，20221008U0012，20221008N0043，20221009N0010，20221009N0011，20221009N0036，20221010U0004，20221011U0017，20221011U0031</td>
+          <td data-t="n" data-v="10" id="sjs-F79">10</td>
+        </tr>
+        <tr>
+          <td data-t="s" data-v="个性化需求" id="sjs-B80">个性化需求</td>
+          <td data-t="s" data-v="个性化需求" id="sjs-C80">个性化需求</td>
+          <td data-t="s" data-v="完全没有共性问题" id="sjs-D80">完全没有共性问题</td>
+          <td data-t="s"
+            data-v="20220930N0010（修改6329展示方式）,20220930N0015(删除区块部分内容)，20220930N0021(不会设置)，20220930N0035，20220930N0036（不会设置sku缩略图），20220930N0046（局部可复制），20221006N0002，20221007N0001(修改区块部分悬浮颜色)，20221007N0002，20221008N0025，20221008N0027，20221008N0030（同步老网站），20221008N0037，20221008N0039，20221008N0050，20221009N0002，20221009N0006，20221009N0009，20221009N0013（部分设置同步主语中），20221009N0014（禁止图片懒加载），20221009N0019（logo放大），20221009N0024，20221010N0002，20221010N0006，20221010N0010，20221010N0024，20221011N0002(页头选中的下划线加粗)，20221011N0018，20221011N0041"
+            id="sjs-E80">20220930N0010（修改6329展示方式）,20220930N0015(删除区块部分内容)，20220930N0021(不会设置)，20220930N0035，20220930N0036（不会设置sku缩略图），20220930N0046（局部可复制），20221006N0002，20221007N0001(修改区块部分悬浮颜色)，20221007N0002，20221008N0025，20221008N0027，20221008N0030（同步老网站），20221008N0037，20221008N0039，20221008N0050，20221009N0002，20221009N0006，20221009N0009，20221009N0013（部分设置同步主语中），20221009N0014（禁止图片懒加载），20221009N0019（logo放大），20221009N0024，20221010N0002，20221010N0006，20221010N0010，20221010N0024，20221011N0002(页头选中的下划线加粗)，20221011N0018，20221011N0041</td>
+          <td data-t="n" data-v="29" id="sjs-F80">29</td>
+        </tr>
+        <tr>
+          <td id="sjs-A81"></td>
+          <td
+            rowspan="2"
+            data-t="s"
+            data-v="其他"
+            id="sjs-B81">其他</td>
+          <td data-t="s" data-v="其他" id="sjs-C81">其他</td>
+          <td data-t="s" data-v="前后台不一致" id="sjs-D81">前后台不一致</td>
+          <td data-t="s"
+            data-v="20221009N0030（后台和预览不一致），20221011N0019（产品详情分享按钮），20221011N0025，20221011N0030"
+            id="sjs-E81">20221009N0030（后台和预览不一致），20221011N0019（产品详情分享按钮），20221011N0025，20221011N0030</td>
+          <td data-t="n" data-v="4" id="sjs-F81">4</td>
+        </tr>
+        <tr>
+          <td id="sjs-A82"></td>
+          <td data-t="s" data-v="其他" id="sjs-C82">其他</td>
+          <td data-t="s" data-v="服务端缓存" id="sjs-D82">服务端缓存</td>
+          <td data-t="s" data-v="20221010N0015，20221011N0033" id="sjs-E82">20221010N0015，20221011N0033</td>
+          <td data-t="n" data-v="2" id="sjs-F82">2</td>
+        </tr>
+        <tr>
+          <td id="sjs-A83"></td>
+          <td data-t="s" data-v="总数" id="sjs-B83">总数</td>
+          <td id="sjs-C83"></td>
+          <td id="sjs-D83"></td>
+          <td id="sjs-E83"></td>
+          <td data-t="n" data-v="177" id="sjs-F83">177</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+         console.log(XLSX);
+         function exportExcel(){
+            const table = document.getElementsByClassName("table1")[0]
+            //将table转成工作簿
+            //raw:true
+            //表示类型都为文字类型即无需自动转换各种类型，这里仅为处理100%转换成数字100的问题
+            const wb = XLSX.utils.table_to_book(table,{raw:true})
+            //导出
+            XLSX.writeFile(wb,"SheetJS.xlsx")
+          }
+      </script>
+  </body>
+</html>

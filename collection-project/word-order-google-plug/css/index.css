@@ -13,7 +13,7 @@
 
 
 /* 搜索 */
-.workorder-search{
+.workorder-search,.workorder-search-faq{
     position: fixed;
     top: 20%;
     left: 40%;
@@ -21,7 +21,7 @@
     z-index: 9999;
 }
 
-.workorder-search input{
+.workorder-search input,.workorder-search-faq input{
     width: 800px;
     height: 50px;
     outline: none;
@@ -32,23 +32,23 @@
     cursor: context-menu;
 }
 
-.workorder-search .workorder-search-input{
+.workorder-search .workorder-search-input,.workorder-search-faq .workorder-search-input-faq{
     border-bottom: 2px solid rgb(222, 226, 230)
 }
 
-.workorder-cfn-list{
+.workorder-cfn-list,.workorder-cfn-list-faq{
     max-height: 500px;
     overflow-x: hidden;
 
     background-color: white;
 }
 
-.workorder-cfn-list::-webkit-scrollbar {
+.workorder-cfn-list::-webkit-scrollbar,.workorder-cfn-list-faq::-webkit-scrollbar {
     width: 6px;
     height: 1px;
 }
 
-.workorder-cfn-list::-webkit-scrollbar-thumb {
+.workorder-cfn-list::-webkit-scrollbar-thumb,.workorder-cfn-list-faq::-webkit-scrollbar-thumb {
     border-radius: 4px;
     -webkit-box-shadow: none;
     background-color: #8c24aa91;
@@ -58,30 +58,30 @@
     background-color: #dee2e6;
 } */
 
-.workorder-cfn-list .workorder-cfn-list-item{
+.workorder-cfn-list .workorder-cfn-list-item,.workorder-cfn-list-faq .workorder-cfn-list-item{
     padding: 6px 12px;
 }
 
 /* 选中的分类 */
-.workorder-cfn-list .workorder-cfn-list-item.active{
+.workorder-cfn-list .workorder-cfn-list-item.active,.workorder-cfn-list-faq .workorder-cfn-list-item.active{
     background-color: #f5222d !important;
 }
 
-.workorder-cfn-list .workorder-cfn-list-item.active *{
+.workorder-cfn-list .workorder-cfn-list-item.active *,.workorder-cfn-list-faq .workorder-cfn-list-item.active *{
     color: white !important;
 }
 
-.workorder-cfn-list .workorder-cfn-list-item:hover{
+.workorder-cfn-list .workorder-cfn-list-item:hover,.workorder-cfn-list-faq .workorder-cfn-list-item:hover{
     background-color: #dee2e6;
 }
 
-.workorder-cfn-list .workorder-cfn-list-item-title{
+.workorder-cfn-list .workorder-cfn-list-item-title,.workorder-cfn-list-faq .workorder-cfn-list-item-title{
     font-size: 16px;
     margin-bottom: 5px;
 
     color: #212121;
 }
-.workorder-cfn-list .workorder-cfn-list-item-desc{
+.workorder-cfn-list .workorder-cfn-list-item-desc,.workorder-cfn-list-faq .workorder-cfn-list-item-desc{
     font-size: 12px;
     color: #929598;
 }
@@ -173,3 +173,12 @@
     color: #F76C6C;
 }
 /* 复制 */
+
+#table_excel{
+    background-color: white;
+    position: relative;
+}
+
+#table_excel td{
+    border: 1px solid;
+}

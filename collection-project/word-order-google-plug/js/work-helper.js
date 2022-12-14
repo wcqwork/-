@@ -120,13 +120,13 @@ var setAllHelper = function () {
                 {
                     "title": "区块功能bug",
                     "desc": "重复添加导致代码冲突",
-                    "cateId": 18
+                    "cateId": 18,
+                    "title_rowspan": "3",
                 },
                 {
                     "title": "区块功能bug",
                     "desc": "区块功能不可用",
                     "cateId": 19,
-                    "title_rowspan": "3",
                 },
                 {
                     "title": "区块功能bug",
@@ -182,6 +182,7 @@ var setAllHelper = function () {
                     "title": "表格问题",
                     "desc": "表格响应问题",
                     "cateId": 29,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "多端响应问题",
@@ -208,7 +209,8 @@ var setAllHelper = function () {
                 {
                     "title": "组件样式bug",
                     "desc": "展示错乱",
-                    "cateId": 34
+                    "cateId": 34,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "组件功能bug",
@@ -233,19 +235,21 @@ var setAllHelper = function () {
                     "title": "移动端隐藏",
                     "desc": "",
                     "cateId": 38,
-                    "category":"移动端隐藏",
+                    "category":"系统功能问题",
                     "category_rowspan":"3",
                     "title_rowspan": "1",
                 },
                 {
                     "title": "系统功能不支持",
                     "desc": "",
-                    "cateId": 39
+                    "cateId": 39,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "系统功能bug",
                     "desc": "",
-                    "cateId": 40
+                    "cateId": 40,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "区块样式编辑问题",
@@ -292,7 +296,8 @@ var setAllHelper = function () {
                 {
                     "title": "小语种样式问题",
                     "desc": "右对齐小语种样式问题",
-                    "cateId": 48
+                    "cateId": 48,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "网站速度优化",
@@ -339,17 +344,19 @@ var setAllHelper = function () {
                 {
                     "title": "国际化翻译文案",
                     "desc": "翻译错误",
-                    "cateId": 56
+                    "cateId": 56,
                 },
                 {
                     "title": "翻译缺失",
                     "desc": "",
-                    "cateId": 57
+                    "cateId": 57,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "组件丢失",
                     "desc": "",
-                    "cateId": 58
+                    "cateId": 58,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "pc端兼容性问题",
@@ -378,7 +385,8 @@ var setAllHelper = function () {
                 {
                     "title": "低版本浏览器不兼容",
                     "desc": "",
-                    "cateId": 63
+                    "cateId": 63,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "富文本内容问题",
@@ -457,22 +465,30 @@ var setAllHelper = function () {
                 {
                     "title": "网站速度问题",
                     "desc": "网站速度不达标",
-                    "cateId": 77
+                    "cateId": 77,
+                    "title_rowspan": "1",
                 },
                 {
                     "title": "个性化需求",
                     "desc": "完全没有共性问题",
-                    "cateId": 78
+                    "cateId": 78,
+                    "title_rowspan": "1",
                 },
                 {
-                    "title": "其他",
+                    "title": "前后台不一致",
                     "desc": "前后台不一致",
-                    "cateId": 79
+                    "cateId": 79,
+                    "category":"其他",
+                    "category_rowspan":"1",
+                    "title_rowspan": "1",
                 },
                 {
-                    "title": "其他",
+                    "title": "服务端缓存",
                     "desc": "服务端缓存",
-                    "cateId": 80
+                    "cateId": 80,
+                    "category":"其他",
+                    "category_rowspan":"1",
+                    "title_rowspan": "1",
                 }
             ],
             injectWorkerHtml: `
@@ -1201,7 +1217,10 @@ var setAllHelper = function () {
             createTableHeader(_tableEl,workOrderCnfHeader);
             createTableContent(_tableEl,jsonData);
             debugger;
+            $("body").append(_tableEl);
+            // tableToExcel(_tableEl[0]);
 
+            // 创建表格头
             function createTableHeader(_tableEl,headList){
                 var _headTr = $("<tr></tr>");
                 headList.forEach((item,index) => {
@@ -1210,24 +1229,36 @@ var setAllHelper = function () {
                 _tableEl.append(_headTr);
             }
 
+            // 创建表格内容
             function createTableContent(_tableEl,jsonData){
                 jsonData.forEach((item,index) => {
                     let _trEl =  $("<tr></tr>");
                     // 工单问题大类
                     if(item.category){
-                        let _cateTd = $(``);
+                        let _cateTd = $(`<td rowspan="${item.category_rowspan}">${item.category}</td>`);
+                        _trEl.append(_cateTd);
                     }
                     // 工单问题类型
-
+                    if(item.title_rowspan){
+                        let _titelCate = $(`<td rowspan="${item.title_rowspan}">${item.title}</td>`);
+                        _trEl.append(_titelCate);
+                    }
                     // 工单详细问题分类
-
+                    let _detailCate = $(`<td>${item.desc}</td>`);
+                    _trEl.append(_detailCate);
                     // 工单号
-
+                    let _orderEl = $(`<td>${item.orderid}</td>`);
+                    _trEl.append(_orderEl);
                     // 计数
-                    let 
+                    let _numEl = $(`<td>${item.num}</td>`);
+                    _trEl.append(_numEl);
+
+                    // 追加一行
+                    _tableEl.append(_trEl);
                 })
             }
 
+            // 查找分类对应的所有工单
             function findCateWorkId(_that, cateId, type) {
                 let { workOrderCateList } = _that.state;
                 let strIdArr = [];
@@ -1242,13 +1273,15 @@ var setAllHelper = function () {
                     return strIdArr.join('，');
                 }
             }
-            const table = document.getElementsByClassName("table1")[0]
-            //将table转成工作簿
-            //raw:true
-            //表示类型都为文字类型即无 需自动转换各种类型，这里仅为处理100%转换成数字100的问题
-            const wb = XLSX.utils.table_to_book(table)
-            //导出
-            XLSX.writeFile(wb,"SheetJS.xlsx")
+
+            function tableToExcel(tableEl){
+                //将table转成工作簿
+                //raw:true
+                //表示类型都为文字类型即无 需自动转换各种类型，这里仅为处理100%转换成数字100的问题
+                const wb = XLSX.utils.table_to_book(tableEl)
+                //导出
+                XLSX.writeFile(wb,"SheetJS.xlsx")
+            }
           },
         showMessage: function (message, type) {
             let messageJQ = $(`
