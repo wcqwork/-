@@ -615,7 +615,8 @@ var setAllHelper = function () {
             var jsArr = [
                 "//cdn.bootcdn.net/ajax/libs/jquery/1.8.3/jquery.min.js",
                 '//code.jquery.com/ui/1.10.4/jquery-ui.js',
-                'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.4/xlsx.full.min.js'
+                // 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.4/xlsx.full.min.js'
+                "https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"
             ]
             jsArr.forEach(link => {
                 loadScript(link, function () {
@@ -1217,8 +1218,8 @@ var setAllHelper = function () {
             createTableHeader(_tableEl,workOrderCnfHeader);
             createTableContent(_tableEl,jsonData);
             debugger;
-            $("body").append(_tableEl);
-            // tableToExcel(_tableEl[0]);
+            // $("body").append(_tableEl);
+            tableToExcel(_tableEl[0]);
 
             // 创建表格头
             function createTableHeader(_tableEl,headList){
@@ -1280,7 +1281,10 @@ var setAllHelper = function () {
                 //表示类型都为文字类型即无 需自动转换各种类型，这里仅为处理100%转换成数字100的问题
                 const wb = XLSX.utils.table_to_book(tableEl)
                 //导出
-                XLSX.writeFile(wb,"SheetJS.xlsx")
+                debugger;
+                wb["Sheets"]["Sheet1"]["!cols"] = [ { wch: 20 },{ wch: 20 },{ wch: 50 },{ wch: 100 },{ wch: 10 } ]; 
+
+                XLSX.writeFile(wb,"技术客服工单分类.xlsx")
             }
           },
         showMessage: function (message, type) {
